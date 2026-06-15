@@ -1,0 +1,50 @@
+[
+ {
+  "doctype": "Programme",
+  "name": "NCD",
+  "label": "NCD Programme",
+  "program_type": "NCD",
+  "active": 1,
+  "forms": []
+ },
+ {
+  "doctype": "Programme",
+  "name": "Eye Care",
+  "label": "Eye Care Programme",
+  "program_type": "General",
+  "active": 1,
+  "forms": []
+ },
+ {
+  "doctype": "Programme",
+  "name": "Cataract",
+  "label": "Cataract Programme",
+  "program_type": "General",
+  "active": 1,
+  "forms": []
+ },
+ {
+  "doctype": "Programme",
+  "name": "Family Planning",
+  "label": "Family Planning Programme",
+  "program_type": "MCH",
+  "active": 1,
+  "forms": []
+ },
+ {
+  "doctype": "Programme",
+  "name": "PW Profile",
+  "label": "PW Profile Programme",
+  "program_type": "MCH",
+  "active": 1,
+  "forms": []
+ },
+ {
+  "doctype": "Programme",
+  "name": "Pregnancy Outcome",
+  "label": "Pregnancy Outcome Programme",
+  "program_type": "MCH",
+  "active": 1,
+  "forms": []
+ }
+]

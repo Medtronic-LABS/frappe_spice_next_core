@@ -1,0 +1,547 @@
+[
+ {
+  "doctype": "Workspace",
+  "name": "UHIS Clinical",
+  "title": "UHIS Clinical",
+  "label": "UHIS Clinical",
+  "module": "Uhis Next Core",
+  "icon": "stethoscope",
+  "indicator_color": "blue",
+  "public": 1,
+  "content": "[{\"id\": \"uhis0001\", \"type\": \"header\", \"data\": {\"text\": \"<b>Clinical Overview</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Active Patients\", \"col\": 4}}, {\"id\": \"uhis0003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Open Cases\", \"col\": 4}}, {\"id\": \"uhis0004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Total Encounters\", \"col\": 4}}, {\"id\": \"uhis0005\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Pending Tasks\", \"col\": 4}}, {\"id\": \"uhis0039\", \"type\": \"header\", \"data\": {\"text\": \"<b>Risk &amp; Referral Intelligence</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0040\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - High Risk Cases\", \"col\": 4}}, {\"id\": \"uhis0041\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Active Referrals\", \"col\": 4}}, {\"id\": \"uhis0042\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Overdue Follow-ups\", \"col\": 4}}, {\"id\": \"uhis0006\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Patient\", \"col\": 3}}, {\"id\": \"uhis0008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Patient List\", \"col\": 3}}, {\"id\": \"uhis0009\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Case\", \"col\": 3}}, {\"id\": \"uhis0010\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Case List\", \"col\": 3}}, {\"id\": \"uhis0011\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Encounter\", \"col\": 3}}, {\"id\": \"uhis0012\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Encounter List\", \"col\": 3}}, {\"id\": \"uhis0013\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Task\", \"col\": 3}}, {\"id\": \"uhis0014\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Task List\", \"col\": 3}}]",
+  "shortcuts": [
+   {
+    "type": "DocType",
+    "link_to": "Patient",
+    "label": "New Patient",
+    "color": "Cyan",
+    "doc_view": "New",
+    "idx": 1,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Patient",
+    "label": "Patient List",
+    "color": "Cyan",
+    "doc_view": "List",
+    "idx": 2,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Case",
+    "label": "New Case",
+    "color": "Blue",
+    "doc_view": "New",
+    "idx": 3,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Case",
+    "label": "Case List",
+    "color": "Blue",
+    "doc_view": "List",
+    "idx": 4,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Encounter",
+    "label": "New Encounter",
+    "color": "Teal",
+    "doc_view": "New",
+    "idx": 5,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Encounter",
+    "label": "Encounter List",
+    "color": "Teal",
+    "doc_view": "List",
+    "idx": 6,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Task",
+    "label": "New Task",
+    "color": "Green",
+    "doc_view": "New",
+    "idx": 7,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Task",
+    "label": "Task List",
+    "color": "Green",
+    "doc_view": "List",
+    "idx": 8,
+    "doctype": "Workspace Shortcut"
+   }
+  ],
+  "number_cards": [
+   {
+    "number_card_name": "UHIS - Active Patients",
+    "idx": 1,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Open Cases",
+    "idx": 2,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Total Encounters",
+    "idx": 3,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Pending Tasks",
+    "idx": 4,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - High Risk Cases",
+    "idx": 5,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Active Referrals",
+    "idx": 6,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Overdue Follow-ups",
+    "idx": 7,
+    "doctype": "Workspace Number Card"
+   }
+  ],
+  "links": [
+   {
+    "type": "Card Break",
+    "label": "Patients",
+    "description": "Register and manage patients",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 1,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Patient",
+    "link_to": "Patient",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 2,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Household",
+    "link_to": "Household",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 3,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Card Break",
+    "label": "Cases & Encounters",
+    "description": "Clinical workflow",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 4,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Case",
+    "link_to": "Case",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 5,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Encounter",
+    "link_to": "Encounter",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 6,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Observation",
+    "link_to": "Observation",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 7,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Task",
+    "link_to": "Task",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 8,
+    "doctype": "Workspace Link"
+   }
+  ]
+ },
+ {
+  "doctype": "Workspace",
+  "name": "UHIS Facility",
+  "title": "UHIS Facility",
+  "label": "UHIS Facility",
+  "module": "Uhis Next Core",
+  "icon": "map-pin",
+  "indicator_color": "green",
+  "public": 1,
+  "content": "[{\"id\": \"uhis0015\", \"type\": \"header\", \"data\": {\"text\": \"<b>Facility Management</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0016\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Total Facilities\", \"col\": 4}}, {\"id\": \"uhis0017\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Providers\", \"col\": 4}}, {\"id\": \"uhis0018\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Care Teams\", \"col\": 4}}, {\"id\": \"uhis0019\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0020\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Facility List\", \"col\": 3}}, {\"id\": \"uhis0021\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Facility\", \"col\": 3}}, {\"id\": \"uhis0022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Provider List\", \"col\": 3}}, {\"id\": \"uhis0023\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Provider\", \"col\": 3}}, {\"id\": \"uhis0024\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Care Team List\", \"col\": 3}}, {\"id\": \"uhis0025\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Care Team\", \"col\": 3}}, {\"id\": \"uhis0026\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Geography Node List\", \"col\": 3}}, {\"id\": \"uhis0027\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Organization List\", \"col\": 3}}]",
+  "shortcuts": [
+   {
+    "type": "DocType",
+    "link_to": "Facility",
+    "label": "Facility List",
+    "color": "Green",
+    "doc_view": "List",
+    "idx": 1,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Facility",
+    "label": "New Facility",
+    "color": "Green",
+    "doc_view": "New",
+    "idx": 2,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Provider",
+    "label": "Provider List",
+    "color": "Cyan",
+    "doc_view": "List",
+    "idx": 3,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Provider",
+    "label": "New Provider",
+    "color": "Cyan",
+    "doc_view": "New",
+    "idx": 4,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Care Team",
+    "label": "Care Team List",
+    "color": "Blue",
+    "doc_view": "List",
+    "idx": 5,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Care Team",
+    "label": "New Care Team",
+    "color": "Blue",
+    "doc_view": "New",
+    "idx": 6,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Geography Node",
+    "label": "Geography Node List",
+    "color": "Grey",
+    "doc_view": "List",
+    "idx": 7,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Organization",
+    "label": "Organization List",
+    "color": "Grey",
+    "doc_view": "List",
+    "idx": 8,
+    "doctype": "Workspace Shortcut"
+   }
+  ],
+  "number_cards": [
+   {
+    "number_card_name": "UHIS - Total Facilities",
+    "idx": 1,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Providers",
+    "idx": 2,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Care Teams",
+    "idx": 3,
+    "doctype": "Workspace Number Card"
+   }
+  ],
+  "links": [
+   {
+    "type": "Card Break",
+    "label": "Infrastructure",
+    "description": "Health system infrastructure",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 1,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Facility",
+    "link_to": "Facility",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 2,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Organization",
+    "link_to": "Organization",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 3,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Geography Node",
+    "link_to": "Geography Node",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 4,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Card Break",
+    "label": "Workforce",
+    "description": "Providers and teams",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 5,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Provider",
+    "link_to": "Provider",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 6,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Care Team",
+    "link_to": "Care Team",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 7,
+    "doctype": "Workspace Link"
+   }
+  ]
+ },
+ {
+  "doctype": "Workspace",
+  "name": "UHIS NCD Programme",
+  "title": "UHIS NCD Programme",
+  "label": "UHIS NCD Programme",
+  "module": "Uhis Next Core",
+  "icon": "heart",
+  "indicator_color": "orange",
+  "public": 1,
+  "content": "[{\"id\": \"uhis0028\", \"type\": \"header\", \"data\": {\"text\": \"<b>NCD Programme</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0029\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - NCD Screenings\", \"col\": 4}}, {\"id\": \"uhis0030\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - NCD Followups\", \"col\": 4}}, {\"id\": \"uhis0031\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Open Cases\", \"col\": 4}}, {\"id\": \"uhis0032\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0033\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"NCD Screening List\", \"col\": 3}}, {\"id\": \"uhis0034\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New NCD Screening\", \"col\": 3}}, {\"id\": \"uhis0035\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"NCD Followup List\", \"col\": 3}}, {\"id\": \"uhis0036\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New NCD Followup\", \"col\": 3}}, {\"id\": \"uhis0037\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Concept List\", \"col\": 3}}, {\"id\": \"uhis0038\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Programme List\", \"col\": 3}}]",
+  "shortcuts": [
+   {
+    "type": "DocType",
+    "link_to": "NCD Screening",
+    "label": "NCD Screening List",
+    "color": "Orange",
+    "doc_view": "List",
+    "idx": 1,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "NCD Screening",
+    "label": "New NCD Screening",
+    "color": "Orange",
+    "doc_view": "New",
+    "idx": 2,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "NCD Followup",
+    "label": "NCD Followup List",
+    "color": "Yellow",
+    "doc_view": "List",
+    "idx": 3,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "NCD Followup",
+    "label": "New NCD Followup",
+    "color": "Yellow",
+    "doc_view": "New",
+    "idx": 4,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Concept",
+    "label": "Concept List",
+    "color": "Grey",
+    "doc_view": "List",
+    "idx": 5,
+    "doctype": "Workspace Shortcut"
+   },
+   {
+    "type": "DocType",
+    "link_to": "Programme",
+    "label": "Programme List",
+    "color": "Grey",
+    "doc_view": "List",
+    "idx": 6,
+    "doctype": "Workspace Shortcut"
+   }
+  ],
+  "number_cards": [
+   {
+    "number_card_name": "UHIS - NCD Screenings",
+    "idx": 1,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - NCD Followups",
+    "idx": 2,
+    "doctype": "Workspace Number Card"
+   },
+   {
+    "number_card_name": "UHIS - Open Cases",
+    "idx": 3,
+    "doctype": "Workspace Number Card"
+   }
+  ],
+  "links": [
+   {
+    "type": "Card Break",
+    "label": "Programme Forms",
+    "description": "Clinical programme data",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 1,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "NCD Screening",
+    "link_to": "NCD Screening",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 2,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "NCD Followup",
+    "link_to": "NCD Followup",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 3,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Card Break",
+    "label": "Configuration",
+    "description": "Terminology and programmes",
+    "hidden": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 4,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Concept",
+    "link_to": "Concept",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 5,
+    "doctype": "Workspace Link"
+   },
+   {
+    "type": "Link",
+    "label": "Programme",
+    "link_to": "Programme",
+    "link_type": "DocType",
+    "hidden": 0,
+    "onboard": 0,
+    "is_query_report": 0,
+    "idx": 6,
+    "doctype": "Workspace Link"
+   }
+  ]
+ }
+]

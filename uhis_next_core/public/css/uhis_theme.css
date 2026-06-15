@@ -1,0 +1,840 @@
+/* ── UHIS Next Core — Clinical Theme ─────────────────────────────────────── */
+/* Design tokens: teal primary, dark-navy navbar/sidebar, sky-50 background  */
+
+/* Use both :root AND explicit theme selectors.
+   Our file loads LAST in app_include_css so same-specificity rules win via
+   cascade order.  Covering all three selectors ensures the variables apply
+   regardless of whether the user has Light / Dark / Automatic preference. */
+:root,
+[data-theme=light],
+[data-theme=dark] {
+    --primary-color:        #0E7490;
+    --primary-hover:        #0C6678;
+    --accent-color:         #06B6D4;
+    --bg-color:             #F0F9FF;
+    --fg-color:             #FFFFFF;
+    --card-bg:              #FFFFFF;
+    --subtle-accent:        #E0F2FE;
+    --subtle-fg:            #F0F9FF;
+    --border-color:         #CBD5E1;
+    --text-color:           #1E293B;
+    --text-muted:           #64748B;
+    --card-shadow:          0 1px 4px rgba(0, 0, 0, 0.08);
+    --navbar-bg:            #0F172A;
+
+    /* Frappe semantic overrides */
+    --btn-height:           32px;
+    --checkbox-color:       #0E7490;
+    --btn-primary:          #0E7490;
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Page background ──────────────────────────────────────────────────────── */
+body,
+.page-container {
+    background-color: #F0F9FF !important;
+}
+
+/* ── Navbar (dark slate-900) ─────────────────────────────────────────────── */
+.navbar {
+    background-color: #0F172A !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.navbar .navbar-brand img,
+.navbar .navbar-brand svg {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+#navbar-breadcrumbs li a,
+#navbar-breadcrumbs li .breadcrumb-separator,
+.navbar .nav-link,
+.navbar .navbar-nav .btn-reset {
+    color: #94A3B8 !important;
+}
+
+#navbar-breadcrumbs li:last-child a {
+    color: #E2E8F0 !important;
+    font-weight: 500;
+}
+
+.navbar .search-bar input {
+    background: rgba(255, 255, 255, 0.07) !important;
+    color: #E2E8F0 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar .search-bar input::placeholder {
+    color: #64748B !important;
+}
+
+.navbar .search-icon svg {
+    stroke: #64748B;
+}
+
+/* ── Left workspace sidebar (dark slate-900) ──────────────────────────────── */
+.desk-sidebar {
+    background-color: #0F172A !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.standard-sidebar-section .sidebar-group-title,
+.standard-sidebar-section .divider-label {
+    color: #475569 !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.07em !important;
+    text-transform: uppercase !important;
+}
+
+.standard-sidebar-item .item-anchor {
+    color: #94A3B8 !important;
+    border-radius: 6px;
+    margin: 1px 6px;
+    padding: 6px 10px !important;
+}
+
+.standard-sidebar-item:hover .item-anchor {
+    background-color: rgba(14, 116, 144, 0.15) !important;
+    color: #E2E8F0 !important;
+}
+
+.standard-sidebar-item.selected .item-anchor,
+.standard-sidebar-item.active .item-anchor {
+    background-color: rgba(14, 116, 144, 0.28) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+.standard-sidebar-item .item-anchor svg,
+.standard-sidebar-item .item-anchor .sidebar-item-icon svg {
+    stroke: currentColor !important;
+    opacity: 0.85;
+}
+
+/* ── Primary buttons & interactive elements ──────────────────────────────── */
+.btn-primary {
+    background-color: #0E7490 !important;
+    border-color: #0E7490 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0C6678 !important;
+    border-color: #0C6678 !important;
+}
+
+/* ── Links ───────────────────────────────────────────────────────────────── */
+a,
+.ellipsis a {
+    color: #0E7490;
+}
+
+a:hover {
+    color: #0C6678;
+}
+
+/* ── Form tab active state ───────────────────────────────────────────────── */
+.form-tabs-list .tab-link.active,
+.form-tabs-list .tab-link:focus {
+    border-bottom-color: #0E7490 !important;
+    color: #0E7490 !important;
+}
+
+/* ── Padding fixes (frappe_theme zeroes Bootstrap column + section padding) ─ */
+/* page.html: .container(24px) > .row(-15px margin) > .col.page-title         */
+/* frappe_theme removes the col's 15px, leaving title at 9px. Restore it.     */
+.page-title {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* frappe_theme zeroes .section-head padding, putting labels against the edge */
+.section-head {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* ── Cards & form sections ───────────────────────────────────────────────── */
+.layout-main-section.frappe-card {
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    border-color: #CBD5E1 !important;
+}
+
+/* ── Indicator pills ─────────────────────────────────────────────────────── */
+.indicator-pill.blue,
+.indicator.blue {
+    background-color: #E0F2FE !important;
+    color: #0E7490 !important;
+}
+
+/* ── Number card widgets ─────────────────────────────────────────────────── */
+.widget.number-widget-wrap {
+    border-color: #CBD5E1 !important;
+    background-color: #FFFFFF !important;
+}
+
+.widget.number-widget-wrap .widget-head {
+    border-bottom-color: #CBD5E1 !important;
+}
+
+.widget.number-widget-wrap .number-card-head {
+    color: #0E7490 !important;
+}
+
+.widget.number-widget-wrap .widget-title {
+    color: #1E293B !important;
+}
+
+/* ── Workspace shortcut widgets ──────────────────────────────────────────── */
+.widget.shortcut-widget-box {
+    border-color: #CBD5E1 !important;
+    background-color: #FFFFFF !important;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.widget.shortcut-widget-box:hover {
+    border-color: #0E7490 !important;
+    box-shadow: 0 2px 8px rgba(14, 116, 144, 0.15) !important;
+}
+
+/* ── Save button (sticky footer) ─────────────────────────────────────────── */
+.form-save-btn,
+.page-actions .btn-primary {
+    background-color: #0E7490 !important;
+    border-color: #0E7490 !important;
+}
+
+/* ── UHIS Custom components ──────────────────────────────────────────────── */
+
+.uhis-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted, #64748B);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+}
+
+.uhis-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0E7490, #06B6D4);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.uhis-avatar.sm {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+}
+
+.uhis-prog-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 4px 4px 0;
+}
+
+.uhis-prog-chip.active  { background: #DCFCE7; color: #15803D; }
+.uhis-prog-chip.referred { background: #FFEDD5; color: #C2410C; }
+.uhis-prog-chip.closed  { background: #F1F5F9; color: #475569; }
+
+.uhis-vital-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color, #CBD5E1);
+    border-left-width: 3px;
+    border-left-color: var(--border-color, #CBD5E1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    min-width: 90px;
+    flex: 1;
+    max-width: 150px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: default;
+}
+
+.uhis-vital-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.uhis-vital-card.uhis-alert { border-left-color: #EF4444; }
+.uhis-vital-card.uhis-ok    { border-left-color: #22C55E; }
+
+.uhis-vital-label {
+    font-size: 10px;
+    color: var(--text-muted, #64748B);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    margin-bottom: 4px;
+}
+
+.uhis-vital-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color, #1E293B);
+    line-height: 1.2;
+}
+
+.uhis-vital-value.uhis-alert { color: #EF4444; }
+.uhis-vital-value.uhis-ok    { color: #16A34A; }
+
+.uhis-vital-unit {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted, #64748B);
+    margin-left: 2px;
+}
+
+.uhis-vital-status {
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.uhis-vital-status.uhis-alert { color: #EF4444; }
+.uhis-vital-status.uhis-ok    { color: #16A34A; }
+
+.uhis-vital-date {
+    font-size: 10px;
+    color: var(--text-muted, #64748B);
+    margin-top: 4px;
+}
+
+.uhis-member-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.12s ease;
+    cursor: default;
+}
+
+.uhis-member-row:hover {
+    background: var(--subtle-fg, #F0F9FF);
+}
+
+.uhis-member-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.uhis-member-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color, #1E293B);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+.uhis-member-name:hover { color: #0E7490; text-decoration: underline; }
+
+.uhis-member-meta {
+    font-size: 11px;
+    color: var(--text-muted, #64748B);
+    margin-top: 1px;
+}
+
+.uhis-flag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.uhis-flag.alert { background: #FEE2E2; color: #DC2626; }
+.uhis-flag.ok    { background: #DCFCE7; color: #16A34A; }
+.uhis-flag.muted { background: #F1F5F9; color: #94A3B8; }
+
+/* ── Profile header (patient + household) ────────────────────────────────── */
+.uhis-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    background: #0E7490;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.uhis-header-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.uhis-header-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.uhis-header-meta {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 3px;
+}
+
+.uhis-header-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.uhis-header-chip {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.uhis-empty-state {
+    padding: 16px;
+    background: #F8FAFC;
+    border: 1px dashed #CBD5E1;
+    border-radius: 10px;
+    text-align: center;
+    color: #94A3B8;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* ── Last visit strip (patient) ───────────────────────────────────────────── */
+.uhis-last-visit-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #64748B;
+}
+
+.uhis-visit-count-badge {
+    background: #E0F2FE;
+    color: #0E7490;
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ── Enrolment rows (household) ──────────────────────────────────────────── */
+.uhis-enrolment-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid #0E7490;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: box-shadow 0.12s ease;
+}
+
+.uhis-enrolment-row:hover {
+    box-shadow: 0 2px 10px rgba(14, 116, 144, 0.12);
+}
+
+.uhis-enrolment-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.uhis-enrolment-count-badge {
+    background: #DCFCE7;
+    color: #15803D;
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ── Visit counter block (household) ─────────────────────────────────────── */
+.uhis-visit-counter {
+    padding: 14px 12px;
+    background: #0E7490;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.uhis-visit-number {
+    font-size: 40px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+}
+
+.uhis-visit-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 4px;
+}
+
+.uhis-last-visit-card {
+    padding: 10px 12px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.uhis-lvc-label {
+    font-size: 10px;
+    color: #94A3B8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.uhis-lvc-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-top: 3px;
+}
+
+/* ── Workspace number card polish ────────────────────────────────────────── */
+.widget.number-widget-wrap {
+    border-left: 3px solid #0E7490 !important;
+}
+
+.widget.shortcut-widget-box .widget-title {
+    font-weight: 600 !important;
+}
+
+/* ── Risk level badges (Case summary panel) ──────────────────────────────── */
+.uhis-risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.uhis-risk-low      { background: #DCFCE7; color: #15803D; }
+.uhis-risk-moderate { background: #FEF3C7; color: #92400E; }
+.uhis-risk-high     { background: #FEE2E2; color: #B91C1C; }
+
+/* ── Care-gap alert strip ────────────────────────────────────────────────── */
+.uhis-care-gap-alert {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.uhis-care-gap-alert.warn {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+}
+
+.uhis-care-gap-alert.critical {
+    background: #FEE2E2;
+    color: #B91C1C;
+    border: 1px solid #FECACA;
+}
+
+/* ── Case overview grid: conditions + tasks row ──────────────────────────── */
+.uhis-overview-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-color, #1E293B);
+    margin-bottom: 8px;
+}
+
+.uhis-overview-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted, #64748B);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 70px;
+    flex-shrink: 0;
+}
+
+.uhis-cond-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.uhis-cond-chip.active   { background: #DCFCE7; color: #15803D; }
+.uhis-cond-chip.inactive { background: #F1F5F9; color: #64748B; }
+.uhis-cond-chip.resolved { background: #E0F2FE; color: #0E7490; }
+
+.uhis-task-overdue {
+    background: #FEE2E2;
+    color: #B91C1C;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ── AI summary panel ─────────────────────────────────────────────────────── */
+.uhis-ai-panel {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 3px solid #0E7490;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 12px;
+}
+
+.uhis-ai-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.uhis-ai-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0E7490;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.uhis-ai-text {
+    font-size: 13px;
+    color: var(--text-color, #1E293B);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.uhis-ai-meta {
+    font-size: 10px;
+    color: var(--text-muted, #94A3B8);
+    margin-top: 6px;
+}
+
+.uhis-ai-placeholder {
+    font-size: 12px;
+    color: var(--text-muted, #94A3B8);
+    font-style: italic;
+}
+
+.uhis-ai-configure-note {
+    font-size: 11px;
+    color: #94A3B8;
+}
+
+.uhis-btn-ai {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #0E7490;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.uhis-btn-ai:hover { background: #0C6678; }
+.uhis-btn-ai:disabled { background: #94A3B8; cursor: not-allowed; }
+
+/* ── Chat section ─────────────────────────────────────────────────────────── */
+
+.uhis-chat-section {
+    margin-top: 14px;
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+    padding-top: 10px;
+}
+
+.uhis-chat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #94A3B8;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.uhis-chat-msgs {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 0 8px;
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+.uhis-chat-msgs::-webkit-scrollbar { width: 4px; }
+.uhis-chat-msgs::-webkit-scrollbar-track { background: transparent; }
+.uhis-chat-msgs::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 4px; }
+
+.uhis-chat-bubble {
+    max-width: 88%;
+    padding: 9px 13px;
+    font-size: 13px;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+/* User messages — right-aligned pill */
+.uhis-chat-user {
+    align-self: flex-end;
+    background: #0E7490;
+    color: #fff;
+    border-radius: 18px 18px 4px 18px;
+    margin-top: 6px;
+}
+
+/* Assistant messages — left-aligned, minimal */
+.uhis-chat-assistant {
+    align-self: flex-start;
+    background: transparent;
+    color: #1E293B;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    padding-left: 22px;
+}
+
+.uhis-chat-assistant::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-size: 10px;
+    color: #0E7490;
+    line-height: 1;
+}
+
+.uhis-chat-thinking {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 10px 0 10px 22px;
+    background: transparent;
+}
+
+.uhis-thinking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #CBD5E1;
+    animation: uhis-blink 1.4s ease-in-out infinite;
+}
+
+.uhis-thinking-dot:nth-child(2) { animation-delay: 0.18s; }
+.uhis-thinking-dot:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes uhis-blink {
+    0%, 60%, 100% { opacity: 0.25; transform: scale(0.8); }
+    30%            { opacity: 1;   transform: scale(1.15); }
+}
+
+/* Input row — floating pill */
+.uhis-chat-input-row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 4px 4px 4px 14px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.uhis-chat-input-row:focus-within {
+    border-color: #0E7490;
+    box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.1);
+    background: #fff;
+}
+
+.uhis-chat-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: #1E293B;
+    padding: 5px 0;
+    min-width: 0;
+    font-family: inherit;
+}
+
+.uhis-chat-input::placeholder { color: #94A3B8; }
+.uhis-chat-input:disabled     { color: #CBD5E1; }
+
+.uhis-chat-send-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #0E7490;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.uhis-chat-send-btn:hover:not(:disabled) {
+    background: #0C6678;
+    transform: scale(1.05);
+}
+
+.uhis-chat-send-btn:active:not(:disabled) { transform: scale(0.96); }
+.uhis-chat-send-btn:disabled { background: #CBD5E1; cursor: not-allowed; }

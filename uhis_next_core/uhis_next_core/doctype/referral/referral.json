@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "autoname": "field:client_uuid",
+ "creation": "2026-06-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "client_uuid",
+  "case",
+  "from_facility",
+  "to_facility",
+  "reason",
+  "status",
+  "sync_seq"
+ ],
+ "fields": [
+  {
+   "fieldname": "client_uuid",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client UUID",
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "case",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Case",
+   "options": "Case",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_facility",
+   "fieldtype": "Link",
+   "label": "From Facility",
+   "options": "Facility"
+  },
+  {
+   "fieldname": "to_facility",
+   "fieldtype": "Link",
+   "label": "To Facility",
+   "options": "Facility"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Text",
+   "label": "Reason"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nAccepted\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "sync_seq",
+   "fieldtype": "Int",
+   "label": "Sync Seq",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Uhis Next Core",
+ "name": "Referral",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "hide_toolbar": 1
+}

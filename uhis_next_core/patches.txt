@@ -1,0 +1,1 @@
+uhis_next_core.uhis_next_core.doctype.sync_seq_counter.patches.v0_init_counter

@@ -1,0 +1,172 @@
+[
+ {
+  "doctype": "Property Setter",
+  "name": "Patient-sva_cases-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Patient",
+  "field_name": "sva_cases",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Case\", \"link_fieldname\": \"patient\", \"title\": \"Cases\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\", \\\"delete\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"status\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"programme\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Programme\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"care_team\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Care Team\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"opened_on\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Opened On\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Open Case\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Case-sva_encounters-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Case",
+  "field_name": "sva_encounters",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Encounter\", \"link_fieldname\": \"case\", \"title\": \"Encounters\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\", \\\"delete\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"encounter_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Type\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"provider\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Provider\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"facility\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Facility\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"encounter_dt\\\", \\\"fieldtype\\\": \\\"Datetime\\\", \\\"label\\\": \\\"Date\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Encounter\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Case-sva_observations-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Case",
+  "field_name": "sva_observations",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Observation\", \"link_fieldname\": \"case\", \"title\": \"Observations\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"concept\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Concept\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"value\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Value\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"unit\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Unit\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"observed_dt\\\", \\\"fieldtype\\\": \\\"Datetime\\\", \\\"label\\\": \\\"Observed At\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"source_form\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Source Form\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add row\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Case-sva_conditions-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Case",
+  "field_name": "sva_conditions",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Condition\", \"link_fieldname\": \"case\", \"title\": \"Conditions\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\", \\\"delete\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"concept\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Concept\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"clinical_status\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"onset_date\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Onset Date\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Condition\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Case-sva_referrals-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Case",
+  "field_name": "sva_referrals",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Referral\", \"link_fieldname\": \"case\", \"title\": \"Referrals\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\", \\\"delete\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"from_facility\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"From\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"to_facility\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"To\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"reason\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Reason\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"status\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Referral\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Household-sva_patients-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Household",
+  "field_name": "sva_patients",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Patient\", \"link_fieldname\": \"primary_household\", \"title\": \"Patients\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"full_name\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Name\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"gender\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Gender\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"dob\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Date of Birth\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"phone\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Phone\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Register Patient\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Encounter-sva_obs_enc-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Encounter",
+  "field_name": "sva_obs_enc",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Observation\", \"link_fieldname\": \"encounter\", \"title\": \"Observations\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"concept\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Concept\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"value\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Value\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"unit\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Unit\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"observed_dt\\\", \\\"fieldtype\\\": \\\"Datetime\\\", \\\"label\\\": \\\"Observed At\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add row\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Facility-sva_providers-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Facility",
+  "field_name": "sva_providers",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Provider\", \"link_fieldname\": \"facility\", \"title\": \"Providers\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"full_name\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Name\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"role_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Role\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Provider\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Facility-sva_care_teams-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Facility",
+  "field_name": "sva_care_teams",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Care Team\", \"link_fieldname\": \"facility\", \"title\": \"Care Teams\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"label\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Team\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Create Care Team\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Case-sva_tasks-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Case",
+  "field_name": "sva_tasks",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Task\", \"link_fieldname\": \"case\", \"title\": \"Tasks\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\", \\\"delete\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"description\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Description\\\", \\\"width\\\": 4, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"status\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"assigned_to\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Assigned To\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"due_date\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Due Date\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Task\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Patient-sva_encounters-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Patient",
+  "field_name": "sva_encounters",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Encounter\", \"link_fieldname\": \"patient\", \"title\": \"Encounters\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"encounter_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Type\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"provider\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Provider\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"facility\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Facility\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"encounter_dt\\\", \\\"fieldtype\\\": \\\"Datetime\\\", \\\"label\\\": \\\"Date\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Encounter\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Organization-sva_facilities-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Organization",
+  "field_name": "sva_facilities",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Facility\", \"link_fieldname\": \"organization\", \"title\": \"Facilities\", \"crud_permissions\": \"[\\\"read\\\", \\\"write\\\", \\\"create\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"label\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Facility\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"facility_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Type\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"geography_node\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Geography Node\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Facility\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Provider-sva_encounters-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Provider",
+  "field_name": "sva_encounters",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Encounter\", \"link_fieldname\": \"provider\", \"title\": \"Encounters\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"patient\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Patient\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"case\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Case\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"encounter_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Type\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"facility\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Facility\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"encounter_dt\\\", \\\"fieldtype\\\": \\\"Datetime\\\", \\\"label\\\": \\\"Date\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Encounter\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Care Team-sva_cases-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Care Team",
+  "field_name": "sva_cases",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Case\", \"link_fieldname\": \"care_team\", \"title\": \"Cases\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"patient\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Patient\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"programme\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Programme\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"status\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"opened_on\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Opened On\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Open Case\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Programme-sva_cases-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Programme",
+  "field_name": "sva_cases",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Case\", \"link_fieldname\": \"programme\", \"title\": \"Cases\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"patient\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Patient\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"care_team\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Care Team\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"status\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Status\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"opened_on\\\", \\\"fieldtype\\\": \\\"Date\\\", \\\"label\\\": \\\"Opened On\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Open Case\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Geography Node-sva_facilities-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Geography Node",
+  "field_name": "sva_facilities",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Facility\", \"link_fieldname\": \"geography_node\", \"title\": \"Facilities\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"label\\\", \\\"fieldtype\\\": \\\"Data\\\", \\\"label\\\": \\\"Facility\\\", \\\"width\\\": 4, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"facility_type\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"Type\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"organization\\\", \\\"fieldtype\\\": \\\"Link\\\", \\\"label\\\": \\\"Organization\\\", \\\"width\\\": 3, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Facility\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ },
+ {
+  "doctype": "Property Setter",
+  "name": "Geography Node-sva_households-sva_ft",
+  "doctype_or_field": "DocField",
+  "doc_type": "Geography Node",
+  "field_name": "sva_households",
+  "property": "sva_ft",
+  "property_type": "JSON",
+  "value": "{\"property_type\": \"DocType (Direct)\", \"connection_type\": \"Direct\", \"link_doctype\": \"Household\", \"link_fieldname\": \"geography_node\", \"title\": \"Households\", \"crud_permissions\": \"[\\\"read\\\"]\", \"listview_settings\": \"[{\\\"fieldname\\\": \\\"address\\\", \\\"fieldtype\\\": \\\"Text\\\", \\\"label\\\": \\\"Address\\\", \\\"width\\\": 5, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}, {\\\"fieldname\\\": \\\"socioeconomic_tier\\\", \\\"fieldtype\\\": \\\"Select\\\", \\\"label\\\": \\\"SES Tier\\\", \\\"width\\\": 2, \\\"inline_edit\\\": 0, \\\"sticky\\\": 0, \\\"wrap\\\": 0, \\\"color\\\": \\\"\\\", \\\"bg_color\\\": \\\"\\\"}]\", \"add_row_button_label\": \"Add Household\", \"allow_export\": 1, \"full_screen_dialog\": 1, \"redirect_to_main_form\": 0, \"disable_workflow\": 1}"
+ }
+]

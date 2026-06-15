@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-06-12 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "thread_key",
+  "ref_doctype",
+  "ref_docname",
+  "thread"
+ ],
+ "fields": [
+  {
+   "fieldname": "thread_key",
+   "fieldtype": "Data",
+   "label": "Thread Key",
+   "unique": 1,
+   "reqd": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Data",
+   "label": "Reference DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ref_docname",
+   "fieldtype": "Data",
+   "label": "Reference Document",
+   "read_only": 1
+  },
+  {
+   "fieldname": "thread",
+   "fieldtype": "Long Text",
+   "label": "Thread",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "links": [],
+ "modified": "2026-06-12 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Uhis Next Core",
+ "name": "AI Chat Thread",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
