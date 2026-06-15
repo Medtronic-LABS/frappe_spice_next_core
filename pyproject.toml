@@ -1,0 +1,11 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501", "W191", "E101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"

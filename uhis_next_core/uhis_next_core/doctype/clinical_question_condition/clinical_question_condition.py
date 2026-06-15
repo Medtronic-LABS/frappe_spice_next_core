@@ -1,6 +1,5 @@
-import frappe
 from frappe.model.document import Document
 
 
 class ClinicalQuestionCondition(Document):
-    pass
+	pass
