@@ -98,6 +98,20 @@ def _ensure_concept(mapping):
 	return name
 
 
+# ── set_case_geography_node ───────────────────────────────────────────────────
+
+
+def set_case_geography_node(doc, event):
+	"""Denormalize geography_node onto Case from Patient → Household at insert time."""
+	if doc.geography_node:
+		return  # already set (e.g. sync push carried the field)
+	if not doc.patient:
+		return
+	household = frappe.db.get_value("Patient", doc.patient, "primary_household")
+	if household:
+		doc.geography_node = frappe.db.get_value("Household", household, "geography_node")
+
+
 # ── validate_clinical_fields ──────────────────────────────────────────────────
 
 

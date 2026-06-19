@@ -8,9 +8,14 @@
  "field_order": [
   "tab_details",
   "full_name",
+  "full_name_bn",
   "role_type",
+  "programme",
+  "column_break_provider_1",
+  "geography_node",
   "facility",
   "user",
+  "photo",
   "tab_encounters",
   "sva_encounters"
  ],
@@ -28,10 +33,33 @@
    "reqd": 1
   },
   {
+   "fieldname": "full_name_bn",
+   "fieldtype": "Data",
+   "label": "Full Name (Bangla)"
+  },
+  {
    "fieldname": "role_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Role Type",
-   "options": "CHW\nNurse\nDoctor\nSupervisor\nAdmin"
+   "options": "SK\nSS\nDoctor\nSupervisor\nAdmin"
+  },
+  {
+   "fieldname": "programme",
+   "fieldtype": "Link",
+   "label": "Programme",
+   "options": "Programme"
+  },
+  {
+   "fieldname": "column_break_provider_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "geography_node",
+   "fieldtype": "Link",
+   "label": "Geography Node (Ward)",
+   "options": "Geography Node",
+   "description": "Set for SS (Sashtasebika) — their directly assigned ward. Leave blank for SK (resolved via Facility)."
   },
   {
    "fieldname": "facility",
@@ -44,6 +72,11 @@
    "fieldtype": "Link",
    "label": "User",
    "options": "User"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
   },
   {
    "fieldname": "tab_encounters",

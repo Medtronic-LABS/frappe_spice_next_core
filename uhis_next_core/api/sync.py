@@ -29,12 +29,28 @@ class CaseStatusConflict(Exception):
 	pass
 
 
+def _resolve_env(payload=None):
+	"""Accept either a legacy `payload` string or raw JSON body keys (Flutter client).
+
+	Flutter sends the envelope as a flat JSON body:
+	  {"contract_version": 1, "ops": [...]}
+	The original Frappe-desk approach wraps it in a `payload` string:
+	  payload = '{"contract_version": 1, "ops": [...]}'
+	Both arrive as frappe.local.form_dict keys; this helper handles both.
+	"""
+	if payload:
+		return frappe.parse_json(payload)
+	# Raw JSON body — Frappe v15 merges application/json body into form_dict,
+	# so the top-level keys are directly accessible as function arguments.
+	return frappe.local.form_dict
+
+
 # ── push ─────────────────────────────────────────────────────────────────────
 
 
 @frappe.whitelist()
-def push(payload):
-	env = frappe.parse_json(payload)
+def push(payload=None, **kwargs):
+	env = _resolve_env(payload)
 	_assert_contract_version(env)
 	results = []
 
@@ -257,8 +273,8 @@ def _log_op(client_op_id, doctype, name, seq):
 
 
 @frappe.whitelist()
-def pull(payload):
-	env = frappe.parse_json(payload)
+def pull(payload=None, **kwargs):
+	env = _resolve_env(payload)
 	_assert_contract_version(env)
 	cursor = int(env.get("cursor", 0))
 	limit = min(int(env.get("limit", 200)), 500)
@@ -320,8 +336,8 @@ def _serialize_change(row):
 
 
 @frappe.whitelist()
-def config(payload):
-	env = frappe.parse_json(payload)
+def config(payload=None, **kwargs):
+	env = _resolve_env(payload)
 	_assert_contract_version(env)
 	client_versions = env.get("config_versions", {})
 
@@ -329,12 +345,20 @@ def config(payload):
 	geography = _serialize_geography(client_versions.get("geography", 0))
 	concepts = _serialize_concepts(client_versions.get("concepts", 0))
 	clinical_questions = _serialize_clinical_questions()
+	symptom_obs_mappings = _serialize_symptom_obs_mappings()
+	priority_rules = _serialize_priority_rules()
+	protocol_selection_rules = _serialize_protocol_selection_rules()
+	recommendation_rules = _serialize_recommendation_rules()
 
 	versions = {
 		"forms": frappe.db.count("Programme Form"),
 		"geography": frappe.db.count("Geography Node"),
 		"concepts": frappe.db.count("Concept"),
 		"clinical_questions": frappe.db.count("Clinical Question"),
+		"symptom_obs_mappings": frappe.db.count("Symptom Observation Mapping"),
+		"priority_rules": frappe.db.count("Priority Rule"),
+		"protocol_selection_rules": frappe.db.count("Protocol Selection Rule"),
+		"recommendation_rules": frappe.db.count("Recommendation Rule"),
 	}
 
 	return {
@@ -343,6 +367,10 @@ def config(payload):
 		"geography": geography,
 		"concepts": concepts,
 		"clinical_questions": clinical_questions,
+		"symptom_obs_mappings": symptom_obs_mappings,
+		"priority_rules": priority_rules,
+		"protocol_selection_rules": protocol_selection_rules,
+		"recommendation_rules": recommendation_rules,
 		"versions": versions,
 	}
 
@@ -376,41 +404,137 @@ def _serialize_concepts(client_version):
 	return [dict(c) for c in concepts]
 
 
+def _serialize_symptom_obs_mappings():
+	rows = frappe.get_all(
+		"Symptom Observation Mapping",
+		fields=["name", "symptom_question_id", "observation_question_id", "mandatory_if_present", "display_order", "programme"],
+		order_by="display_order asc",
+	)
+	return [dict(r) for r in rows]
+
+
+def _serialize_priority_rules():
+	rows = frappe.get_all(
+		"Priority Rule",
+		filters={"active": 1},
+		fields=["name", "rule_name", "programme", "condition_field", "condition_operator", "condition_value", "weight", "reason_label"],
+		order_by="weight desc",
+	)
+	return [dict(r) for r in rows]
+
+
+def _serialize_protocol_selection_rules():
+	rules = frappe.get_all(
+		"Protocol Selection Rule",
+		filters={"active": 1},
+		fields=["name", "rule_name", "programme", "priority", "allow_concurrent", "condition_logic"],
+		order_by="priority desc",
+	)
+	result = []
+	for rule in rules:
+		conditions = frappe.get_all(
+			"Rule Condition",
+			filters={"parenttype": "Protocol Selection Rule", "parent": rule.name},
+			fields=["condition_field", "condition_operator", "condition_value"],
+			order_by="idx asc",
+		)
+		rule_dict = dict(rule)
+		rule_dict["conditions"] = [dict(c) for c in conditions]
+		result.append(rule_dict)
+	return result
+
+
+def _serialize_recommendation_rules():
+	rules = frappe.get_all(
+		"Recommendation Rule",
+		filters={"active": 1},
+		fields=["name", "rule_name", "programme", "priority", "condition_logic", "severity", "action_type", "action_label", "rationale_template", "guideline_id"],
+		order_by="priority desc",
+	)
+	result = []
+	for rule in rules:
+		conditions = frappe.get_all(
+			"Rule Condition",
+			filters={"parenttype": "Recommendation Rule", "parent": rule.name},
+			fields=["condition_field", "condition_operator", "condition_value"],
+			order_by="idx asc",
+		)
+		rule_dict = dict(rule)
+		rule_dict["conditions"] = [dict(c) for c in conditions]
+		result.append(rule_dict)
+	return result
+
+
 # ── helpers ───────────────────────────────────────────────────────────────────
 
 
+def _get_subtree(geography_node):
+	"""Return geography_node + all descendants (BFS, iterative)."""
+	nodes, queue = {geography_node}, [geography_node]
+	while queue:
+		children = frappe.get_all(
+			"Geography Node",
+			filters={"parent_node": ["in", queue]},
+			pluck="name",
+		)
+		fresh = [c for c in children if c not in nodes]
+		nodes.update(fresh)
+		queue = fresh
+	return nodes
+
+
 def get_user_catchment(user):
+	"""
+	Resolve geography scope for a user.
+	  None  → System Manager (unrestricted)
+	  set() → empty (no Provider record; sees nothing)
+	  {ids} → set of Geography Node names the user may access
+
+	SS (Sashtasebika): scoped to their directly assigned ward + descendants.
+	SK (Sashta Kormi): scoped to their facility's geography node + descendants.
+	Legacy fallback: Care Team → Facility chain for records without direct assignment.
+	"""
 	if "System Manager" in frappe.get_roles(user):
 		return None
 
-	provider = frappe.db.get_value("Provider", {"user": user}, "name")
+	provider = frappe.db.get_value(
+		"Provider",
+		{"user": user},
+		["name", "role_type", "geography_node", "facility"],
+		as_dict=True,
+	)
 	if not provider:
 		return set()
 
-	care_team_rows = frappe.get_all(
+	# SS: directly assigned to a ward geography_node
+	if provider.geography_node:
+		return _get_subtree(provider.geography_node)
+
+	# SK: scoped via assigned facility → facility's geography_node
+	if provider.facility:
+		node = frappe.db.get_value("Facility", provider.facility, "geography_node")
+		if node:
+			return _get_subtree(node)
+
+	# Legacy fallback: Care Team → Facility chain
+	care_teams = frappe.get_all(
 		"Care Team Member",
-		filters={"provider": provider},
-		fields=["parent"],
+		filters={"provider": provider.name},
+		pluck="parent",
 	)
-	care_teams = [r.parent for r in care_team_rows]
 	if not care_teams:
 		return set()
-
-	facility_rows = frappe.get_all(
+	facilities = frappe.get_all(
 		"Care Team",
 		filters=[["name", "in", care_teams]],
-		fields=["facility"],
+		pluck="facility",
 	)
-	facilities = [r.facility for r in facility_rows]
-	if not facilities:
-		return set()
-
-	node_rows = frappe.get_all(
-		"Facility",
-		filters=[["name", "in", facilities]],
-		fields=["geography_node"],
-	)
-	return {r.geography_node for r in node_rows if r.geography_node}
+	nodes = set()
+	for fac in filter(None, facilities):
+		node = frappe.db.get_value("Facility", fac, "geography_node")
+		if node:
+			nodes |= _get_subtree(node)
+	return nodes
 
 
 def _assert_contract_version(env):

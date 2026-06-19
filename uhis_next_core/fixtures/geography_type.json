@@ -1,0 +1,44 @@
+[
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-country",
+  "label": "Country",
+  "level_order": 0
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-division",
+  "label": "Division",
+  "level_order": 1
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-district",
+  "label": "District",
+  "level_order": 2
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-upazila",
+  "label": "Upazila",
+  "level_order": 3
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-union",
+  "label": "Union",
+  "level_order": 4
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-ward",
+  "label": "Ward",
+  "level_order": 5
+ },
+ {
+  "doctype": "Geography Type",
+  "name": "geo-type-village",
+  "label": "Village",
+  "level_order": 6
+ }
+]

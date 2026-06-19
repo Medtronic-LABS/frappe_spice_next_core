@@ -12,6 +12,7 @@
   "tab_details",
   "client_uuid",
   "full_name",
+  "full_name_bn",
   "dob",
   "gender",
   "phone",
@@ -62,6 +63,11 @@
    "in_list_view": 1,
    "label": "Full Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "full_name_bn",
+   "fieldtype": "Data",
+   "label": "Full Name (Bangla)"
   },
   {
    "fieldname": "dob",

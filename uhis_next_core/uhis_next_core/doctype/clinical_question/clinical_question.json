@@ -8,6 +8,7 @@
  "field_order": [
   "label",
   "form_group",
+  "question_type",
   "sequence",
   "fieldtype",
   "options",
@@ -38,8 +39,17 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Form Group",
-   "options": "ncd\neye_care\ncataract\nfamily_planning\npw_profile\npregnancy_outcome",
+   "options": "ncd\neye_care\ncataract\nfamily_planning\npw_profile\npregnancy_outcome\nchild_health\nanc\ntb\nimci\npp",
    "reqd": 1
+  },
+  {
+   "fieldname": "question_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Question Type",
+   "options": "assessment\nsymptom\nvital\nhistory\noutcome",
+   "default": "assessment",
+   "description": "assessment=Step 4 form; symptom=Step 2 discovery; vital=Step 3 collection; history=background; outcome=end-of-visit"
   },
   {
    "fieldname": "sequence",

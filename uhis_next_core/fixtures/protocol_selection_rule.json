@@ -1,0 +1,195 @@
+[
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "NCD-High-Risk-Protocol",
+    "rule_name": "NCD Urgent Protocol — high risk",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 10,
+    "condition_logic": "AND",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-High-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "NCD-High-Risk-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "programme",
+        "condition_operator": "=",
+        "condition_value": "ncd"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-High-C2",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "NCD-High-Risk-Protocol",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "risk_level",
+        "condition_operator": "=",
+        "condition_value": "high"
+      }
+    ]
+  },
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "NCD-Routine-Protocol",
+    "rule_name": "NCD Routine Assessment",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 50,
+    "condition_logic": "AND",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-Routine-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "NCD-Routine-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "programme",
+        "condition_operator": "=",
+        "condition_value": "ncd"
+      }
+    ]
+  },
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "CH-Fever-Protocol",
+    "rule_name": "Child Illness Protocol — fever",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 10,
+    "condition_logic": "OR",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Fever-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "CH-Fever-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "symptom_ch_sym_fever",
+        "condition_operator": "=",
+        "condition_value": "true"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Fever-C2",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "CH-Fever-Protocol",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "ch_vit_temperature",
+        "condition_operator": ">=",
+        "condition_value": "38.5"
+      }
+    ]
+  },
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "CH-Breathing-Protocol",
+    "rule_name": "Child Illness Protocol — respiratory",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 5,
+    "condition_logic": "OR",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Breathing-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "CH-Breathing-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "symptom_ch_sym_fast_breathing",
+        "condition_operator": "=",
+        "condition_value": "true"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Breathing-C2",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "CH-Breathing-Protocol",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "ch_vit_respiratory_rate",
+        "condition_operator": ">=",
+        "condition_value": "50"
+      }
+    ]
+  },
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "ANC-Routine-Protocol",
+    "rule_name": "ANC Routine Assessment",
+    "programme": "ANC",
+    "active": 1,
+    "priority": 50,
+    "condition_logic": "AND",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "ANC-Routine-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "ANC-Routine-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "programme",
+        "condition_operator": "=",
+        "condition_value": "anc"
+      }
+    ]
+  },
+  {
+    "doctype": "Protocol Selection Rule",
+    "name": "ANC-Danger-Signs-Protocol",
+    "rule_name": "ANC Danger Signs Protocol",
+    "programme": "ANC",
+    "active": 1,
+    "priority": 5,
+    "condition_logic": "OR",
+    "allow_concurrent": 1,
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "ANC-Danger-C1",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "ANC-Danger-Signs-Protocol",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "symptom_anc_sym_bleeding",
+        "condition_operator": "=",
+        "condition_value": "true"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "ANC-Danger-C2",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "ANC-Danger-Signs-Protocol",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "symptom_anc_sym_headache",
+        "condition_operator": "=",
+        "condition_value": "true"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "ANC-Danger-C3",
+        "parenttype": "Protocol Selection Rule",
+        "parent": "ANC-Danger-Signs-Protocol",
+        "parentfield": "conditions",
+        "idx": 3,
+        "condition_field": "anc_temperature",
+        "condition_operator": ">=",
+        "condition_value": "38.0"
+      }
+    ]
+  }
+]

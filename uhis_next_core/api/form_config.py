@@ -68,6 +68,7 @@ def serialize_clinical_questions():
 			"name",
 			"label",
 			"form_group",
+			"question_type",
 			"sequence",
 			"fieldtype",
 			"options",
@@ -81,6 +82,7 @@ def serialize_clinical_questions():
 			"mandatory_expression",
 		],
 		order_by="form_group asc, sequence asc",
+		ignore_permissions=True,
 	)
 	result = []
 	for q in questions:
@@ -100,6 +102,7 @@ def serialize_clinical_questions():
 				"question_id": q.name,
 				"label": q.label,
 				"form_group": q.form_group,
+				"question_type": q.question_type or "assessment",
 				"sequence": q.sequence,
 				"type": q.fieldtype,
 				"mandatory": bool(q.mandatory),

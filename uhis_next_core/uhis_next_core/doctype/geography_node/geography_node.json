@@ -38,6 +38,7 @@
   {
    "fieldname": "parent_node",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Parent Node",
    "options": "Geography Node"
   },

@@ -15,8 +15,15 @@ app_include_js = ["/assets/uhis_next_core/js/ai_panel.js"]
 # Fixtures committed to git; bench export-fixtures writes these files.
 # Order matters: Number Card must precede Workspace (workspace references card names).
 fixtures = [
+	"Role",
+	"Geography Type",
+	"Geography Node",
 	"Concept",
 	"Clinical Question",
+	"Symptom Observation Mapping",
+	"Priority Rule",
+	"Protocol Selection Rule",
+	"Recommendation Rule",
 	{
 		"dt": "Property Setter",
 		"filters": [
@@ -123,7 +130,9 @@ doc_events = {
 		],
 	},
 	# change journal + FHIR push for Case (EpisodeOfCare)
+	# before_insert: denormalize geography_node from Patient → Household
 	"Case": {
+		"before_insert": "uhis_next_core.hooks_impl.set_case_geography_node",
 		"after_insert": [
 			"uhis_next_core.hooks_impl.advance_sync_seq",
 			"uhis_next_core.fhir.push.enqueue_fhir_push",

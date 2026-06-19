@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "autoname": "prompt",
+ "creation": "2026-06-18 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "programme",
+  "active",
+  "col_condition",
+  "condition_field",
+  "condition_operator",
+  "condition_value",
+  "col_result",
+  "weight",
+  "reason_label"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "programme",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Programme (scope)",
+   "options": "Programme",
+   "description": "Leave blank to apply to all programmes"
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1"
+  },
+  {
+   "fieldname": "col_condition",
+   "fieldtype": "Section Break",
+   "label": "Condition"
+  },
+  {
+   "fieldname": "condition_field",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Field",
+   "reqd": 1,
+   "description": "Priority context field: risk_level, days_since_last_encounter, last_bp_systolic, missed_followup_count, open_referral_count, programme"
+  },
+  {
+   "fieldname": "condition_operator",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Operator",
+   "options": "=\n!=\n>\n>=\n<\n<=\nin",
+   "reqd": 1
+  },
+  {
+   "fieldname": "condition_value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_result",
+   "fieldtype": "Section Break",
+   "label": "Result"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Score Weight",
+   "reqd": 1,
+   "default": "50",
+   "description": "Higher = more urgent. Total score = sum of all matching rule weights"
+  },
+  {
+   "fieldname": "reason_label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reason Label",
+   "description": "Shown to CHW in worklist, e.g. 'BP uncontrolled — 3+ visits'"
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Uhis Next Core",
+ "name": "Priority Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "rule_name",
+ "sort_field": "weight",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "rule_name"
+}

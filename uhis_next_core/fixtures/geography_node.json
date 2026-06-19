@@ -1,0 +1,51 @@
+[
+ {
+  "doctype": "Geography Node",
+  "name": "geo-bangladesh",
+  "label": "Bangladesh",
+  "geography_type": "geo-type-country",
+  "parent_node": null
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-dhaka-div",
+  "label": "Dhaka",
+  "geography_type": "geo-type-division",
+  "parent_node": "geo-bangladesh"
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-dhaka-dist",
+  "label": "Dhaka",
+  "geography_type": "geo-type-district",
+  "parent_node": "geo-dhaka-div"
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-mirpur-upazila",
+  "label": "Mirpur",
+  "geography_type": "geo-type-upazila",
+  "parent_node": "geo-dhaka-dist"
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-mirpur-1-union",
+  "label": "Mirpur-1",
+  "geography_type": "geo-type-union",
+  "parent_node": "geo-mirpur-upazila"
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-mirpur-ward-1",
+  "label": "Mirpur Ward 1",
+  "geography_type": "geo-type-ward",
+  "parent_node": "geo-mirpur-1-union"
+ },
+ {
+  "doctype": "Geography Node",
+  "name": "geo-mirpur-ward-2",
+  "label": "Mirpur Ward 2",
+  "geography_type": "geo-type-ward",
+  "parent_node": "geo-mirpur-1-union"
+ }
+]

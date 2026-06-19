@@ -1,0 +1,14 @@
+[
+ {
+  "doctype": "Role",
+  "name": "SK",
+  "role_name": "SK",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "name": "SS",
+  "role_name": "SS",
+  "desk_access": 1
+ }
+]

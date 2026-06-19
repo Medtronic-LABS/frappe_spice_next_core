@@ -21,6 +21,7 @@
   "closed_on",
   "outcome",
   "client_uuid",
+  "geography_node",
   "risk_factors",
   "ai_summary",
   "ai_summary_generated_at",
@@ -132,6 +133,14 @@
    "reqd": 1,
    "set_only_once": 1,
    "unique": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "geography_node",
+   "fieldtype": "Link",
+   "label": "Geography Node",
+   "options": "Geography Node",
+   "read_only": 1,
    "hidden": 1
   },
   {

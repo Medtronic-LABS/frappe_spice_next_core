@@ -1,0 +1,414 @@
+[
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-BP-Sys-Critical",
+    "rule_name": "Systolic BP ≥ 160 (WHO Stage 2)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 10,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Sys-Critical-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Sys-Critical",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|8480-6",
+        "condition_operator": ">=",
+        "condition_value": "160"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer to health facility today",
+    "rationale_template": "Systolic BP {LOINC|8480-6} mmHg ≥ 160 mmHg — WHO Stage 2 hypertension",
+    "guideline_id": "WHO-HTN-2023"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-BP-Sys-Moderate",
+    "rule_name": "Systolic BP 140–159 (JNC8 Stage 1)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 20,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Sys-Mod-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Sys-Moderate",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|8480-6",
+        "condition_operator": ">=",
+        "condition_value": "140"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Sys-Mod-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Sys-Moderate",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "LOINC|8480-6",
+        "condition_operator": "<",
+        "condition_value": "160"
+      }
+    ],
+    "severity": "moderate",
+    "action_type": "followup_7d",
+    "action_label": "Follow up within 7 days and review medication",
+    "rationale_template": "Systolic BP {LOINC|8480-6} mmHg — JNC8 Stage 1 hypertension",
+    "guideline_id": "JNC8-HTN"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-BP-Dia-Critical",
+    "rule_name": "Diastolic BP ≥ 100 (WHO Stage 2)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 11,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Dia-Critical-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Dia-Critical",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|8462-4",
+        "condition_operator": ">=",
+        "condition_value": "100"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer to health facility today",
+    "rationale_template": "Diastolic BP {LOINC|8462-4} mmHg ≥ 100 mmHg — WHO Stage 2 hypertension",
+    "guideline_id": "WHO-HTN-2023"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-BP-Dia-Moderate",
+    "rule_name": "Diastolic BP 90–99 (JNC8 Stage 1)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 21,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Dia-Mod-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Dia-Moderate",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|8462-4",
+        "condition_operator": ">=",
+        "condition_value": "90"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-BP-Dia-Mod-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-BP-Dia-Moderate",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "LOINC|8462-4",
+        "condition_operator": "<",
+        "condition_value": "100"
+      }
+    ],
+    "severity": "moderate",
+    "action_type": "followup_7d",
+    "action_label": "Follow up within 7 days",
+    "rationale_template": "Diastolic BP {LOINC|8462-4} mmHg — JNC8 Stage 1 hypertension",
+    "guideline_id": "JNC8-HTN"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-Glucose-High",
+    "rule_name": "Blood Glucose ≥ 11.1 mmol/L (ADA)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 12,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-Glucose-High-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-Glucose-High",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|2339-0",
+        "condition_operator": ">=",
+        "condition_value": "11.1"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer for diabetes management today",
+    "rationale_template": "Random blood glucose {LOINC|2339-0} mmol/L ≥ 11.1 — probable diabetes",
+    "guideline_id": "ADA-2024"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-Glucose-Moderate",
+    "rule_name": "Blood Glucose 7.0–11.0 mmol/L",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 22,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-Glucose-Mod-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-Glucose-Moderate",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|2339-0",
+        "condition_operator": ">=",
+        "condition_value": "7.0"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-Glucose-Mod-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-Glucose-Moderate",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "LOINC|2339-0",
+        "condition_operator": "<",
+        "condition_value": "11.1"
+      }
+    ],
+    "severity": "moderate",
+    "action_type": "followup_7d",
+    "action_label": "Review medication adherence and diet within 7 days",
+    "rationale_template": "Blood glucose {LOINC|2339-0} mmol/L — elevated, review adherence",
+    "guideline_id": "ADA-2024"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-HbA1c-High",
+    "rule_name": "HbA1c ≥ 9.0% (poor control)",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 13,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-HbA1c-High-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-HbA1c-High",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|4548-4",
+        "condition_operator": ">=",
+        "condition_value": "9.0"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer for specialist diabetes review",
+    "rationale_template": "HbA1c {LOINC|4548-4}% ≥ 9.0 — poor glycaemic control (ADA 2024)",
+    "guideline_id": "ADA-2024"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "NCD-HbA1c-Moderate",
+    "rule_name": "HbA1c 7.0–8.9%",
+    "programme": "NCD",
+    "active": 1,
+    "priority": 23,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-HbA1c-Mod-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-HbA1c-Moderate",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "LOINC|4548-4",
+        "condition_operator": ">=",
+        "condition_value": "7.0"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "NCD-HbA1c-Mod-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "NCD-HbA1c-Moderate",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "LOINC|4548-4",
+        "condition_operator": "<",
+        "condition_value": "9.0"
+      }
+    ],
+    "severity": "moderate",
+    "action_type": "followup_7d",
+    "action_label": "Adjust diet, check adherence, follow up in 7 days",
+    "rationale_template": "HbA1c {LOINC|4548-4}% — suboptimal glycaemic control",
+    "guideline_id": "ADA-2024"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "CH-Temp-High",
+    "rule_name": "Temperature ≥ 39.0°C (high fever)",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 10,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Temp-High-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-Temp-High",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "vital_temperature",
+        "condition_operator": ">=",
+        "condition_value": "39.0"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer to health facility today — high fever",
+    "rationale_template": "Temperature {vital_temperature}°C ≥ 39.0°C — high fever per WHO-IMCI",
+    "guideline_id": "WHO-IMCI-2025"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "CH-Temp-Moderate",
+    "rule_name": "Temperature 38.5–38.9°C",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 20,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Temp-Mod-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-Temp-Moderate",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "vital_temperature",
+        "condition_operator": ">=",
+        "condition_value": "38.5"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-Temp-Mod-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-Temp-Moderate",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "vital_temperature",
+        "condition_operator": "<",
+        "condition_value": "39.0"
+      }
+    ],
+    "severity": "moderate",
+    "action_type": "followup_7d",
+    "action_label": "Give paracetamol, follow up in 2 days",
+    "rationale_template": "Temperature {vital_temperature}°C — fever, monitor closely",
+    "guideline_id": "WHO-IMCI-2025"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "CH-RR-Infant-Critical",
+    "rule_name": "RR ≥ 60 in infant ≤ 12 months",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 5,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-RR-Infant-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-RR-Infant-Critical",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "vital_respiratory_rate",
+        "condition_operator": ">=",
+        "condition_value": "60"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-RR-Infant-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-RR-Infant-Critical",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "patient_age_months",
+        "condition_operator": "<=",
+        "condition_value": "12"
+      }
+    ],
+    "severity": "critical",
+    "action_type": "refer_today",
+    "action_label": "URGENT: Refer immediately — possible severe pneumonia",
+    "rationale_template": "RR {vital_respiratory_rate}/min ≥ 60 in infant {patient_age_months}mo — severe fast breathing (WHO-IMCI)",
+    "guideline_id": "WHO-IMCI-2025"
+  },
+  {
+    "doctype": "Recommendation Rule",
+    "name": "CH-RR-Child-High",
+    "rule_name": "RR ≥ 50 in child 1–5 years",
+    "programme": "Child Health",
+    "active": 1,
+    "priority": 6,
+    "condition_logic": "AND",
+    "conditions": [
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-RR-Child-C1",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-RR-Child-High",
+        "parentfield": "conditions",
+        "idx": 1,
+        "condition_field": "vital_respiratory_rate",
+        "condition_operator": ">=",
+        "condition_value": "50"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-RR-Child-C2",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-RR-Child-High",
+        "parentfield": "conditions",
+        "idx": 2,
+        "condition_field": "patient_age_months",
+        "condition_operator": ">",
+        "condition_value": "12"
+      },
+      {
+        "doctype": "Rule Condition",
+        "name": "CH-RR-Child-C3",
+        "parenttype": "Recommendation Rule",
+        "parent": "CH-RR-Child-High",
+        "parentfield": "conditions",
+        "idx": 3,
+        "condition_field": "patient_age_months",
+        "condition_operator": "<=",
+        "condition_value": "60"
+      }
+    ],
+    "severity": "high",
+    "action_type": "refer_today",
+    "action_label": "Refer to health facility today — fast breathing",
+    "rationale_template": "RR {vital_respiratory_rate}/min ≥ 50 in child {patient_age_months}mo — fast breathing (WHO-IMCI)",
+    "guideline_id": "WHO-IMCI-2025"
+  }
+]
