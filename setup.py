@@ -11,6 +11,9 @@ setup(
 	zip_safe=False,
 	include_package_data=True,
 	python_requires=">=3.10",
+	install_requires=[
+		"PyJWT~=2.12.1",
+	],
 	classifiers=[
 		"License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
 		"Programming Language :: Python :: 3",
