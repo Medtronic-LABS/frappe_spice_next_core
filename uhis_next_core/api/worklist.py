@@ -110,7 +110,7 @@ def _build_case_context(case):
 	}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def today():
 	catchment = get_user_catchment(frappe.session.user)
 
@@ -188,7 +188,7 @@ def today():
 	return entries
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def notifications():
 	"""Pending high-priority referrals for the logged-in SK's catchment."""
 	catchment = get_user_catchment(frappe.session.user)

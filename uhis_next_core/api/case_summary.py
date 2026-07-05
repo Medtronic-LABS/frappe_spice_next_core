@@ -47,7 +47,7 @@ _VITALS_UNIT = {
 }
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def get_case_summary(case):
 	doc = frappe.get_doc("Case", case)
 

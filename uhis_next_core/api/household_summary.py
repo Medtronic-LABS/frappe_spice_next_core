@@ -1,7 +1,7 @@
 import frappe
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def get_household_summary(household):
 	patients = frappe.get_all(
 		"Patient",

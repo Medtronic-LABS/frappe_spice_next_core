@@ -48,7 +48,7 @@ def _resolve_env(payload=None):
 # ── push ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def push(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -272,7 +272,7 @@ def _log_op(client_op_id, doctype, name, seq):
 # ── pull ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def pull(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -335,7 +335,7 @@ def _serialize_change(row):
 # ── config ────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def config(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)

@@ -10,7 +10,7 @@ import frappe
 # ── whitelisted read endpoints ────────────────────────────────────────────────
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_patient(patient):
 	doc = frappe.get_doc("Patient", patient)
 	resource = {
@@ -27,7 +27,7 @@ def read_patient(patient):
 	return resource
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_encounter(encounter):
 	enc = frappe.get_doc("Encounter", encounter)
 	patient_id = _patient_from_case(enc.case) if enc.case else ""
@@ -50,7 +50,7 @@ def read_encounter(encounter):
 	return resource
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_condition(condition):
 	cond = frappe.get_doc("Condition", condition)
 	patient_id = _patient_from_case(cond.case) if cond.case else ""
@@ -83,7 +83,7 @@ def read_condition(condition):
 	return resource
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_referral(referral):
 	ref = frappe.get_doc("Referral", referral)
 	case = frappe.get_doc("Case", ref.case)
@@ -127,7 +127,7 @@ def read_referral(referral):
 	return resource
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_household(household):
 	doc = frappe.get_doc("Household", household)
 	patients = frappe.get_all(
@@ -144,7 +144,7 @@ def read_household(household):
 	}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def read_patient_bundle(patient):
 	entries = []
 
@@ -197,7 +197,7 @@ def read_patient_bundle(patient):
 # ── legacy endpoints (kept for backwards compatibility) ───────────────────────
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def to_questionnaire_response(form_doc_name, form_doctype):
 	doc = frappe.get_doc(form_doctype, form_doc_name)
 	meta = frappe.get_meta(form_doctype)
@@ -229,7 +229,7 @@ def to_questionnaire_response(form_doc_name, form_doctype):
 	}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def to_fhir_observation(obs_name):
 	obs = frappe.get_doc("Observation", obs_name)
 	concept = frappe.get_doc("Concept", obs.concept) if obs.concept else None
@@ -265,7 +265,7 @@ def to_fhir_observation(obs_name):
 	return resource
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def to_episode_of_care(case_name):
 	case = frappe.get_doc("Case", case_name)
 	return {

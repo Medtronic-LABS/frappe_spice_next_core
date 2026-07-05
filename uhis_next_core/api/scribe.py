@@ -37,7 +37,7 @@ from frappe import _
 from ..ai.client import call_ai
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def transcribe(payload):
 	env = frappe.parse_json(payload)
 	audio_file_path = env.get("audio_file_path") or ""
