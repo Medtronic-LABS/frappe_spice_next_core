@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "autoname": "field:user",
+ "creation": "2026-07-03 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "min_app_version",
+  "selected_language",
+  "ai_feature"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "description": "External mobile-app/device user id (from the JWT `sub` claim). This is NOT a Link to Frappe User — mobile-app users have no corresponding Frappe User record."
+  },
+  {
+   "fieldname": "min_app_version",
+   "fieldtype": "Data",
+   "label": "Min App Version (Override)",
+   "default": "",
+   "description": "Per-user override of UHIS Settings > Minimum App Version. Leave blank to use the system default."
+  },
+  {
+   "fieldname": "selected_language",
+   "fieldtype": "Select",
+   "label": "Selected Language (Override)",
+   "options": "en\nbn",
+   "default": "",
+   "description": "Per-user override of UHIS Settings > Default Language. Leave blank to use the system default."
+  },
+  {
+   "fieldname": "ai_feature",
+   "fieldtype": "Check",
+   "label": "AI Feature (Override)",
+   "default": "0",
+   "description": "Per-user override of UHIS Settings > AI Feature Enabled. If this row exists, this value (0 or 1) always overrides the system default."
+  }
+ ],
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-07-03 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Uhis Next Core",
+ "name": "User App Control",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "user",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

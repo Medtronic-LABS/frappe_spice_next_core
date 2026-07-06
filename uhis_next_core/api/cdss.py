@@ -59,7 +59,7 @@ _SEVERITY_NAMES = ["Low", "Moderate", "High", "Critical"]
 
 # ── public endpoints ──────────────────────────────────────────────────────────
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def recommend(payload=None, **kwargs):
 	env = frappe.parse_json(payload) if payload else frappe.local.form_dict
 	patient_uuid = env.get("patient_uuid") or ""
@@ -110,7 +110,7 @@ def recommend(payload=None, **kwargs):
 	return result
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def suggest_symptoms(payload=None, **kwargs):
 	"""Return AI-suggested likely symptoms based on patient history.
 

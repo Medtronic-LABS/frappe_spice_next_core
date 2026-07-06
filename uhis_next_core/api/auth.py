@@ -34,7 +34,7 @@ import frappe
 from frappe import _
 
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def login(username=None, password=None, device=None):
 	# Accept both flat JSON body keys (Flutter client) and a legacy `payload` string.
 	username = username or ""

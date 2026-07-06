@@ -1,7 +1,7 @@
 import frappe
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def get_health_summary(patient):
 	doc = frappe.get_doc("Patient", patient)
 

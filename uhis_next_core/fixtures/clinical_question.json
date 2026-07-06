@@ -16,7 +16,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "hasSymptoms"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -43,7 +51,15 @@
     ],
     "visibility_expression": "has_symptoms = 1",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "ncdSymptoms"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -70,7 +86,15 @@
     ],
     "visibility_expression": "has_symptoms = 1",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "newWorseningSymptoms"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -89,7 +113,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "compliance"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -108,7 +140,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "height"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -127,7 +167,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -146,7 +194,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "bmi"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -165,7 +221,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "bpLogDetails"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -184,7 +248,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "bpLogDetails"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -203,7 +275,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "isRegularSmoker"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -222,7 +302,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "glucoseType"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -249,7 +337,15 @@
     ],
     "visibility_expression": "glucose_type != HbA1c",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "glucose"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -276,7 +372,15 @@
     ],
     "visibility_expression": "glucose_type = HbA1c",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "NCD",
+        "clinical_workflow_id": 21,
+        "form_type": "ncd",
+        "field_id": "hba1c"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -295,7 +399,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "eyeTestOutcome"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -314,7 +426,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "glassPower"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -333,7 +453,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "haveTheGlassesBeenSold"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -352,7 +480,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "typeOfGlass"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -371,7 +507,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "typeOfFrame"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -390,7 +534,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "firstTimeUser"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -409,7 +561,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Eye Care",
+        "clinical_workflow_id": 22,
+        "form_type": "eye_care",
+        "field_id": "referPlace"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -428,7 +588,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "height"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -447,7 +615,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -466,7 +642,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "bmi"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -485,7 +669,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "eyeDisease"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -504,7 +696,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "glassPower"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -523,7 +723,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "haveTheGlassesBeenSold"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -542,7 +750,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "typeOfGlass"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -561,7 +777,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "typeOfFrame"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -580,7 +804,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "firstTimeUser"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -599,7 +831,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "referPlace"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -618,7 +858,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "historyOfOtherDiseases"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -637,7 +885,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "patientReferredForOperation"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -656,7 +912,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "operationName"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -675,7 +939,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "reason"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -694,7 +966,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "pseudophakiaPostCataractSurgery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -713,7 +993,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "ncdServiceProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -732,7 +1020,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "isBeforeHtnDiagnosis"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -751,7 +1047,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "medicationFrequencyBp"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -770,7 +1074,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "bpLogDetails"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -789,7 +1101,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "bpLogDetails"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -808,7 +1128,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "isRegularSmoker"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -827,7 +1155,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "isBeforeDiabetesDiagnosis"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -846,7 +1182,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "medicationFrequencyBg"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -865,7 +1209,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "glucoseType"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -884,7 +1236,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "glucose"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -903,7 +1263,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Cataract",
+        "clinical_workflow_id": 23,
+        "form_type": "cataract",
+        "field_id": "whoReferredThisPerson"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -922,7 +1290,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Family Planning",
+        "clinical_workflow_id": 100,
+        "form_type": "family_planning",
+        "field_id": "numberOfLivingChildren"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -941,7 +1317,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Family Planning",
+        "clinical_workflow_id": 100,
+        "form_type": "family_planning",
+        "field_id": "ageOfLastChild"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -960,7 +1344,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Family Planning",
+        "clinical_workflow_id": 100,
+        "form_type": "family_planning",
+        "field_id": "desireForChildrenInFuture"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -979,7 +1371,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Family Planning",
+        "clinical_workflow_id": 100,
+        "form_type": "family_planning",
+        "field_id": "familyPlanningMethods"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -998,7 +1398,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "lmp"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1017,7 +1425,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "EDD"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1036,7 +1452,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "gestationalWeek"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1055,7 +1479,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "pregnancyTest"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1074,7 +1506,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "gravida"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1093,7 +1533,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "parity"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1112,7 +1560,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "livingChildren"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1131,7 +1587,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "PW Profile",
+        "clinical_workflow_id": 101,
+        "form_type": "pwProfile",
+        "field_id": "ageOfLastChild"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1150,7 +1614,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "timeOfDeath"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1169,7 +1641,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "gestationMonthAtDeath"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1188,7 +1668,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "causeOfDeath"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1207,7 +1695,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "gestationMonthAtAbortion"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1226,7 +1722,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "typeOfAbortion"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1245,7 +1749,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "liveBirthNumbers"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1264,7 +1776,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "stillbirthNumbers"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1283,7 +1803,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "placeOfDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1302,7 +1830,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "dateOfDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1321,7 +1857,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "modeOfDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1340,7 +1884,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "birthAttendant"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1359,7 +1911,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "anyComplicationsDuringDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1386,7 +1946,15 @@
     ],
     "visibility_expression": "po_any_complications = Yes",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Pregnancy Outcome",
+        "clinical_workflow_id": 102,
+        "form_type": "pregnancyOutcome",
+        "field_id": "complicationsDuringDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1405,7 +1973,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "previousPregnancyComplications"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1424,7 +2000,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "pregnantWomanExistingIllness"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1443,7 +2027,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "pregnantWomanOnTreatment"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1462,7 +2054,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "height"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1481,7 +2081,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1500,7 +2108,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "systolic"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1519,7 +2135,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "diastolic"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1538,7 +2162,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "edema"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1557,7 +2189,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "temperature"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1576,7 +2216,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "pulse"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1595,7 +2243,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "fundalHeight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1614,7 +2270,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "hemoglobin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1633,7 +2297,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "bloodSugar"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1652,7 +2324,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "bloodSugarFasting"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1671,7 +2351,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "bloodSugarRandom"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1690,7 +2378,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "urinaryAlbumin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1709,7 +2405,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "urinarySugar"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1728,7 +2432,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "urinaryBilirubin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1747,7 +2459,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ttTdCompleted"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1766,7 +2486,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "folicAcidTotalConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1785,7 +2513,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "folicAcidProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1804,7 +2540,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ifaTotalConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1823,7 +2567,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ifaProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1842,7 +2594,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "calciumTotalConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1861,7 +2621,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "calciumProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1880,7 +2648,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ancVisitsOtherProviders"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1899,7 +2675,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ancFromMedicalDoctor"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1918,7 +2702,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "ultrasound"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1937,7 +2729,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "facilityIdentifiedForDelivery"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1956,7 +2756,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "dangerSignsExperienced12"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1975,7 +2783,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "dangerSignsExperienced13To27"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -1994,7 +2810,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "dangerSignsExperienced28To40"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2013,7 +2837,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "referralFacility"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2032,7 +2864,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "anc",
+        "field_id": "followUpVisit"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2051,7 +2891,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "gravida"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2070,7 +2918,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "parity"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2089,7 +2945,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "livingChildren"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2108,7 +2972,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "temperature"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2127,7 +2999,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "pulse"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2146,7 +3026,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2165,7 +3053,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "htnPatient"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2184,7 +3080,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "eclampsia"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2203,7 +3107,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "onTreatmentHtnEclampsia"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2222,7 +3134,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "systolic"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2241,7 +3161,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "diastolic"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2260,7 +3188,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "edema"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2279,7 +3215,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "urinaryAlbumin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2298,7 +3242,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "urinaryBilirubin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2317,7 +3269,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "hemoglobin"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2336,7 +3296,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "dmPatient"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2355,7 +3323,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "gdmPatient"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2374,7 +3350,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "onTreatmentDmGdm"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2401,7 +3385,15 @@
     ],
     "visibility_expression": "{\"field\": \"randomBloodSugar\", \"operator\": \"=\", \"value\": \"random\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "bloodSugar"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2420,7 +3412,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "fastingBloodSugar"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2439,7 +3439,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "randomBloodSugar"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2458,7 +3466,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "postpartumDangerSigns"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2477,7 +3493,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "vitaminAConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2496,7 +3520,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "ifaTabletsConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2515,7 +3547,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "ifaTabletsProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2534,7 +3574,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "calciumTabletsConsumed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2553,7 +3601,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "calciumTabletsProvided"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2572,7 +3628,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "familyPlanningMethods"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2591,7 +3655,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncMother",
+        "field_id": "referralFacility"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2618,7 +3690,15 @@
     ],
     "visibility_expression": "{\"field\": \"otherPncNeonateSigns\", \"operator\": \"=\", \"value\": \"Other\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncNeonatal",
+        "field_id": "pncNeonateSigns"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2637,7 +3717,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncNeonatal",
+        "field_id": "otherPncNeonateSigns"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2656,7 +3744,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncNeonatal",
+        "field_id": "newbornReferredToSBCU"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2675,7 +3771,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncNeonatal",
+        "field_id": "lowBirthWeight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2694,7 +3798,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncNeonatal",
+        "field_id": "deathOfNewborn"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2713,7 +3825,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "congenitalDefect"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2732,7 +3852,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2759,7 +3887,15 @@
     ],
     "visibility_expression": "{\"field\": \"otherChildFeed\", \"operator\": \"=\", \"value\": \"other\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "childFeedLast24Hrs"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2778,7 +3914,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "otherChildFeed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2797,7 +3941,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "hrsBreastFed"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2816,7 +3968,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "monthAdditionalFeedGiven"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2835,7 +3995,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "childBreastFeeding"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2854,7 +4022,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "additionalFood24Hrs"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2873,7 +4049,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "receivedVaccine"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2892,7 +4076,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "dewormingMedicine"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2919,7 +4111,15 @@
     ],
     "visibility_expression": "{\"field\": \"childIllnessType\", \"operator\": \"=\", \"value\": \"yes\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "anyIllness"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2938,7 +4138,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "childIllnessType"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2965,7 +4173,15 @@
     ],
     "visibility_expression": "{\"field\": \"childReferralFacilityType\", \"operator\": \"=\", \"value\": \"yes\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "childReferral"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -2984,7 +4200,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "RMNCH",
+        "clinical_workflow_id": 4,
+        "form_type": "pncChild",
+        "field_id": "childReferralFacilityType"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3003,7 +4227,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "village_id"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3022,7 +4254,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "shasthya_shebika_id"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3041,7 +4281,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "sub_village_id"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3060,7 +4308,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "household_type"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3079,7 +4335,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "household_number"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3098,7 +4362,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "total_members"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3125,7 +4397,15 @@
     ],
     "visibility_expression": "{\"field\": \"otherOccupation\", \"operator\": \"=\", \"value\": \"Other\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "householdHeadOccupation"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3144,7 +4424,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "otherOccupation"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3163,7 +4451,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "monthly_income"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3182,7 +4478,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_registration",
+        "field_id": "disability_persons_count"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3209,7 +4513,15 @@
     ],
     "visibility_expression": "{\"field\": \"national_id\", \"operator\": \"in\", \"value\": [\"nid\", \"brn\"]}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "id_type"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3228,7 +4540,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "national_id"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3247,7 +4567,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "name"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3266,7 +4594,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "phone_number"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3285,7 +4621,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "date_of_birth"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3304,7 +4648,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "gender"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3323,7 +4675,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "guardian"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3342,7 +4702,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "maritalStatus"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3361,7 +4729,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "disability"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3380,7 +4756,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": null,
+        "clinical_workflow_id": null,
+        "form_type": "household_member_registration",
+        "field_id": "is_house_hold_head"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3407,7 +4791,15 @@
     ],
     "visibility_expression": "{\"field\": \"identityValue\", \"operator\": \"in\", \"value\": [\"nid\", \"brn\"]}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "identityType"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3426,7 +4818,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "identityValue"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3445,7 +4845,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "fullName"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3472,7 +4880,15 @@
     ],
     "visibility_expression": "{\"field\": \"phoneNumberCategory\", \"operator\": \"!=\", \"value\": \"0\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "phoneNumber"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3491,7 +4907,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "phoneNumberCategory"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3510,7 +4934,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "chiefdom"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3529,7 +4961,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "village"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3556,7 +4996,15 @@
     ],
     "visibility_expression": "{\"field\": \"otherVillage\", \"operator\": \"=\", \"value\": \"Other\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "subVillage"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3575,7 +5023,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "otherVillage"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3594,7 +5050,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "houseNumber"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3621,7 +5085,15 @@
     ],
     "visibility_expression": "{\"field\": \"isPregnant\", \"operator\": \"=\", \"value\": \"Female\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "gender"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3640,7 +5112,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "isPregnant"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3659,7 +5139,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "dateOfBirth"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3678,7 +5166,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "height"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3697,7 +5193,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "weight"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3724,7 +5228,15 @@
     ],
     "visibility_expression": "{\"field\": \"smokerTypes\", \"operator\": \"=\", \"value\": \"Yes\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "isRegularSmoker"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3751,7 +5263,15 @@
     ],
     "visibility_expression": "{\"field\": \"hypertensionStatus\", \"operator\": \"=\", \"value\": \"Yes\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "isHtnDiagnosis"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3770,7 +5290,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "hypertensionStatus"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3797,7 +5325,15 @@
     ],
     "visibility_expression": "{\"field\": \"diabetesStatus\", \"operator\": \"=\", \"value\": \"Yes\"}",
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "isDiabetesDiagnosis"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3816,7 +5352,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "diabetesStatus"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3835,7 +5379,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "diabetesDiagnosis"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3854,7 +5406,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "heartAttack"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3873,7 +5433,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "stroke"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3892,7 +5460,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "kidneyDisease"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",
@@ -3911,7 +5487,15 @@
     "visibility_conditions": [],
     "visibility_expression": null,
     "mandatory_conditions": [],
-    "mandatory_expression": null
+    "mandatory_expression": null,
+    "spice_field_mappings": [
+      {
+        "workflow_name": "Confirm Diagnosis",
+        "clinical_workflow_id": 103,
+        "form_type": "enrollment",
+        "field_id": "copd"
+      }
+    ]
   },
   {
     "doctype": "Clinical Question",

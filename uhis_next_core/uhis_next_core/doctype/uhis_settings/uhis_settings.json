@@ -4,6 +4,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "tab_integrations",
   "fhir_section",
   "fhir_sync_enabled",
   "fhir_server_url",
@@ -14,9 +15,20 @@
   "ai_provider",
   "ai_api_key",
   "ai_base_url",
-  "ai_model"
+  "ai_model",
+  "tab_app_version_control",
+  "min_app_version",
+  "latest_app_version",
+  "column_break_avc_1",
+  "default_language",
+  "ai_feature_enabled"
  ],
  "fields": [
+  {
+   "fieldname": "tab_integrations",
+   "fieldtype": "Tab Break",
+   "label": "Integrations"
+  },
   {
    "fieldname": "fhir_section",
    "fieldtype": "Section Break",
@@ -85,6 +97,42 @@
    "label": "Model Name",
    "default": "llama3.1:8b",
    "description": "Bundled default: llama3.1:8b. For Claude: claude-haiku-4-5-20251001. For OpenAI: gpt-4o-mini."
+  },
+  {
+   "fieldname": "tab_app_version_control",
+   "fieldtype": "Tab Break",
+   "label": "App Version Control"
+  },
+  {
+   "fieldname": "min_app_version",
+   "fieldtype": "Data",
+   "label": "Minimum App Version",
+   "description": "System-wide minimum mobile app version, e.g. 1.4.0. Fallback when a user has no override in User App Control."
+  },
+  {
+   "fieldname": "latest_app_version",
+   "fieldtype": "Data",
+   "label": "Latest App Version",
+   "description": "Latest available mobile app version, e.g. 1.6.2. No per-user override exists for this value."
+  },
+  {
+   "fieldname": "column_break_avc_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_language",
+   "fieldtype": "Select",
+   "label": "Default Language",
+   "options": "en\nbn",
+   "default": "en",
+   "description": "System-level default language code (matches Flutter client locales en/bn). Fallback when no per-user override."
+  },
+  {
+   "fieldname": "ai_feature_enabled",
+   "fieldtype": "Check",
+   "label": "AI Feature Enabled (Default)",
+   "default": "0",
+   "description": "System-level default for mobile AI feature. Fallback when no per-user override."
   }
  ],
  "issingle": 1,

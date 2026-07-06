@@ -24,7 +24,9 @@
   "visibility_expression",
   "sec_mandatory_conditions",
   "mandatory_conditions",
-  "mandatory_expression"
+  "mandatory_expression",
+  "sec_legacy_mapping",
+  "spice_field_mappings"
  ],
  "fields": [
   {
@@ -151,6 +153,19 @@
    "fieldtype": "Text",
    "label": "Mandatory Expression",
    "description": "Compiled from conditions table, or manually authored."
+  },
+  {
+   "fieldname": "sec_legacy_mapping",
+   "fieldtype": "Section Break",
+   "label": "Legacy Mapping",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "spice_field_mappings",
+   "fieldtype": "Table",
+   "label": "Spice Field Mappings",
+   "options": "Clinical Question Spice Mapping",
+   "description": "One-time migration reference to the equivalent field(s) in the legacy spice platform. A question can map to more than one legacy field (e.g. if two old forms merged into this one). Not read by sync.config, form_config.py, or any API — desk-only bookkeeping for the migration."
   }
  ],
  "links": [],
