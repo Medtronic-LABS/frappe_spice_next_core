@@ -1,0 +1,10 @@
+[mysqld]
+user                              = mysql
+datadir                           = /var/lib/mysql
+socket                            = /run/mysqld/mysqld.sock
+bind-address                      = 127.0.0.1
+character-set-server              = utf8mb4
+collation-server                  = utf8mb4_unicode_ci
+skip-character-set-client-handshake
+skip-innodb-read-only-compressed
+innodb_buffer_pool_size           = 512M

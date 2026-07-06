@@ -6,6 +6,10 @@ app_email = "admin@medtroniclabs.org"
 app_license = "GPL-3.0-or-later"
 app_version = "0.1.0"
 
+# frappe_theme provides the SVADatatable/dashboard/report chart config layer this app
+# builds on — required so `bench install-app uhis_next_core` installs it automatically.
+required_apps = ["frappe_theme"]
+
 # Clinical theme — loaded after frappe_theme so it takes precedence.
 app_include_css = ["/assets/uhis_next_core/css/uhis_theme.css"]
 
