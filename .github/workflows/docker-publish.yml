@@ -82,8 +82,8 @@ jobs:
           script: |
             set -eu
             cd /home/ubuntu/frappe_uhis_
-            docker compose -f docker-compose.prod.yml pull backend
-            docker compose -f docker-compose.prod.yml up -d backend
+            docker compose -f docker-compose.yml pull backend
+            docker compose -f docker-compose.yml up -d backend
 
             # Hits uhis-next's OWN proxy directly on the deploy host (port 8081,
             # published by docker-compose.prod.yml) — NOT through the legacy
