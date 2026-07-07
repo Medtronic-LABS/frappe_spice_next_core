@@ -107,6 +107,15 @@ uhis_next_core/
 
 ---
 
+## Deployment
+
+This app ships as a single all-in-one production image (bench + MariaDB + Redis,
+built from `docker/allinone/Dockerfile` and published to GHCR by
+`.github/workflows/docker-publish.yml`) — see [`docs/deployment.md`](docs/deployment.md)
+for the image's architecture, how to build/test it locally, and the CI/CD pipeline.
+
+---
+
 ## License
 
 Copyright (C) 2024 Medtronic Labs
