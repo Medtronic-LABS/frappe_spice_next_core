@@ -16,13 +16,13 @@
   "ai_api_key",
   "ai_base_url",
   "ai_model",
-  "tab_app_version_control",
+  "tab_mobile_ai_controls",
+  "app_version_control_section",
   "min_app_version",
   "latest_app_version",
   "column_break_avc_1",
   "default_language",
   "ai_feature_enabled",
-  "tab_mobile_ai_controls",
   "ai_widget_controls_section",
   "step1_summary_enabled",
   "step1_asr_enabled",
@@ -118,8 +118,13 @@
    "description": "Bundled default: llama3.1:8b. For Claude: claude-haiku-4-5-20251001. For OpenAI: gpt-4o-mini."
   },
   {
-   "fieldname": "tab_app_version_control",
+   "fieldname": "tab_mobile_ai_controls",
    "fieldtype": "Tab Break",
+   "label": "Mobile AI Controls"
+  },
+  {
+   "fieldname": "app_version_control_section",
+   "fieldtype": "Section Break",
    "label": "App Version Control"
   },
   {
@@ -152,11 +157,6 @@
    "label": "AI Feature Enabled (Default)",
    "default": "0",
    "description": "System-level default for mobile AI feature. Fallback when no per-user override."
-  },
-  {
-   "fieldname": "tab_mobile_ai_controls",
-   "fieldtype": "Tab Break",
-   "label": "Mobile AI Controls"
   },
   {
    "fieldname": "ai_widget_controls_section",
