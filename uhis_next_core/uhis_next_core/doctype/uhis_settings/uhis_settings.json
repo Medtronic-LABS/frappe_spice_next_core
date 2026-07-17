@@ -16,12 +16,31 @@
   "ai_api_key",
   "ai_base_url",
   "ai_model",
-  "tab_app_version_control",
+  "tab_mobile_ai_controls",
+  "app_version_control_section",
   "min_app_version",
   "latest_app_version",
   "column_break_avc_1",
   "default_language",
-  "ai_feature_enabled"
+  "ai_feature_enabled",
+  "ai_widget_controls_section",
+  "step1_summary_enabled",
+  "step1_asr_enabled",
+  "step2_asr_enabled",
+  "column_break_awc_1",
+  "step3_summary_enabled",
+  "step3_referral_alert_enabled",
+  "step3_whatsapp_enabled",
+  "vad_tuning_section",
+  "vad_enter_margin_db",
+  "vad_sustain_margin_db",
+  "vad_floor_ceiling_dbfs",
+  "vad_floor_alpha",
+  "column_break_vad_1",
+  "vad_bootstrap_ms",
+  "vad_debounce_ms",
+  "vad_hangover_ms",
+  "vad_preroll_ms"
  ],
  "fields": [
   {
@@ -99,8 +118,13 @@
    "description": "Bundled default: llama3.1:8b. For Claude: claude-haiku-4-5-20251001. For OpenAI: gpt-4o-mini."
   },
   {
-   "fieldname": "tab_app_version_control",
+   "fieldname": "tab_mobile_ai_controls",
    "fieldtype": "Tab Break",
+   "label": "Mobile AI Controls"
+  },
+  {
+   "fieldname": "app_version_control_section",
+   "fieldtype": "Section Break",
    "label": "App Version Control"
   },
   {
@@ -133,6 +157,128 @@
    "label": "AI Feature Enabled (Default)",
    "default": "0",
    "description": "System-level default for mobile AI feature. Fallback when no per-user override."
+  },
+  {
+   "fieldname": "ai_widget_controls_section",
+   "fieldtype": "Section Break",
+   "label": "AI Widget Toggles",
+   "description": "Per-step on/off switches for the mobile visit flow's AI-generated widgets. Mirrors the Flutter client's AiFeatureTogglesNotifier — served to the app via controls.get_controls, no per-user override."
+  },
+  {
+   "fieldname": "step1_summary_enabled",
+   "fieldtype": "Check",
+   "label": "Step 1: Visit Summary",
+   "default": "1",
+   "description": "The \"Before You Knock\" AI briefing cards shown before symptom entry."
+  },
+  {
+   "fieldname": "step1_asr_enabled",
+   "fieldtype": "Check",
+   "label": "Step 1: Voice Symptom Capture",
+   "default": "1",
+   "description": "AI Scribe voice capture that pre-ticks symptom cards from what the SK says."
+  },
+  {
+   "fieldname": "step2_asr_enabled",
+   "fieldtype": "Check",
+   "label": "Step 2: Voice Form Fill",
+   "default": "1",
+   "description": "AI Scribe voice capture that fills the vitals and clinical assessment form."
+  },
+  {
+   "fieldname": "column_break_awc_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "step3_summary_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: Visit Summary & Recommendations",
+   "default": "1",
+   "description": "The AI-generated visit summary, next actions, counselling, and follow-up plan."
+  },
+  {
+   "fieldname": "step3_referral_alert_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: Danger Sign / Referral Alert",
+   "default": "1",
+   "description": "The alert card that flags danger signs and recommends a referral."
+  },
+  {
+   "fieldname": "step3_whatsapp_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: WhatsApp Draft",
+   "default": "1",
+   "description": "The pre-written WhatsApp message summarising the visit for the patient."
+  },
+  {
+   "fieldname": "vad_tuning_section",
+   "fieldtype": "Section Break",
+   "label": "VAD Gate Tuning",
+   "description": "Realtime-ASR voice-activity-detection gate thresholds — saves mobile data by not streaming silence. Mirrors the Flutter client's VadTuningNotifier/AppConfig.vad* defaults."
+  },
+  {
+   "fieldname": "vad_enter_margin_db",
+   "fieldtype": "Float",
+   "label": "Entry Margin (dB)",
+   "precision": "2",
+   "default": "9",
+   "description": "dB above the noise floor required to start treating audio as speech."
+  },
+  {
+   "fieldname": "vad_sustain_margin_db",
+   "fieldtype": "Float",
+   "label": "Sustain Margin (dB)",
+   "precision": "2",
+   "default": "6",
+   "description": "Lower bar used to stay in speech mode once started."
+  },
+  {
+   "fieldname": "vad_floor_ceiling_dbfs",
+   "fieldtype": "Float",
+   "label": "Noise Floor Ceiling (dBFS)",
+   "precision": "2",
+   "default": "-35",
+   "description": "Caps how high the background-noise estimate is allowed to climb in a loud room."
+  },
+  {
+   "fieldname": "vad_floor_alpha",
+   "fieldtype": "Float",
+   "label": "Noise Floor Adaptation Speed",
+   "precision": "2",
+   "default": "0.08",
+   "description": "How quickly the background-noise estimate adapts to the room."
+  },
+  {
+   "fieldname": "column_break_vad_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vad_bootstrap_ms",
+   "fieldtype": "Int",
+   "label": "Startup Calibration Window (ms)",
+   "default": "500",
+   "description": "How long at the start of a recording is assumed silent, to measure the room's baseline noise."
+  },
+  {
+   "fieldname": "vad_debounce_ms",
+   "fieldtype": "Int",
+   "label": "Speech Confirmation Window (ms)",
+   "default": "180",
+   "description": "How long a sound must stay above the entry threshold before it's confirmed as real speech."
+  },
+  {
+   "fieldname": "vad_hangover_ms",
+   "fieldtype": "Int",
+   "label": "Trailing Silence Window (ms)",
+   "default": "700",
+   "description": "How long to keep recording after volume drops, to bridge a natural pause."
+  },
+  {
+   "fieldname": "vad_preroll_ms",
+   "fieldtype": "Int",
+   "label": "Pre-Speech Buffer (ms)",
+   "default": "350",
+   "description": "How much audio just before speech is confirmed gets included anyway."
   }
  ],
  "issingle": 1,

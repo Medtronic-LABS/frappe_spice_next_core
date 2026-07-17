@@ -109,5 +109,75 @@ class TestControlsOverrideMerge(unittest.TestCase):
         self.assertFalse(result["AIFeature"])                 # row exists -> its value wins
 
 
+class TestAiWidgetsAndVadTuning(unittest.TestCase):
+    """Mirrors api/controls._ai_widgets and _vad_tuning without DB access."""
+
+    @staticmethod
+    def _ai_widgets(settings):
+        return {
+            "step1SummaryEnabled": bool(settings["step1_summary_enabled"]),
+            "step1AsrEnabled": bool(settings["step1_asr_enabled"]),
+            "step2AsrEnabled": bool(settings["step2_asr_enabled"]),
+            "step3SummaryEnabled": bool(settings["step3_summary_enabled"]),
+            "step3ReferralAlertEnabled": bool(settings["step3_referral_alert_enabled"]),
+            "step3WhatsAppEnabled": bool(settings["step3_whatsapp_enabled"]),
+        }
+
+    @staticmethod
+    def _vad_tuning(settings):
+        return {
+            "enterMarginDb": settings["vad_enter_margin_db"],
+            "sustainMarginDb": settings["vad_sustain_margin_db"],
+            "floorCeilingDbfs": settings["vad_floor_ceiling_dbfs"],
+            "floorAlpha": settings["vad_floor_alpha"],
+            "bootstrapMs": settings["vad_bootstrap_ms"],
+            "debounceMs": settings["vad_debounce_ms"],
+            "hangoverMs": settings["vad_hangover_ms"],
+            "preRollMs": settings["vad_preroll_ms"],
+        }
+
+    def test_ai_widgets_all_enabled_by_default(self):
+        settings = {
+            "step1_summary_enabled": 1,
+            "step1_asr_enabled": 1,
+            "step2_asr_enabled": 1,
+            "step3_summary_enabled": 1,
+            "step3_referral_alert_enabled": 1,
+            "step3_whatsapp_enabled": 1,
+        }
+        result = self._ai_widgets(settings)
+        self.assertTrue(all(result.values()))
+
+    def test_ai_widgets_reflects_individually_disabled_toggle(self):
+        settings = {
+            "step1_summary_enabled": 1,
+            "step1_asr_enabled": 0,
+            "step2_asr_enabled": 1,
+            "step3_summary_enabled": 1,
+            "step3_referral_alert_enabled": 1,
+            "step3_whatsapp_enabled": 1,
+        }
+        result = self._ai_widgets(settings)
+        self.assertFalse(result["step1AsrEnabled"])
+        self.assertTrue(result["step1SummaryEnabled"])
+        self.assertTrue(result["step2AsrEnabled"])
+
+    def test_vad_tuning_matches_flutter_factory_defaults(self):
+        settings = {
+            "vad_enter_margin_db": 9,
+            "vad_sustain_margin_db": 6,
+            "vad_floor_ceiling_dbfs": -35,
+            "vad_floor_alpha": 0.08,
+            "vad_bootstrap_ms": 500,
+            "vad_debounce_ms": 180,
+            "vad_hangover_ms": 700,
+            "vad_preroll_ms": 350,
+        }
+        result = self._vad_tuning(settings)
+        self.assertEqual(result["enterMarginDb"], 9)
+        self.assertEqual(result["floorCeilingDbfs"], -35)
+        self.assertEqual(result["preRollMs"], 350)
+
+
 if __name__ == "__main__":
     unittest.main()

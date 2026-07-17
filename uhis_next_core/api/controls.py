@@ -26,7 +26,25 @@ Response (Frappe wraps in {"message": ...}):
     "minAppVersion": "1.4.0",
     "latestAppVersion": "1.6.2",
     "language": "bn",
-    "AIFeature": true
+    "AIFeature": true,
+    "aiWidgets": {
+      "step1SummaryEnabled": true,
+      "step1AsrEnabled": true,
+      "step2AsrEnabled": true,
+      "step3SummaryEnabled": true,
+      "step3ReferralAlertEnabled": true,
+      "step3WhatsAppEnabled": true
+    },
+    "vadTuning": {
+      "enterMarginDb": 9,
+      "sustainMarginDb": 6,
+      "floorCeilingDbfs": -35,
+      "floorAlpha": 0.08,
+      "bootstrapMs": 500,
+      "debounceMs": 180,
+      "hangoverMs": 700,
+      "preRollMs": 350
+    }
   }
 
 Override rules:
@@ -36,6 +54,11 @@ Override rules:
   - AIFeature: if a User App Control row exists for the caller, its
     ai_feature value (0 or 1) always wins; otherwise UHIS Settings'
     ai_feature_enabled is used.
+  - aiWidgets / vadTuning: system-level only, always read straight from
+    UHIS Settings — no per-user override exists for these yet (matches the
+    Flutter client's own three-tier doctrine: build-time default -> on-device
+    override -> this system-level tier; a future per-user tier can be added
+    here without changing the response shape).
 """
 
 import frappe
@@ -69,6 +92,32 @@ def get_controls():
 		"latestAppVersion": latest_app_version,
 		"language": language,
 		"AIFeature": ai_feature,
+		"aiWidgets": _ai_widgets(settings),
+		"vadTuning": _vad_tuning(settings),
+	}
+
+
+def _ai_widgets(settings):
+	return {
+		"step1SummaryEnabled": bool(settings.step1_summary_enabled),
+		"step1AsrEnabled": bool(settings.step1_asr_enabled),
+		"step2AsrEnabled": bool(settings.step2_asr_enabled),
+		"step3SummaryEnabled": bool(settings.step3_summary_enabled),
+		"step3ReferralAlertEnabled": bool(settings.step3_referral_alert_enabled),
+		"step3WhatsAppEnabled": bool(settings.step3_whatsapp_enabled),
+	}
+
+
+def _vad_tuning(settings):
+	return {
+		"enterMarginDb": settings.vad_enter_margin_db,
+		"sustainMarginDb": settings.vad_sustain_margin_db,
+		"floorCeilingDbfs": settings.vad_floor_ceiling_dbfs,
+		"floorAlpha": settings.vad_floor_alpha,
+		"bootstrapMs": settings.vad_bootstrap_ms,
+		"debounceMs": settings.vad_debounce_ms,
+		"hangoverMs": settings.vad_hangover_ms,
+		"preRollMs": settings.vad_preroll_ms,
 	}
 
 
