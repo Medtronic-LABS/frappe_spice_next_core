@@ -16,6 +16,9 @@
   "ai_api_key",
   "ai_base_url",
   "ai_model",
+  "remote_auth_section",
+  "remote_auth_url",
+  "remote_auth_client_tag",
   "tab_mobile_ai_controls",
   "app_version_control_section",
   "min_app_version",
@@ -116,6 +119,23 @@
    "label": "Model Name",
    "default": "llama3.1:8b",
    "description": "Bundled default: llama3.1:8b. For Claude: claude-haiku-4-5-20251001. For OpenAI: gpt-4o-mini."
+  },
+  {
+   "fieldname": "remote_auth_section",
+   "fieldtype": "Section Break",
+   "label": "Remote Auth"
+  },
+  {
+   "fieldname": "remote_auth_url",
+   "fieldtype": "Data",
+   "label": "Remote Auth URL",
+   "description": "Legacy auth-service token-introspection endpoint, e.g. http://auth-service:8089/authenticate. Leave blank to keep the unverified local-decode fallback (dev/test only) for the X-Auth-Token mobile flow."
+  },
+  {
+   "fieldname": "remote_auth_client_tag",
+   "fieldtype": "Data",
+   "label": "Client Tag",
+   "description": "Value sent as the 'client' header on the remote validation call. Only affects the legacy service's own role-gating; does not affect this app's validity check."
   },
   {
    "fieldname": "tab_mobile_ai_controls",

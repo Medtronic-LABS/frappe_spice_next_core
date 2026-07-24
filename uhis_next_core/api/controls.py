@@ -3,10 +3,13 @@ Mobile app version / feature control endpoint.
 
   uhis_next_core.api.controls.get_controls
 
-Public endpoint (allow_guest=True) authenticated via a caller-supplied
-`X-Auth-Token: Bearer <JWT>` header — NOT Frappe session/token auth. See
-uhis_next_core.auth.jwt_token_validator.JWTTokenValidator for the (currently
-unverified) JWT payload extraction.
+Public endpoint (allow_guest=True, implied by remote_auth=True below)
+authenticated via a caller-supplied `X-Auth-Token: Bearer <JWT>` header — NOT
+Frappe session/token auth. Guarded by uhis_next_core.auth.decorators.whitelist's
+remote_auth=True, which validates the token against the remote auth-service
+(or falls back to unverified local decode when UHIS Settings.remote_auth_url
+is blank — dev/test only). See uhis_next_core.auth.jwt_token_validator.JWTTokenValidator
+for both phases.
 
 NOTE: the token is carried in a custom `X-Auth-Token` header, not the
 standard `Authorization` header. Frappe's own request middleware
@@ -62,16 +65,13 @@ Override rules:
 """
 
 import frappe
-from frappe import _
 
-from uhis_next_core.auth.jwt_token_validator import JWTDecodeError, JWTTokenValidator
-
-_validator = JWTTokenValidator()
+from uhis_next_core.auth.decorators import current_remote_user_id, whitelist
 
 
-@frappe.whitelist(allow_guest=True, methods=["POST"])
+@whitelist(methods=["POST"], remote_auth=True)
 def get_controls():
-	user_id = _authenticate()
+	user_id = current_remote_user_id()
 
 	settings = frappe.get_single("UHIS Settings")
 	min_app_version = settings.min_app_version or ""
@@ -119,14 +119,6 @@ def _vad_tuning(settings):
 		"hangoverMs": settings.vad_hangover_ms,
 		"preRollMs": settings.vad_preroll_ms,
 	}
-
-
-def _authenticate():
-	auth_header = frappe.get_request_header("X-Auth-Token")
-	try:
-		return _validator.extract_user_id(auth_header)
-	except JWTDecodeError:
-		frappe.throw(_("Invalid or missing bearer token."), frappe.AuthenticationError)
 
 
 def _get_user_override(user_id):
