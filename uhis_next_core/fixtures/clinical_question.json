@@ -5499,26 +5499,68 @@
   },
   {
     "doctype": "Clinical Question",
-    "name": "ncd_sym_headache",
+    "name": "sym_headache",
     "label": "Headache",
     "form_group": "ncd",
+    "programmes": [
+      {
+        "parent": "sym_headache",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "NCD"
+      },
+      {
+        "parent": "sym_headache",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "ANC"
+      },
+      {
+        "parent": "sym_headache",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "PNC"
+      }
+    ],
     "question_type": "symptom",
     "sequence": 100,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|25064002",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
-    "name": "ncd_sym_fever",
+    "name": "sym_fever",
     "label": "Fever",
     "form_group": "ncd",
+    "programmes": [
+      {
+        "parent": "sym_fever",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "NCD"
+      },
+      {
+        "parent": "sym_fever",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "ANC"
+      },
+      {
+        "parent": "sym_fever",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "PNC"
+      }
+    ],
     "question_type": "symptom",
     "sequence": 101,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|386661006",
     "visibility_conditions": []
   },
   {
@@ -5542,7 +5584,8 @@
     "sequence": 103,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|29857009",
     "visibility_conditions": []
   },
   {
@@ -5559,26 +5602,42 @@
   },
   {
     "doctype": "Clinical Question",
-    "name": "ncd_sym_dizziness",
+    "name": "sym_dizziness",
     "label": "Dizziness",
     "form_group": "ncd",
+    "programmes": [
+      {
+        "parent": "sym_dizziness",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "NCD"
+      },
+      {
+        "parent": "sym_dizziness",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "PNC"
+      }
+    ],
     "question_type": "symptom",
     "sequence": 105,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|404640003",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
     "name": "ncd_sym_fatigue",
-    "label": "Fatigue",
+    "label": "Feeling tired/weak",
     "form_group": "ncd",
     "question_type": "symptom",
     "sequence": 106,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|84229001",
     "visibility_conditions": []
   },
   {
@@ -5590,7 +5649,8 @@
     "sequence": 107,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|267038008",
     "visibility_conditions": []
   },
   {
@@ -5602,7 +5662,8 @@
     "sequence": 100,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|386661006",
     "visibility_conditions": []
   },
   {
@@ -5718,74 +5779,121 @@
   },
   {
     "doctype": "Clinical Question",
-    "name": "anc_sym_headache",
-    "label": "Headache",
-    "form_group": "anc",
-    "question_type": "symptom",
-    "sequence": 100,
-    "fieldtype": "Check",
-    "mandatory": 0,
-    "clinical": 0,
-    "visibility_conditions": []
-  },
-  {
-    "doctype": "Clinical Question",
     "name": "anc_sym_visual_disturbance",
-    "label": "Visual Disturbance",
+    "label": "Blurry vision",
     "form_group": "anc",
     "question_type": "symptom",
     "sequence": 101,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|63102001",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
     "name": "anc_sym_swelling",
-    "label": "Swelling (Hands/Face)",
+    "label": "Swelling",
     "form_group": "anc",
     "question_type": "symptom",
     "sequence": 102,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|267038008",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
     "name": "anc_sym_bleeding",
-    "label": "Vaginal Bleeding",
+    "label": "Bleeding",
     "form_group": "anc",
+    "programmes": [
+      {
+        "parent": "anc_sym_bleeding",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "ANC"
+      },
+      {
+        "parent": "anc_sym_bleeding",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "PNC"
+      }
+    ],
     "question_type": "symptom",
     "sequence": 103,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|289530006",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
     "name": "anc_sym_reduced_fetal_movement",
-    "label": "Reduced Fetal Movement",
+    "label": "Baby not moving",
     "form_group": "anc",
     "question_type": "symptom",
     "sequence": 104,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|276369006",
     "visibility_conditions": []
   },
   {
     "doctype": "Clinical Question",
-    "name": "anc_sym_fever",
-    "label": "Fever",
+    "name": "sym_abdominal_pain",
+    "label": "Abdominal pain",
     "form_group": "anc",
+    "programmes": [
+      {
+        "parent": "sym_abdominal_pain",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "ANC"
+      },
+      {
+        "parent": "sym_abdominal_pain",
+        "parentfield": "programmes",
+        "parenttype": "Clinical Question",
+        "programme": "PNC"
+      }
+    ],
     "question_type": "symptom",
-    "sequence": 105,
+    "sequence": 106,
     "fieldtype": "Check",
     "mandatory": 0,
-    "clinical": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|21522001",
+    "visibility_conditions": []
+  },
+  {
+    "doctype": "Clinical Question",
+    "name": "ncd_sym_polydipsia",
+    "label": "Very thirsty",
+    "form_group": "ncd",
+    "question_type": "symptom",
+    "sequence": 108,
+    "fieldtype": "Check",
+    "mandatory": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|267036007",
+    "visibility_conditions": []
+  },
+  {
+    "doctype": "Clinical Question",
+    "name": "ncd_sym_numbness",
+    "label": "Numbness",
+    "form_group": "ncd",
+    "question_type": "symptom",
+    "sequence": 109,
+    "fieldtype": "Check",
+    "mandatory": 0,
+    "clinical": 1,
+    "fhir_concept": "SNOMED|44077006",
     "visibility_conditions": []
   }
 ]

@@ -2,7 +2,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "1",
-    "symptom_question_id": "ncd_sym_headache",
+    "symptom_question_id": "sym_headache",
     "observation_question_id": "bp_systolic",
     "mandatory_if_present": 1,
     "display_order": 1,
@@ -11,7 +11,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "2",
-    "symptom_question_id": "ncd_sym_headache",
+    "symptom_question_id": "sym_headache",
     "observation_question_id": "bp_diastolic",
     "mandatory_if_present": 1,
     "display_order": 2,
@@ -20,7 +20,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "3",
-    "symptom_question_id": "ncd_sym_fever",
+    "symptom_question_id": "sym_fever",
     "observation_question_id": "bp_systolic",
     "mandatory_if_present": 1,
     "display_order": 1,
@@ -29,7 +29,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "4",
-    "symptom_question_id": "ncd_sym_fever",
+    "symptom_question_id": "sym_fever",
     "observation_question_id": "blood_glucose",
     "mandatory_if_present": 0,
     "display_order": 2,
@@ -56,7 +56,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "7",
-    "symptom_question_id": "ncd_sym_dizziness",
+    "symptom_question_id": "sym_dizziness",
     "observation_question_id": "bp_systolic",
     "mandatory_if_present": 1,
     "display_order": 1,
@@ -65,7 +65,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "8",
-    "symptom_question_id": "ncd_sym_dizziness",
+    "symptom_question_id": "sym_dizziness",
     "observation_question_id": "bp_diastolic",
     "mandatory_if_present": 1,
     "display_order": 2,
@@ -110,7 +110,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "13",
-    "symptom_question_id": "anc_sym_headache",
+    "symptom_question_id": "sym_headache",
     "observation_question_id": "anc_systolic",
     "mandatory_if_present": 1,
     "display_order": 1,
@@ -119,7 +119,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "14",
-    "symptom_question_id": "anc_sym_headache",
+    "symptom_question_id": "sym_headache",
     "observation_question_id": "anc_diastolic",
     "mandatory_if_present": 1,
     "display_order": 2,
@@ -128,7 +128,7 @@
   {
     "doctype": "Symptom Observation Mapping",
     "name": "15",
-    "symptom_question_id": "anc_sym_fever",
+    "symptom_question_id": "sym_fever",
     "observation_question_id": "anc_temperature",
     "mandatory_if_present": 1,
     "display_order": 1,

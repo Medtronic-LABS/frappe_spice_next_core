@@ -84,6 +84,15 @@ def serialize_clinical_questions():
 		order_by="form_group asc, sequence asc",
 		ignore_permissions=True,
 	)
+
+	programmes_by_question = {}
+	for row in frappe.get_all(
+		"Clinical Question Programme",
+		filters={"parent": ["in", [q.name for q in questions]] if questions else ["", ]},
+		fields=["parent", "programme"],
+	):
+		programmes_by_question.setdefault(row.parent, []).append(row.programme)
+
 	result = []
 	for q in questions:
 		if q.clinical and not q.fhir_concept:
@@ -102,6 +111,7 @@ def serialize_clinical_questions():
 				"question_id": q.name,
 				"label": q.label,
 				"form_group": q.form_group,
+				"programmes": programmes_by_question.get(q.name, []),
 				"question_type": q.question_type or "assessment",
 				"sequence": q.sequence,
 				"type": q.fieldtype,
