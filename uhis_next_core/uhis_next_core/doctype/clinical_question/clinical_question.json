@@ -8,6 +8,7 @@
  "field_order": [
   "label",
   "form_group",
+  "programmes",
   "question_type",
   "sequence",
   "fieldtype",
@@ -41,8 +42,15 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Form Group",
-   "options": "ncd\neye_care\ncataract\nfamily_planning\npw_profile\npregnancy_outcome\nchild_health\nanc\ntb\nimci\npp",
+   "options": "ncd\neye_care\ncataract\nfamily_planning\npw_profile\npregnancy_outcome\nchild_health\nanc\npnc\ntb\nimci\npp",
    "reqd": 1
+  },
+  {
+   "fieldname": "programmes",
+   "fieldtype": "Table MultiSelect",
+   "label": "Programmes",
+   "options": "Clinical Question Programme",
+   "description": "Authoritative multi-programme scope for symptom questions that apply to more than one programme. Leave empty to fall back to form_group (single-programme, all other question types)."
   },
   {
    "fieldname": "question_type",

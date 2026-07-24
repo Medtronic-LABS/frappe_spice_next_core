@@ -131,12 +131,7 @@ def suggest_symptoms(payload=None, **kwargs):
 	if not history:
 		return []
 
-	symptom_questions = frappe.get_all(
-		"Clinical Question",
-		filters={"question_type": "symptom", "form_group": programme} if programme else {"question_type": "symptom"},
-		fields=["name", "label"],
-		order_by="sequence asc",
-	)
+	symptom_questions = _resolve_symptom_questions(programme)
 	if not symptom_questions:
 		return []
 
@@ -176,6 +171,63 @@ def suggest_symptoms(payload=None, **kwargs):
 		return result
 	except Exception:
 		return []
+
+
+# ── symptom scoping ───────────────────────────────────────────────────────────
+
+def _resolve_symptom_questions(programme):
+	"""Symptom Clinical Questions scoped to `programme`.
+
+	Matches EITHER a row whose `programmes` child table (Clinical Question
+	Programme) contains `programme`, OR — for rows that predate that field —
+	falls back to the legacy scalar `form_group == programme` match. A row
+	with any `programmes` entries is only matched via `programmes`, never
+	via its (now-secondary) `form_group`, so it can't leak into an
+	unrelated programme's list through a stale form_group value.
+	"""
+	fields = ["name", "label"]
+	if not programme:
+		return frappe.get_all(
+			"Clinical Question", filters={"question_type": "symptom"},
+			fields=fields, order_by="sequence asc",
+		)
+
+	# Clinical Question Programme stores Title Case Programme names
+	# (NCD/ANC/PNC); the client sends the lowercase form_group-style code.
+	# .upper() only holds for this single-word programme set — replace with
+	# a real code -> Programme.name lookup before adding a multi-word
+	# programme (e.g. "Eye Care") to the `programmes` field.
+	programme_title = programme.upper()
+
+	CQ = frappe.qb.DocType("Clinical Question")
+	CQP = frappe.qb.DocType("Clinical Question Programme")
+	multi_names = set(
+		frappe.qb.from_(CQP)
+		.join(CQ).on(CQ.name == CQP.parent)
+		.where(CQ.question_type == "symptom")
+		.where(CQP.programme == programme_title)
+		.select(CQP.parent)
+		.distinct()
+		.run(pluck=True)
+	)
+
+	scoped_names = set(frappe.get_all(
+		"Clinical Question",
+		filters={"question_type": "symptom", "form_group": programme},
+		pluck="name",
+	))
+	names_with_programmes = set(frappe.get_all(
+		"Clinical Question Programme", filters={"parenttype": "Clinical Question"}, pluck="parent",
+	))
+	legacy_names = scoped_names - names_with_programmes
+
+	all_names = multi_names | legacy_names
+	if not all_names:
+		return []
+	return frappe.get_all(
+		"Clinical Question", filters={"name": ["in", list(all_names)]},
+		fields=fields, order_by="sequence asc",
+	)
 
 
 # ── rule evaluation ───────────────────────────────────────────────────────────
