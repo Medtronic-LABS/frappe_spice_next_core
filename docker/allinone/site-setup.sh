@@ -1,10 +1,11 @@
 #!/bin/bash
 # One-shot supervisord program: create the site (if missing), install
-# frappe_theme and uhis_next_core (if missing), always run bench migrate, then drop
-# a marker file that wait-for-site.sh polls for. Adapted from the old multi-container
-# docker/create-site/create-site.sh, plus the always-migrate step — safe to
-# automate here because this image is deliberately single-instance (no
-# concurrent replicas to race on schema migration).
+# frappe_theme and uhis_next_core (if missing), always run bench migrate and
+# clear-cache, then drop a marker file that wait-for-site.sh polls for.
+# Adapted from the old multi-container docker/create-site/create-site.sh,
+# plus the always-migrate/clear-cache steps — safe to automate here because
+# this image is deliberately single-instance (no concurrent replicas to race
+# on schema migration or cache invalidation).
 set -eu
 
 : "${SITE_NAME:?SITE_NAME must be set}"
@@ -70,6 +71,9 @@ fi
 
 echo "[site-setup] running bench migrate"
 bench --site "${SITE_NAME}" migrate
+
+echo "[site-setup] clearing cache"
+bench --site "${SITE_NAME}" clear-cache
 
 echo "[site-setup] done"
 touch "${MARKER}"
