@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frappe for Spice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#16211F;
+    --ink-soft:#3C4A46;
+    --muted:#5B6B67;
+    --paper:#F2F5F3;
+    --surface:#FFFFFF;
+    --surface-sunk:#E7ECE9;
+    --line:#D3DBD7;
+    --accent:#0F6B62;
+    --accent-soft:#E1EFEC;
+    --accent-ink:#0B4740;
+    --warm:#A9601C;
+    --warm-soft:#F6E9D8;
+    --warm-ink:#7A4413;
+    --code-bg:#0F1614;
+    --code-ink:#DCE8E4;
+    --shadow: 0 1px 2px rgba(20,30,28,0.06), 0 8px 24px -12px rgba(20,30,28,0.16);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#E7EEEC;
+      --ink-soft:#C3D0CC;
+      --muted:#93A19C;
+      --paper:#101715;
+      --surface:#172120;
+      --surface-sunk:#0D1413;
+      --line:#2B3835;
+      --accent:#48BFAC;
+      --accent-soft:#183330;
+      --accent-ink:#8FE1D2;
+      --warm:#E3A55B;
+      --warm-soft:#2E2214;
+      --warm-ink:#F0BE83;
+      --code-bg:#0A100F;
+      --code-ink:#D6E4DF;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px -14px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E7EEEC;
+    --ink-soft:#C3D0CC;
+    --muted:#93A19C;
+    --paper:#101715;
+    --surface:#172120;
+    --surface-sunk:#0D1413;
+    --line:#2B3835;
+    --accent:#48BFAC;
+    --accent-soft:#183330;
+    --accent-ink:#8FE1D2;
+    --warm:#E3A55B;
+    --warm-soft:#2E2214;
+    --warm-ink:#F0BE83;
+    --code-bg:#0A100F;
+    --code-ink:#D6E4DF;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px -14px rgba(0,0,0,0.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  code, .mono{
+    font-family:"IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+  h1,h2,h3{
+    font-family:"IBM Plex Serif", Georgia, serif;
+    color:var(--ink);
+    text-wrap:balance;
+    margin:0;
+  }
+  a{ color:var(--accent-ink); }
+
+  .wrap{ max-width:1760px; margin:0 auto; padding:0 clamp(24px,4.5vw,88px) 96px; }
+  .prose{ max-width:78ch; }
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, var(--surface) 0%, var(--paper) 100%);
+  }
+  .masthead-inner{ max-width:1760px; margin:0 auto; padding:0 clamp(24px,4.5vw,88px); }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:3px;
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-size:clamp(34px,5vw,50px);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  p.dek{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:680px;
+    margin-bottom:24px;
+  }
+  .frame-note{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:var(--warm-soft);
+    border:1px solid color-mix(in srgb, var(--warm) 35%, var(--line));
+    border-radius:8px;
+    padding:14px 16px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:680px;
+  }
+  .frame-note strong{ color:var(--warm-ink); }
+
+  nav.toc{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 18px;
+    margin-top:28px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  nav.toc a{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px dotted transparent;
+  }
+  nav.toc a:hover{ color:var(--accent-ink); border-color:var(--accent-ink); }
+  nav.toc span.n{ color:var(--accent); margin-right:6px; }
+
+  /* ---------- sections ---------- */
+  section{ padding-top:56px; }
+  section.rule{ border-top:1px solid var(--line); }
+  .section-head{ margin-bottom:22px; }
+  .section-kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  h2{ font-size:27px; font-weight:600; }
+  h3{ font-size:18px; font-weight:600; margin-bottom:6px; }
+  p{ margin:0 0 14px; max-width:70ch; }
+  p.lede{ font-size:16.5px; color:var(--ink-soft); max-width:72ch; }
+
+  /* ---------- glossary strip ---------- */
+  .glossary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    margin:22px 0 6px;
+  }
+  .gloss-item{
+    background:var(--surface);
+    padding:16px 18px;
+  }
+  .gloss-term{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent-ink);
+    margin-bottom:5px;
+  }
+  .gloss-def{ font-size:13.5px; color:var(--ink-soft); }
+
+  /* ---------- code blocks ---------- */
+  .code-card{
+    background:var(--code-bg);
+    color:var(--code-ink);
+    border-radius:8px;
+    padding:16px 18px;
+    overflow-x:auto;
+    font-size:13px;
+    line-height:1.65;
+    box-shadow:var(--shadow);
+    margin:14px 0 20px;
+  }
+  .code-card .cmt{ color:#7C9690; }
+  .code-card .lbl{
+    display:block;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:#7C9690;
+    margin-bottom:8px;
+  }
+
+  /* ---------- feature grid (extensibility mechanisms) ---------- */
+  .grid7{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+    gap:14px;
+    margin:22px 0 8px;
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin:22px 0 8px;
+  }
+  .mech-card.wide{ grid-column:1 / -1; }
+  @media (max-width:720px){
+    .grid2{ grid-template-columns:1fr; }
+    .mech-card.wide{ grid-column:auto; }
+  }
+  .mech-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    box-shadow:var(--shadow);
+  }
+  .mech-card .name{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--accent-ink);
+    display:block;
+    margin-bottom:8px;
+  }
+  .mech-card p{ font-size:13.8px; color:var(--ink-soft); margin-bottom:10px; max-width:none; }
+  .mech-card .ex{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    background:var(--surface-sunk);
+    border-radius:6px;
+    padding:8px 10px;
+    color:var(--ink-soft);
+    overflow-x:auto;
+    white-space:pre;
+  }
+
+  /* ---------- diagram frame ---------- */
+  .diagram{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 20px 16px;
+    box-shadow:var(--shadow);
+    margin:22px 0 10px;
+    overflow-x:auto;
+  }
+  .diagram svg{ display:block; width:100%; height:auto; min-width:640px; }
+  .diagram figcaption{
+    font-size:13px;
+    color:var(--muted);
+    text-align:center;
+    margin-top:10px;
+    font-family:"IBM Plex Mono", monospace;
+  }
+
+  /* ---------- comparison table ---------- */
+  .cmp{
+    width:100%;
+    border-collapse:collapse;
+    margin:22px 0;
+    font-size:14.5px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .cmp th, .cmp td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  .cmp th{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    background:var(--surface-sunk);
+  }
+  .cmp tr:last-child td{ border-bottom:none; }
+  .cmp td.who{ font-weight:600; color:var(--ink); white-space:nowrap; }
+
+  /* ---------- callouts ---------- */
+  .callout{
+    border-radius:10px;
+    padding:18px 20px;
+    margin:20px 0;
+    border:1px solid transparent;
+  }
+  .callout.reco{
+    background:var(--accent-soft);
+    border-color:color-mix(in srgb, var(--accent) 30%, var(--line));
+  }
+  .callout.warn{
+    background:var(--warm-soft);
+    border-color:color-mix(in srgb, var(--warm) 30%, var(--line));
+  }
+  .callout .k{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    display:block;
+  }
+  .callout.reco .k{ color:var(--accent-ink); }
+  .callout.warn .k{ color:var(--warm-ink); }
+  .callout p{ margin-bottom:0; font-size:14.8px; color:var(--ink-soft); max-width:none; }
+  .callout p + p{ margin-top:10px; }
+
+  /* ---------- list styling ---------- */
+  ul.plain{ margin:0 0 16px; padding-left:0; list-style:none; }
+  ul.plain li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:9px;
+    font-size:14.8px;
+    color:var(--ink-soft);
+    max-width:70ch;
+  }
+  ul.plain li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+  }
+  ul.plain li code{ color:var(--ink); background:var(--surface-sunk); padding:1px 5px; border-radius:4px; font-size:13px; }
+
+  footer.end{
+    margin-top:70px;
+    padding-top:26px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  @media (max-width:640px){
+    header.masthead{ padding:44px 0 32px; }
+    .masthead-inner{ padding:0 20px; }
+    .wrap{ padding:0 20px 80px; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <span class="eyebrow">Engineering brief · Spice-Next</span>
+    <h1 class="title">Frappe for Spice</h1>
+    <p class="dek">How the Frappe framework's app/site model lets one clinical core serve every country, and how a client running their own ERPNext gets connected to it — grounded in <code class="mono">spice_next_core</code>, the Frappe-side build of spice's clinical domain (Patient, Encounter, Observation, and the rest).</p>
+    <nav class="toc">
+      <a href="#framework"><span class="n">01</span>Framework, app, site</a>
+      <a href="#runtime"><span class="n">02</span>Cache, queue, database</a>
+      <a href="#extend"><span class="n">03</span>Extending without forking</a>
+      <a href="#countries"><span class="n">04</span>One core, many countries</a>
+      <a href="#erpnext"><span class="n">05</span>Bringing in ERPNext</a>
+      <a href="#connector"><span class="n">06</span>The connector pattern</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+
+  <section id="framework">
+    <div class="section-head">
+      <div class="section-kicker">01 — Vocabulary</div>
+      <h2>Framework, app, and site are three different things</h2>
+    </div>
+    <p class="lede">Frappe is a metadata-driven web framework: define a <code class="mono">DocType</code> once and it generates the database table, REST API, desk UI, permissions, and print format together. Everything built on it — including the standalone product <strong>ERPNext</strong> — is packaged the same way: as an <em>app</em>. What's easy to conflate is the app and the <em>site</em> it runs on.</p>
+
+    <div class="glossary">
+      <div class="gloss-item">
+        <div class="gloss-term">bench</div>
+        <div class="gloss-def">One shared workspace on disk. Holds every installed app's source under <code class="mono">apps/</code>, shared by all sites on that machine.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">app</div>
+        <div class="gloss-def">A Python package: DocTypes, <code class="mono">hooks.py</code>, fixtures, client/server code. <code class="mono">frappe</code> itself is one; so is <code class="mono">spice_next_core</code>; so is ERPNext.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">site</div>
+        <div class="gloss-def">One tenant: one database, one <code class="mono">site_config.json</code>, and its own chosen subset of the bench's apps.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">DocType</div>
+        <div class="gloss-def">The unit of modeling — one JSON definition becomes a table, an API, a form, and a permission surface.</div>
+      </div>
+    </div>
+
+    <p>A bench built around spice's domain would typically hold four kinds of apps: the framework itself (<code class="mono">frappe</code>), the clinical core (<code class="mono">spice_next_core</code>), a reusable community theme app (<code class="mono">frappe_theme</code>), and any optional integration app a given deployment needs — e.g. a telephony integration such as <code class="mono">shukhee_integration</code>, which would declare <code class="mono">required_apps = ["spice_next_core"]</code>. ERPNext isn't part of this by default — it shows up later only where it's relevant as a general integration target.</p>
+
+    <div class="callout reco">
+      <span class="k">Why frappe_theme, specifically</span>
+      <p><code class="mono">frappe_theme</code> isn't ours — it's a community-built desk theme app (<code class="mono">github.com/Suvaidyam/frappe_theme</code>), pulled straight in via <code class="mono">bench get-app frappe_theme --branch development https://github.com/Suvaidyam/frappe_theme.git</code> and installed like any other app. Desk theming — layout density, color system, navigation chrome — is a solved problem elsewhere in the Frappe community; building a bespoke one would mean maintaining CSS/JS that has nothing to do with spice's clinical domain. This is section 03's "extend without forking" principle applied to UI: reuse someone else's app, keep customizing your own.</p>
+    </div>
+
+    <p class="lede" style="margin-top:22px;">One thing this vocabulary doesn't decide on its own: whether many countries share one bench (Frappe's built-in multi-tenancy) or each gets a fully separate deployment. This platform uses the latter — see §04.</p>
+  </section>
+
+  <section id="runtime" class="rule">
+    <div class="section-head">
+      <div class="section-kicker">02 — Runtime</div>
+      <h2>What's actually running underneath: cache, queue, database</h2>
+    </div>
+    <p class="lede prose">Every mechanism above — hooks firing, jobs enqueuing, sites answering requests — sits on infrastructure every Frappe deployment needs to provision. The Redis instances and the database choice are worth being deliberate about before a client-facing rollout.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 1360 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: the Frappe app and worker processes sit on four pieces of infrastructure — Redis cache, Redis-backed queue and workers, Redis realtime pub/sub, and a Postgres database — each shown with its own icon">
+        <defs>
+          <marker id="arrowRuntime" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <style>
+            .rt-name{ font-family:"IBM Plex Sans", sans-serif; font-weight:600; font-size:15px; fill:var(--ink); }
+            .rt-sub{ font-family:"IBM Plex Mono", monospace; font-size:11px; fill:var(--accent-ink); }
+            .rt-desc{ font-family:"IBM Plex Mono", monospace; font-size:10.5px; fill:var(--ink-soft); }
+          </style>
+        </defs>
+
+        <!-- app / worker layer -->
+        <rect x="380" y="20" width="600" height="64" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="680" y="46" text-anchor="middle" class="rt-name" fill="var(--accent-ink)">Frappe app + bench worker processes</text>
+        <text x="680" y="64" text-anchor="middle" class="rt-sub">spice_next_core · frappe_theme · shukhee_integration · country app</text>
+
+        <!-- connectors -->
+        <path d="M 620 84 L 210 130" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowRuntime)"/>
+        <path d="M 660 84 L 525 130" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowRuntime)"/>
+        <path d="M 700 84 L 835 130" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowRuntime)"/>
+        <path d="M 740 84 L 1150 130" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowRuntime)"/>
+
+        <!-- card 1: cache -->
+        <rect x="50" y="130" width="300" height="176" rx="12" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <path transform="translate(200,178)" d="M2,-18 L-10,2 L-1,2 L-3,18 L11,-4 L1,-4 Z" fill="var(--accent)"/>
+        <text x="200" y="222" text-anchor="middle" class="rt-name">Cache</text>
+        <text x="200" y="241" text-anchor="middle" class="rt-sub">redis-cache</text>
+        <text x="200" y="263" text-anchor="middle" class="rt-desc">frappe.cache() — hot metadata</text>
+        <text x="200" y="280" text-anchor="middle" class="rt-desc">invalidated automatically on save</text>
+
+        <!-- card 2: queue & workers -->
+        <rect x="370" y="130" width="300" height="176" rx="12" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <g transform="translate(520,178)">
+          <rect x="-15" y="-15" width="30" height="9" rx="3" fill="var(--accent)"/>
+          <rect x="-15" y="-4" width="30" height="9" rx="3" fill="var(--accent)" opacity="0.75"/>
+          <rect x="-15" y="7" width="30" height="9" rx="3" fill="var(--accent)" opacity="0.5"/>
+          <path d="M19,-5 L30,1 L19,7 Z" fill="var(--accent)"/>
+        </g>
+        <text x="520" y="222" text-anchor="middle" class="rt-name">Queue &amp; Workers</text>
+        <text x="520" y="241" text-anchor="middle" class="rt-sub">redis-queue</text>
+        <text x="520" y="263" text-anchor="middle" class="rt-desc">frappe.enqueue() — background jobs</text>
+        <text x="520" y="280" text-anchor="middle" class="rt-desc">bench worker consumes it</text>
+
+        <!-- card 3: realtime -->
+        <rect x="690" y="130" width="300" height="176" rx="12" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <g transform="translate(840,182)">
+          <circle cx="0" cy="10" r="3.2" fill="var(--accent)"/>
+          <path d="M-9,4 A12,12 0 0 1 9,4" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M-16,-6 A21,21 0 0 1 16,-6" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" opacity="0.55"/>
+        </g>
+        <text x="840" y="222" text-anchor="middle" class="rt-name">Realtime</text>
+        <text x="840" y="241" text-anchor="middle" class="rt-sub">redis-socketio</text>
+        <text x="840" y="263" text-anchor="middle" class="rt-desc">publish_realtime() — pub/sub only</text>
+        <text x="840" y="280" text-anchor="middle" class="rt-desc">desk live-updates, not jobs</text>
+
+        <!-- card 4: database -->
+        <rect x="1010" y="130" width="300" height="176" rx="12" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <g transform="translate(1160,178)">
+          <line x1="-15" y1="-14" x2="-15" y2="12" stroke="var(--accent)" stroke-width="1.6"/>
+          <line x1="15" y1="-14" x2="15" y2="12" stroke="var(--accent)" stroke-width="1.6"/>
+          <ellipse cx="0" cy="12" rx="15" ry="5.5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+          <ellipse cx="0" cy="-14" rx="15" ry="5.5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+        </g>
+        <text x="1160" y="222" text-anchor="middle" class="rt-name">Database</text>
+        <text x="1160" y="241" text-anchor="middle" class="rt-sub">postgres:16</text>
+        <text x="1160" y="263" text-anchor="middle" class="rt-desc">frappe.db.* — the ORM's target</text>
+        <text x="1160" y="280" text-anchor="middle" class="rt-desc">one per deployment (§04)</text>
+      </svg>
+      <figcaption>three faces of Redis, one Postgres — every arrow starts from the same app/worker layer</figcaption>
+    </figure>
+
+    <div class="grid7">
+      <div class="mech-card">
+        <span class="name">Cache — redis-cache</span>
+        <p>A single Redis instance backing <code>frappe.cache()</code>: hot metadata (DocType schema, permissions, translations, route maps) so a request doesn't re-read the database on every call. Invalidated automatically when a relevant doc is saved — app code almost never touches Redis directly.</p>
+        <div class="ex">frappe.cache().get_value("key")
+frappe.cache().set_value("key", val)</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">Queue &amp; workers — redis-queue</span>
+        <p>Backs Frappe's background job system (RQ). <code>bench worker</code> processes pull from priority lanes (default / short / long). This is the exact mechanism behind <code>enqueue_fhir_push</code> in <code>hooks.py</code> and the connector's step 3 above; <code>scheduler_events</code> are the same queue, just triggered on a timer.</p>
+        <div class="ex">frappe.enqueue("app.module.fn",
+  queue="short", **kwargs)</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">Realtime — redis-socketio</span>
+        <p>A third, separate Redis instance — pub/sub only, for the desk's live updates (form-level "someone else is viewing this," list auto-refresh). Not cache, not the job queue; don't conflate the three when reasoning about what a Redis outage takes down.</p>
+        <div class="ex">frappe.publish_realtime(
+  "doc_update", doc.name)</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">Database — Postgres</span>
+        <p>Frappe's ORM targets one backend per site, fixed at site-creation time via <code>bench new-site --db-type postgres --db-host postgres</code>. Postgres is a fully supported backend alongside MariaDB — picking it deliberately, rather than defaulting to whichever comes first in a tutorial, keeps the platform on one database engine end-to-end when other services in the broader stack already run on it.</p>
+        <div class="ex">bench new-site ... \
+  --db-type postgres --db-host postgres</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <span class="k">One thing to check before relying on it</span>
+      <p>The DB backend is a <em>bench new-site</em>–time decision, not something changed after data exists — so it's worth locking in before real data lands. Postgres support in Frappe is genuine but newer and less exercised by the wider ecosystem than the historically MariaDB-first default; each installed app (<code>spice_next_core</code>, <code>frappe_theme</code>, <code>shukhee_integration</code>) is worth a quick pass for any raw SQL written against MariaDB syntax before depending on it in production.</p>
+    </div>
+  </section>
+
+  <section id="extend" class="rule">
+    <div class="section-head">
+      <div class="section-kicker">03 — Extensibility</div>
+      <h2>Every lever below adds behavior to an app you don't own the source of</h2>
+    </div>
+    <p class="lede">This is the mechanism that makes "integrate with ERPNext" or "customize per country" possible without forking anything. All of them appear in <code class="mono">spice_next_core/hooks.py</code>, or have a direct ERPNext-facing equivalent.</p>
+
+    <div class="grid2">
+      <div class="mech-card">
+        <span class="name">Custom Field / Property Setter</span>
+        <p>Add a field, or override a label / mandatory / hidden / permission-level property, on a DocType owned by another app — stored as data, no source edit.</p>
+        <div class="ex">fixtures: filtered "Property Setter"
+  → the sva_ft FHIR-mapping channel</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">hooks.py — doc_events</span>
+        <p>Attach a handler to any DocType's lifecycle event, including one from another app.</p>
+        <div class="ex">"*": {"validate": "...validate_clinical_fields"}
+"Observation": {"after_insert": "...enqueue_fhir_push"}</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">override_doctype_class</span>
+        <p>Swap in your own Python controller for a DocType you didn't define — full behavioral override, schema and UI stay put.</p>
+        <div class="ex">override_doctype_class = {
+  "Sales Order": "spice_core.overrides.SalesOrder"}</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">override_whitelisted_methods</span>
+        <p>Replace the implementation behind a whitelisted API path, e.g. one of ERPNext's, while callers keep calling the same dotted path.</p>
+        <div class="ex">override_whitelisted_methods = {
+  "erpnext...make_delivery_note": "spice_core..."}</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">scheduler_events</span>
+        <p>Cron-style hooks, declared per app.</p>
+        <div class="ex">scheduler_events = {"hourly":
+  ["spice_next_core.fhir.pull.do_pull"]}</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">required_apps</span>
+        <p>Declares install-order dependency between apps on the same site.</p>
+        <div class="ex">required_apps = ["spice_next_core"]
+  <span class="cmt" style="color:var(--muted)">— e.g. shukhee_integration</span></div>
+      </div>
+      <div class="mech-card">
+        <span class="name">Server Script</span>
+        <p>Python attached to one DocType's server event, written and saved from the Desk UI itself — no app, no deploy. A country's own admin can add one without a developer touching <code>hooks.py</code>.</p>
+        <div class="ex">Server Script: "Referral" → "After Insert"
+  notify receiving facility via Shukhee
+  — no code push required</div>
+      </div>
+      <div class="mech-card">
+        <span class="name">Client Script</span>
+        <p>JavaScript attached to a DocType's form, controlling what the user sees before anything is saved — show/hide a field, set a default, block submission on a bad value.</p>
+        <div class="ex">Client Script: "Household" form
+  hide "Head of Household" until
+  Household Type = "Registered"</div>
+      </div>
+      <div class="mech-card wide">
+        <span class="name">Custom API</span>
+        <p>Not just overriding an existing whitelisted method — any app can define a brand-new Python function decorated with <code>@frappe.whitelist()</code> and get a live endpoint at <code>/api/method/&lt;dotted.path&gt;</code>, for business logic that isn't CRUD at all. This is the same mechanism behind <code>spice_next_core</code>'s own <code>sync.push</code>/<code>sync.pull</code> and the connector's pull API (§06) — nothing about it is sync-specific; it's the general way to expose server-side computation to the Flutter app or any other caller.</p>
+        <div class="ex">@frappe.whitelist(methods=["GET"])
+def household_risk_summary(household_id):
+    # aggregates Observations + Encounters server-side,
+    # shaped for the CHW worklist screen —
+    # one call instead of the client stitching several
+    return {...}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="countries" class="rule">
+    <div class="section-head">
+      <div class="section-kicker">04 — Deployment shape</div>
+      <h2>One core, many countries — separate deployments, shared code</h2>
+    </div>
+    <p class="lede">Spice's domain, rebuilt as <code class="mono">spice_next_core</code>, is country-agnostic on purpose — but a country or client here is not a site sharing one bench with the others. It's its own <strong>deployment</strong>: its own bench, its own site, its own database, cache, and queue. Frappe's shared-bench multi-tenancy is a real capability (§01); this platform deliberately doesn't use it, trading density for isolation — one country's outage, upgrade, or data-residency requirement never touches another's.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 1360 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: a shared, versioned app source containing frappe, spice_next_core, and frappe_theme (always used), the per-country apps spice_next_bd and spice_next_ke (one required per deployment), and shukhee_integration (optional, used only by Bangladesh). Below it, two fully separate deployments — Bangladesh and Kenya — each with their own bench, site, database, cache, and queue">
+        <defs>
+          <marker id="arrowWarm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warm)"/>
+          </marker>
+          <marker id="arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <marker id="arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
+          </marker>
+          <style>
+            .lbl{ font-family:"IBM Plex Mono", monospace; }
+            .name{ font-family:"IBM Plex Sans", sans-serif; font-weight:600; }
+            .chip{ font-family:"IBM Plex Mono", monospace; font-weight:600; letter-spacing:.05em; }
+            .pill{ font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:.04em; fill:var(--ink-soft); }
+          </style>
+        </defs>
+
+        <!-- source outer -->
+        <rect x="40" y="20" width="1280" height="340" rx="14" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="62" y="46" class="lbl" font-size="13" letter-spacing="1" fill="var(--muted)">SHARED APP SOURCE — versioned code, not a running system</text>
+
+        <!-- legend, top-right, inside source box -->
+        <line x1="958" y1="24" x2="998" y2="24" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="3 4"/>
+        <text x="1008" y="28" class="lbl" font-size="10.5" fill="var(--ink-soft)">always used, every deployment</text>
+        <line x1="958" y1="46" x2="998" y2="46" stroke="var(--warm)" stroke-width="2"/>
+        <text x="1008" y="50" class="lbl" font-size="10.5" fill="var(--ink-soft)">mandatory, one per deployment</text>
+        <line x1="958" y1="68" x2="998" y2="68" stroke="var(--muted)" stroke-width="2"/>
+        <text x="1008" y="72" class="lbl" font-size="10.5" fill="var(--ink-soft)">optional, only where needed</text>
+
+        <!-- frappe -->
+        <rect x="70" y="95" width="200" height="66" rx="9" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <rect x="192" y="85" width="78" height="20" rx="10" fill="var(--accent)"/>
+        <text x="231" y="99" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">ALWAYS</text>
+        <text x="170" y="128" text-anchor="middle" class="name" font-size="15" fill="var(--ink)">frappe</text>
+        <text x="170" y="147" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">the framework</text>
+
+        <!-- core -->
+        <rect x="320" y="80" width="460" height="140" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+        <rect x="702" y="70" width="78" height="20" rx="10" fill="var(--accent)"/>
+        <text x="741" y="84" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">ALWAYS</text>
+        <text x="550" y="107" text-anchor="middle" class="name" font-size="17" fill="var(--accent-ink)">spice_next_core</text>
+        <text x="550" y="128" text-anchor="middle" class="lbl" font-size="11.5" fill="var(--ink-soft)">generic clinical core — spice's domain, country-agnostic</text>
+        <text x="550" y="148" text-anchor="middle" class="lbl" font-size="11.5" fill="var(--ink-soft)">Patient · Encounter · Observation · Condition</text>
+        <text x="550" y="167" text-anchor="middle" class="lbl" font-size="11.5" fill="var(--ink-soft)">Referral · Case · Household · Task</text>
+        <text x="550" y="188" text-anchor="middle" class="lbl" font-size="10.5" fill="var(--muted)">all client_uuid-keyed — no country-specific logic lives here</text>
+
+        <!-- theme -->
+        <rect x="830" y="95" width="200" height="66" rx="9" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <rect x="952" y="85" width="78" height="20" rx="10" fill="var(--accent)"/>
+        <text x="991" y="99" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">ALWAYS</text>
+        <text x="930" y="128" text-anchor="middle" class="name" font-size="15" fill="var(--ink)">frappe_theme</text>
+        <text x="930" y="147" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">community app, unmodified</text>
+
+        <!-- country apps + optional app -->
+        <rect x="290" y="250" width="210" height="72" rx="9" fill="var(--warm-soft)" stroke="var(--warm)" stroke-width="1.4"/>
+        <rect x="412" y="240" width="88" height="20" rx="10" fill="var(--warm)"/>
+        <text x="456" y="254" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">PER-DEPLOY</text>
+        <text x="395" y="282" text-anchor="middle" class="name" font-size="14.5" fill="var(--warm-ink)">spice_next_bd</text>
+        <text x="395" y="301" text-anchor="middle" class="lbl" font-size="11" fill="var(--ink-soft)">Bangladesh's deltas only</text>
+
+        <rect x="560" y="250" width="210" height="72" rx="9" fill="var(--warm-soft)" stroke="var(--warm)" stroke-width="1.4"/>
+        <rect x="682" y="240" width="88" height="20" rx="10" fill="var(--warm)"/>
+        <text x="726" y="254" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">PER-DEPLOY</text>
+        <text x="665" y="282" text-anchor="middle" class="name" font-size="14.5" fill="var(--warm-ink)">spice_next_ke</text>
+        <text x="665" y="301" text-anchor="middle" class="lbl" font-size="11" fill="var(--ink-soft)">Kenya's deltas only</text>
+
+        <rect x="830" y="250" width="210" height="72" rx="9" fill="var(--surface-sunk)" stroke="var(--muted)" stroke-width="1.4"/>
+        <rect x="968" y="240" width="72" height="20" rx="10" fill="var(--muted)"/>
+        <text x="1004" y="254" text-anchor="middle" class="chip" font-size="9.5" fill="var(--surface)">OPTIONAL</text>
+        <text x="935" y="282" text-anchor="middle" class="name" font-size="14.5" fill="var(--ink)">shukhee_integration</text>
+        <text x="935" y="301" text-anchor="middle" class="lbl" font-size="11" fill="var(--ink-soft)">telephony — BD only</text>
+
+        <text x="290" y="335" class="lbl" font-size="10.5" fill="var(--muted)">↳ each declares required_apps = ["spice_next_core"]</text>
+
+        <!-- connectors: core -> country/optional apps (extends / depends on) -->
+        <path d="M 430 220 L 395 250" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowAccent)"/>
+        <path d="M 610 220 L 665 250" fill="none" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arrowAccent)"/>
+        <path d="M 700 220 L 935 250" fill="none" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#arrowAccent)"/>
+
+        <!-- deployments -->
+        <rect x="80" y="410" width="560" height="250" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"/>
+        <text x="360" y="442" text-anchor="middle" class="name" font-size="17" fill="var(--ink)">Bangladesh — own deployment</text>
+        <text x="360" y="462" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">independent bench · independent site</text>
+        <text x="360" y="488" text-anchor="middle" class="lbl" font-size="12" fill="var(--ink-soft)">frappe · spice_next_core · frappe_theme</text>
+        <text x="360" y="508" text-anchor="middle" class="lbl" font-size="12" fill="var(--warm-ink)">spice_next_bd · shukhee_integration</text>
+        <rect x="150" y="528" width="100" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="200" y="545" text-anchor="middle" class="pill">OWN DATABASE</text>
+        <rect x="260" y="528" width="80" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="300" y="545" text-anchor="middle" class="pill">OWN CACHE</text>
+        <rect x="350" y="528" width="80" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="390" y="545" text-anchor="middle" class="pill">OWN QUEUE</text>
+        <rect x="440" y="528" width="150" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="515" y="545" text-anchor="middle" class="pill">OWN REALTIME (socketio)</text>
+        <text x="360" y="580" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">nothing here is shared with Kenya's deployment</text>
+
+        <rect x="720" y="410" width="560" height="250" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"/>
+        <text x="1000" y="442" text-anchor="middle" class="name" font-size="17" fill="var(--ink)">Kenya — own deployment</text>
+        <text x="1000" y="462" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">independent bench · independent site</text>
+        <text x="1000" y="488" text-anchor="middle" class="lbl" font-size="12" fill="var(--ink-soft)">frappe · spice_next_core · frappe_theme</text>
+        <text x="1000" y="508" text-anchor="middle" class="lbl" font-size="12" fill="var(--warm-ink)">spice_next_ke</text>
+        <rect x="790" y="528" width="100" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="840" y="545" text-anchor="middle" class="pill">OWN DATABASE</text>
+        <rect x="900" y="528" width="80" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="940" y="545" text-anchor="middle" class="pill">OWN CACHE</text>
+        <rect x="990" y="528" width="80" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="1030" y="545" text-anchor="middle" class="pill">OWN QUEUE</text>
+        <rect x="1080" y="528" width="150" height="26" rx="13" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="1155" y="545" text-anchor="middle" class="pill">OWN REALTIME (socketio)</text>
+        <text x="1000" y="580" text-anchor="middle" class="lbl" font-size="11" fill="var(--muted)">nothing here is shared with Bangladesh's deployment</text>
+
+        <!-- country app -> its deployment: bold warm arrow -->
+        <path d="M 395 322 L 360 410" fill="none" stroke="var(--warm)" stroke-width="2" marker-end="url(#arrowWarm)"/>
+        <path d="M 665 322 L 1000 410" fill="none" stroke="var(--warm)" stroke-width="2" marker-end="url(#arrowWarm)"/>
+
+        <!-- shukhee_integration -> BD only: muted arrow -->
+        <path d="M 935 322 L 560 410" fill="none" stroke="var(--muted)" stroke-width="1.8" marker-end="url(#arrowMuted)"/>
+
+        <!-- source -> each deployment: always-used apps, dashed accent -->
+        <path d="M 380 360 L 360 410" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="3 4" marker-end="url(#arrowAccent)"/>
+        <path d="M 980 360 L 1000 410" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="3 4" marker-end="url(#arrowAccent)"/>
+
+        <!-- scale note -->
+        <rect x="330" y="690" width="700" height="42" rx="21" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="680" y="716" text-anchor="middle" class="lbl" font-size="12" fill="var(--ink-soft)">+ every new country is its own deployment — same shared source, no shared runtime</text>
+      </svg>
+      <figcaption>badges mark why each app exists: shared everywhere, mandatory here, or optional here</figcaption>
+    </figure>
+
+    <p>What a country app is allowed to contain — every item below is additive, so nothing here ever touches core's source:</p>
+    <ul class="plain">
+      <li><code>required_apps = ["spice_next_core"]</code> — the same install-order dependency <code>shukhee_integration</code> declares.</li>
+      <li>Custom Fields / Property Setters for country-specific form fields, labels, or mandatory rules on core's <code>Patient</code> / <code>Encounter</code>.</li>
+      <li>Its own <code>doc_events</code> in its own <code>hooks.py</code>, running alongside — not instead of — core's <code>validate_clinical_fields</code>, <code>enqueue_fhir_push</code>, and friends.</li>
+      <li>Its own fixtures: a country's <code>Geography Node</code> tree, terminology <code>Concept</code> set, <code>Priority Rule</code>s — the same fixture mechanism core already uses for its own reference data.</li>
+      <li><code>override_doctype_class</code>, reserved for the rare case a country genuinely needs different controller behavior on a core DocType.</li>
+      <li>Optional apps aren't all-or-nothing either — <code>shukhee_integration</code> is installed into Bangladesh's deployment because Bangladesh needs telephony, and left out of Kenya's entirely, without either deployment's core or country app changing.</li>
+    </ul>
+  </section>
+
+  <section id="erpnext" class="rule">
+    <div class="section-head">
+      <div class="section-kicker">05 — ERPNext</div>
+      <h2>Bringing ERPNext into the picture</h2>
+    </div>
+    <p class="lede">ERPNext is, mechanically, just another Frappe app — same install-app command, same <code class="mono">hooks.py</code> levers from section 03 apply to it. There are two honest ways to bring it in, and they cost very different amounts.</p>
+
+    <table class="cmp">
+      <tr><th>Pattern</th><th>What it means</th><th>Cost</th></tr>
+      <tr>
+        <td class="who">A — Compose alongside</td>
+        <td>Install ERPNext and a new domain app on the same site. They share one DB, one user/role/permission system, one desk shell, notifications, print formats, background jobs — for free. The domain app's DocTypes <code class="mono">Link</code> to ERPNext's rather than reimplementing them (e.g. a <code>Household Visit</code> DocType linking to ERPNext Healthcare's <code>Patient</code>).</td>
+        <td>Low, if the domain genuinely overlaps with what ERPNext already models well.</td>
+      </tr>
+      <tr>
+        <td class="who">B — Extend in place</td>
+        <td>Don't add DocTypes — bend ERPNext's existing ones (Healthcare's <code>Patient</code>, <code>Patient Encounter</code>) with Custom Fields, Property Setters, <code>doc_events</code>, and <code>override_doctype_class</code> until they fit.</td>
+        <td>High once the target invariants diverge from ERPNext's assumptions — see below.</td>
+      </tr>
+    </table>
+
+    <div class="callout reco">
+      <span class="k">Why spice_next_core picked neither</span>
+      <p>It built <code class="mono">Patient</code>, <code class="mono">Encounter</code>, and the rest from scratch. ERPNext Healthcare assumes server-assigned naming series (conflicts with client-mintable UUIDv7 IDs), mutable encounter records (conflicts with append-only clinical facts), and has no built-in FHIR egress or catchment-scoped row permissions. Retrofitting all four via Pattern B means overriding most of Healthcare's core behavior anyway — at which point Patterns A and B stop saving effort over building fresh.</p>
+      <p><strong>Recommendation:</strong> reach for ERPNext when the need is genuinely ERP-shaped — inventory, procurement, accounting, HR/payroll for CHW supply chains — where none of those four invariants are in tension. Don't reach for it to model clinical facts; that's exactly the ground <code class="mono">spice_next_core</code> stakes out instead.</p>
+    </div>
+  </section>
+
+  <section id="connector" class="rule">
+    <div class="section-head">
+      <div class="section-kicker">06 — Client-owned ERPNext</div>
+      <h2>When a client already runs their own ERPNext</h2>
+    </div>
+    <p class="lede">Different scenario: a country or client already operates ERPNext plus their own facility customizations, and needs data flowing to and from the Spice side. The answer isn't a fork of their ERPNext, or a rewrite of their customizations — it's a small, generic <em>connector app</em> installed on their site.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 1360 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Numbered sequence diagram: client ERPNext site, connector app, and remote Spice system. Outbound flow, steps 1 to 5: a DocType change fires a hook, the connector maps fields, enqueues a background job, pushes to the remote system, and receives an ack. Inbound flow, steps 6 to 8: the remote system calls a whitelisted pull API, the connector reads scoped ERPNext data, and returns the mapped payload">
+        <defs>
+          <marker id="arrowSolid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <marker id="arrowReturn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warm)"/>
+          </marker>
+          <style>
+            .p-head{ font-family:"IBM Plex Sans", sans-serif; font-weight:600; font-size:15px; fill:var(--ink); }
+            .p-sub{ font-family:"IBM Plex Mono", monospace; font-size:11px; fill:var(--muted); }
+            .arr-lbl{ font-family:"IBM Plex Mono", monospace; font-size:12px; fill:var(--ink-soft); }
+            .step-n{ font-family:"IBM Plex Mono", monospace; font-size:12px; font-weight:600; fill:var(--surface); }
+            .band-tag{ font-family:"IBM Plex Mono", monospace; font-size:12px; font-weight:600; letter-spacing:.06em; fill:var(--surface); }
+            .life{ stroke:var(--line); stroke-width:1.4; stroke-dasharray:2 4; }
+          </style>
+        </defs>
+
+        <!-- legend -->
+        <line x1="1000" y1="16" x2="1040" y2="16" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="1050" y="20" class="arr-lbl">request</text>
+        <line x1="1000" y1="38" x2="1040" y2="38" stroke="var(--warm)" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <text x="1050" y="42" class="arr-lbl">response</text>
+
+        <!-- lifeline headers -->
+        <rect x="90" y="54" width="280" height="64" rx="9" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="230" y="80" text-anchor="middle" class="p-head">Client's ERPNext site</text>
+        <text x="230" y="98" text-anchor="middle" class="p-sub">ERPNext + their customizations</text>
+
+        <rect x="540" y="54" width="280" height="64" rx="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="680" y="80" text-anchor="middle" class="p-head" fill="var(--accent-ink)">Connector app</text>
+        <text x="680" y="98" text-anchor="middle" class="p-sub">installed on the same site</text>
+
+        <rect x="990" y="54" width="280" height="64" rx="9" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="1130" y="80" text-anchor="middle" class="p-head">Remote Spice system</text>
+        <text x="1130" y="98" text-anchor="middle" class="p-sub">e.g. spice_next_core</text>
+
+        <!-- flow bands (drawn before lifelines so lifelines stay visible on top) -->
+        <rect x="20" y="126" width="1320" height="270" rx="12" fill="var(--accent-soft)" fill-opacity="0.55"/>
+        <rect x="20" y="412" width="1320" height="270" rx="12" fill="var(--warm-soft)" fill-opacity="0.55"/>
+
+        <!-- lifelines -->
+        <line x1="230" y1="118" x2="230" y2="690" class="life"/>
+        <line x1="680" y1="118" x2="680" y2="690" class="life"/>
+        <line x1="1130" y1="118" x2="1130" y2="690" class="life"/>
+
+        <rect x="30" y="136" width="80" height="26" rx="13" fill="var(--accent)"/>
+        <text x="70" y="153" text-anchor="middle" class="band-tag">OUT · PUSH</text>
+
+        <!-- 1: ERPNext -> Connector -->
+        <circle cx="230" cy="190" r="13" fill="var(--accent)"/>
+        <text x="230" y="194" text-anchor="middle" class="step-n">1</text>
+        <line x1="243" y1="190" x2="676" y2="190" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrowSolid)"/>
+        <text x="250" y="176" class="arr-lbl">after_insert / on_update fires</text>
+        <text x="250" y="206" class="arr-lbl">hooks.py doc_events — e.g. "Patient", "Stock Entry"</text>
+
+        <!-- 2: connector self note: mapping -->
+        <circle cx="560" cy="252" r="13" fill="var(--accent)"/>
+        <text x="560" y="256" text-anchor="middle" class="step-n">2</text>
+        <rect x="580" y="230" width="360" height="44" rx="7" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="596" y="248" class="arr-lbl">look up Connector Field Mapping config</text>
+        <text x="596" y="266" class="arr-lbl">— source → canonical field translation</text>
+
+        <!-- 3: connector self note: enqueue -->
+        <circle cx="560" cy="308" r="13" fill="var(--accent)"/>
+        <text x="560" y="312" text-anchor="middle" class="step-n">3</text>
+        <rect x="580" y="286" width="360" height="44" rx="7" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="596" y="304" class="arr-lbl">frappe.enqueue() queues a background job</text>
+        <text x="596" y="322" class="arr-lbl">— hook returns immediately, save is never blocked</text>
+
+        <!-- 4: Connector -> Remote -->
+        <circle cx="680" cy="358" r="13" fill="var(--accent)"/>
+        <text x="680" y="362" text-anchor="middle" class="step-n">4</text>
+        <line x1="693" y1="358" x2="1126" y2="358" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrowSolid)"/>
+        <text x="700" y="344" class="arr-lbl">POST /api/method/&lt;remote&gt;.sync.push</text>
+        <text x="700" y="374" class="arr-lbl">mapped payload + client op-id — retry-safe</text>
+
+        <!-- 5: Remote -> Connector return -->
+        <circle cx="1130" cy="382" r="13" fill="var(--warm)"/>
+        <text x="1130" y="386" text-anchor="middle" class="step-n">5</text>
+        <line x1="1117" y1="382" x2="694" y2="382" stroke="var(--warm)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowReturn)"/>
+        <text x="750" y="378" class="arr-lbl">200 ack</text>
+
+        <rect x="30" y="422" width="70" height="26" rx="13" fill="var(--warm)"/>
+        <text x="65" y="439" text-anchor="middle" class="band-tag">IN · PULL</text>
+
+        <!-- 6: Remote -> Connector -->
+        <circle cx="1130" cy="482" r="13" fill="var(--accent)"/>
+        <text x="1130" y="486" text-anchor="middle" class="step-n">6</text>
+        <line x1="1117" y1="482" x2="694" y2="482" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrowSolid)"/>
+        <text x="750" y="468" class="arr-lbl">POST /api/method/connector.api.pull</text>
+        <text x="750" y="498" class="arr-lbl">@frappe.whitelist — API-key authenticated</text>
+
+        <!-- 7: Connector -> ERPNext -->
+        <circle cx="680" cy="536" r="13" fill="var(--accent)"/>
+        <text x="680" y="540" text-anchor="middle" class="step-n">7</text>
+        <line x1="667" y1="536" x2="244" y2="536" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrowSolid)"/>
+        <text x="260" y="522" class="arr-lbl">frappe.get_list() / get_doc()</text>
+        <text x="260" y="552" class="arr-lbl">scoped by mapping config + permission_query_conditions</text>
+
+        <!-- 8: Connector -> Remote return -->
+        <circle cx="680" cy="602" r="13" fill="var(--warm)"/>
+        <text x="680" y="606" text-anchor="middle" class="step-n">8</text>
+        <line x1="693" y1="602" x2="1126" y2="602" stroke="var(--warm)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowReturn)"/>
+        <text x="750" y="598" class="arr-lbl">mapped payload, canonical shape</text>
+
+        <rect x="330" y="706" width="700" height="42" rx="21" fill="var(--surface-sunk)" stroke="var(--line)"/>
+        <text x="680" y="732" text-anchor="middle" class="arr-lbl">same connector app works for any client's ERPNext — only the Field Mapping rows change</text>
+      </svg>
+      <figcaption>numbered in call order · solid = request · dashed = response</figcaption>
+    </figure>
+
+    <ul class="plain">
+      <li><strong>Trigger = <code>doc_events</code></strong>, the same primitive from section 03: <code>{"Patient": {"after_insert": "connector.sync.on_change"}}</code>, added by the connector app — ERPNext's own code is never touched.</li>
+      <li><strong>Push is queued, not inline</strong> — <code>frappe.enqueue(...)</code> means a slow or failing remote call never blocks the user's save. Mirrors how <code>spice_next_core</code> already runs <code>enqueue_fhir_push</code> from a hook rather than inline in <code>validate</code>.</li>
+      <li><strong>Pull side is a whitelisted custom API</strong>, the same <code>@frappe.whitelist(methods=["POST"])</code> pattern behind <code>spice_next_core.api.sync.pull</code> — so a remote system can ask on its own schedule instead of only receiving pushes.</li>
+      <li><strong>Config-driven mapping, not hardcoded per client</strong> — a <code>Connector Field Mapping</code> DocType holding <code>{source_doctype, source_field, target_field, transform}</code> rows lets one connector codebase adapt to different clients' ERPNext customizations by adding rows, not code.</li>
+      <li><strong>Auth</strong> — Frappe's built-in API Key/Secret on a dedicated Integration User, scoped by that user's role and <code>permission_query_conditions</code> if row-level scoping is needed. No bespoke auth layer.</li>
+      <li><strong>Generic app, per-client companion only when logic (not just fields) diverges</strong> — same shape as section 04's core-plus-country-app split: <code>connector_&lt;client&gt;</code> with <code>required_apps = ["connector"]</code>, reserved for genuinely bespoke transform logic.</li>
+    </ul>
+  </section>
+
+
+  <footer class="end">
+    <p style="margin:0; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.04em; color:var(--muted);">Presented by Amresh</p>
+  </footer>
+
+</div>
+</body>
+</html>
