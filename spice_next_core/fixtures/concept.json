@@ -1,0 +1,857 @@
+[
+ {
+  "code": "8480-6",
+  "code_system": "LOINC",
+  "display": "Systolic blood pressure",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.112904",
+  "name": "LOINC|8480-6"
+ },
+ {
+  "code": "8462-4",
+  "code_system": "LOINC",
+  "display": "Diastolic blood pressure",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.115871",
+  "name": "LOINC|8462-4"
+ },
+ {
+  "code": "29463-7",
+  "code_system": "LOINC",
+  "display": "Body weight",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.118170",
+  "name": "LOINC|29463-7"
+ },
+ {
+  "code": "2339-0",
+  "code_system": "LOINC",
+  "display": "Glucose [Mass/volume] in Blood",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.120403",
+  "name": "LOINC|2339-0"
+ },
+ {
+  "code": "77176002",
+  "code_system": "SNOMED",
+  "display": "Tobacco use",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.122577",
+  "name": "SNOMED|77176002"
+ },
+ {
+  "code": "8302-2",
+  "code_system": "LOINC",
+  "display": "Body height",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.125159",
+  "name": "LOINC|8302-2"
+ },
+ {
+  "code": "39156-5",
+  "code_system": "LOINC",
+  "display": "Body mass index",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.127743",
+  "name": "LOINC|39156-5"
+ },
+ {
+  "code": "4548-4",
+  "code_system": "LOINC",
+  "display": "Hemoglobin A1c",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.129897",
+  "name": "LOINC|4548-4"
+ },
+ {
+  "code": "8665-2",
+  "code_system": "LOINC",
+  "display": "Last menstrual period",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.132121",
+  "name": "LOINC|8665-2"
+ },
+ {
+  "code": "11996-6",
+  "code_system": "LOINC",
+  "display": "Number of previous pregnancies",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.134363",
+  "name": "LOINC|11996-6"
+ },
+ {
+  "code": "11977-6",
+  "code_system": "LOINC",
+  "display": "Parity",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.136687",
+  "name": "LOINC|11977-6"
+ },
+ {
+  "code": "25064002",
+  "code_system": "SNOMED",
+  "display": "Headache",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.139038",
+  "name": "SNOMED|25064002"
+ },
+ {
+  "code": "267038008",
+  "code_system": "SNOMED",
+  "display": "Oedema",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.141375",
+  "name": "SNOMED|267038008"
+ },
+ {
+  "code": "21522001",
+  "code_system": "SNOMED",
+  "display": "Abdominal pain",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.143776",
+  "name": "SNOMED|21522001"
+ },
+ {
+  "code": "63102001",
+  "code_system": "SNOMED",
+  "display": "Visual disturbance",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.146256",
+  "name": "SNOMED|63102001"
+ },
+ {
+  "code": "276369006",
+  "code_system": "SNOMED",
+  "display": "Reduced fetal movement",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.148558",
+  "name": "SNOMED|276369006"
+ },
+ {
+  "code": "289530006",
+  "code_system": "SNOMED",
+  "display": "Bleeding from vagina",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.150946",
+  "name": "SNOMED|289530006"
+ },
+ {
+  "code": "386661006",
+  "code_system": "SNOMED",
+  "display": "Fever",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.153360",
+  "name": "SNOMED|386661006"
+ },
+ {
+  "code": "404640003",
+  "code_system": "SNOMED",
+  "display": "Dizziness",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.155694",
+  "name": "SNOMED|404640003"
+ },
+ {
+  "code": "84229001",
+  "code_system": "SNOMED",
+  "display": "Fatigue",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.158012",
+  "name": "SNOMED|84229001"
+ },
+ {
+  "code": "267036007",
+  "code_system": "SNOMED",
+  "display": "Polydipsia",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.160365",
+  "name": "SNOMED|267036007"
+ },
+ {
+  "code": "29857009",
+  "code_system": "SNOMED",
+  "display": "Chest pain",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.162696",
+  "name": "SNOMED|29857009"
+ },
+ {
+  "code": "44077006",
+  "code_system": "SNOMED",
+  "display": "Numbness",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.165228",
+  "name": "SNOMED|44077006"
+ },
+ {
+  "code": "718-7",
+  "code_system": "LOINC",
+  "display": "Hemoglobin",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.167590",
+  "name": "LOINC|718-7"
+ },
+ {
+  "code": "8310-5",
+  "code_system": "LOINC",
+  "display": "Body temperature",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.169857",
+  "name": "LOINC|8310-5"
+ },
+ {
+  "code": "9279-1",
+  "code_system": "LOINC",
+  "display": "Respiratory rate",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.172203",
+  "name": "LOINC|9279-1"
+ },
+ {
+  "code": "59408-5",
+  "code_system": "LOINC",
+  "display": "Oxygen saturation",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.174489",
+  "name": "LOINC|59408-5"
+ },
+ {
+  "code": "364645004",
+  "code_system": "SNOMED",
+  "display": "Fetal movement",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.176903",
+  "name": "SNOMED|364645004"
+ },
+ {
+  "code": "80313002",
+  "code_system": "SNOMED",
+  "display": "Palpitations",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.179141",
+  "name": "SNOMED|80313002"
+ },
+ {
+  "code": "49727002",
+  "code_system": "SNOMED",
+  "display": "Cough",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.181507",
+  "name": "SNOMED|49727002"
+ },
+ {
+  "code": "68154008",
+  "code_system": "SNOMED",
+  "display": "Chronic cough",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.183791",
+  "name": "SNOMED|68154008"
+ },
+ {
+  "code": "42984000",
+  "code_system": "SNOMED",
+  "display": "Night sweats",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.186051",
+  "name": "SNOMED|42984000"
+ },
+ {
+  "code": "161833006",
+  "code_system": "SNOMED",
+  "display": "Weight loss",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.188423",
+  "name": "SNOMED|161833006"
+ },
+ {
+  "code": "408731000",
+  "code_system": "SNOMED",
+  "display": "Relationship to index case",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.190749",
+  "name": "SNOMED|408731000"
+ },
+ {
+  "code": "224249004",
+  "code_system": "SNOMED",
+  "display": "Sleep location relative to index case",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.193697",
+  "name": "SNOMED|224249004"
+ },
+ {
+  "code": "312004007",
+  "code_system": "SNOMED",
+  "display": "Previous treatment for tuberculosis",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.196017",
+  "name": "SNOMED|312004007"
+ },
+ {
+  "code": "8867-4",
+  "code_system": "LOINC",
+  "display": "Heart rate",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.196885",
+  "name": "LOINC|8867-4"
+ },
+ {
+  "code": "116223007",
+  "code_system": "SNOMED",
+  "display": "Previous pregnancy complication",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.197865",
+  "name": "SNOMED|116223007"
+ },
+ {
+  "code": "11687002",
+  "code_system": "SNOMED",
+  "display": "Gestational diabetes mellitus",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.198769",
+  "name": "SNOMED|11687002"
+ },
+ {
+  "code": "127785005",
+  "code_system": "SNOMED",
+  "display": "Vaccination received",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.199654",
+  "name": "SNOMED|127785005"
+ },
+ {
+  "code": "13197004",
+  "code_system": "SNOMED",
+  "display": "First-time contraceptive user",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.200516",
+  "name": "SNOMED|13197004"
+ },
+ {
+  "code": "13645005",
+  "code_system": "SNOMED",
+  "display": "COPD",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.201363",
+  "name": "SNOMED|13645005"
+ },
+ {
+  "code": "15938005",
+  "code_system": "SNOMED",
+  "display": "Eclampsia",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.202211",
+  "name": "SNOMED|15938005"
+ },
+ {
+  "code": "161714006",
+  "code_system": "SNOMED",
+  "display": "Estimated date of delivery",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.203070",
+  "name": "SNOMED|161714006"
+ },
+ {
+  "code": "167272007",
+  "code_system": "SNOMED",
+  "display": "Urine albumin",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.203914",
+  "name": "SNOMED|167272007"
+ },
+ {
+  "code": "167273002",
+  "code_system": "SNOMED",
+  "display": "Urine glucose",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.204774",
+  "name": "SNOMED|167273002"
+ },
+ {
+  "code": "167274008",
+  "code_system": "SNOMED",
+  "display": "Urine bilirubin",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.205652",
+  "name": "SNOMED|167274008"
+ },
+ {
+  "code": "169745008",
+  "code_system": "SNOMED",
+  "display": "Additional food last 24 hours",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.206485",
+  "name": "SNOMED|169745008"
+ },
+ {
+  "code": "182904002",
+  "code_system": "SNOMED",
+  "display": "Treatment for DM/GDM",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.207352",
+  "name": "SNOMED|182904002"
+ },
+ {
+  "code": "182992009",
+  "code_system": "SNOMED",
+  "display": "Delivery facility identified",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.208232",
+  "name": "SNOMED|182992009"
+ },
+ {
+  "code": "184305005",
+  "code_system": "SNOMED",
+  "display": "Time of maternal death",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.209156",
+  "name": "SNOMED|184305005"
+ },
+ {
+  "code": "22298006",
+  "code_system": "SNOMED",
+  "display": "Myocardial infarction",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.210074",
+  "name": "SNOMED|22298006"
+ },
+ {
+  "code": "224118004",
+  "code_system": "SNOMED",
+  "display": "Number of living children",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.210976",
+  "name": "SNOMED|224118004"
+ },
+ {
+  "code": "224930009",
+  "code_system": "SNOMED",
+  "display": "NCD service provided",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.211829",
+  "name": "SNOMED|224930009"
+ },
+ {
+  "code": "225834001",
+  "code_system": "SNOMED",
+  "display": "Child illness type",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.212671",
+  "name": "SNOMED|225834001"
+ },
+ {
+  "code": "230690007",
+  "code_system": "SNOMED",
+  "display": "Stroke",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.213499",
+  "name": "SNOMED|230690007"
+ },
+ {
+  "code": "237364002",
+  "code_system": "SNOMED",
+  "display": "Number of stillbirths",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.214313",
+  "name": "SNOMED|237364002"
+ },
+ {
+  "code": "243796009",
+  "code_system": "SNOMED",
+  "display": "Danger signs 28-40 weeks",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.215125",
+  "name": "SNOMED|243796009"
+ },
+ {
+  "code": "249228009",
+  "code_system": "SNOMED",
+  "display": "Neonatal danger sign (other)",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.215945",
+  "name": "SNOMED|249228009"
+ },
+ {
+  "code": "250416002",
+  "code_system": "SNOMED",
+  "display": "Pregnancy test",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.217014",
+  "name": "SNOMED|250416002"
+ },
+ {
+  "code": "267024001",
+  "code_system": "SNOMED",
+  "display": "Postpartum danger signs",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.217813",
+  "name": "SNOMED|267024001"
+ },
+ {
+  "code": "276610007",
+  "code_system": "SNOMED",
+  "display": "Low birth weight",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.218649",
+  "name": "SNOMED|276610007"
+ },
+ {
+  "code": "276654001",
+  "code_system": "SNOMED",
+  "display": "Congenital defect",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.219465",
+  "name": "SNOMED|276654001"
+ },
+ {
+  "code": "281050002",
+  "code_system": "SNOMED",
+  "display": "Neonatal death",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.220392",
+  "name": "SNOMED|281050002"
+ },
+ {
+  "code": "289258004",
+  "code_system": "SNOMED",
+  "display": "Mode of delivery",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.221373",
+  "name": "SNOMED|289258004"
+ },
+ {
+  "code": "306204006",
+  "code_system": "SNOMED",
+  "display": "Patient referred for operation",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.222231",
+  "name": "SNOMED|306204006"
+ },
+ {
+  "code": "306206005",
+  "code_system": "SNOMED",
+  "display": "Referral source",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.223049",
+  "name": "SNOMED|306206005"
+ },
+ {
+  "code": "359659005",
+  "code_system": "SNOMED",
+  "display": "Obstetric ultrasound",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.223878",
+  "name": "SNOMED|359659005"
+ },
+ {
+  "code": "363983007",
+  "code_system": "SNOMED",
+  "display": "Spectacle frame type",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.224680",
+  "name": "SNOMED|363983007"
+ },
+ {
+  "code": "364605001",
+  "code_system": "SNOMED",
+  "display": "Uterine fundal height",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.225502",
+  "name": "SNOMED|364605001"
+ },
+ {
+  "code": "371405004",
+  "code_system": "SNOMED",
+  "display": "Type of eye disease",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.226311",
+  "name": "SNOMED|371405004"
+ },
+ {
+  "code": "37237003",
+  "code_system": "SNOMED",
+  "display": "Vitamin A capsule consumed",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.227344",
+  "name": "SNOMED|37237003"
+ },
+ {
+  "code": "38341003",
+  "code_system": "SNOMED",
+  "display": "Prior hypertension diagnosis",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.228546",
+  "name": "SNOMED|38341003"
+ },
+ {
+  "code": "386639001",
+  "code_system": "SNOMED",
+  "display": "Type of abortion",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.229699",
+  "name": "SNOMED|386639001"
+ },
+ {
+  "code": "387713003",
+  "code_system": "SNOMED",
+  "display": "Surgical operation",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.230877",
+  "name": "SNOMED|387713003"
+ },
+ {
+  "code": "390840006",
+  "code_system": "SNOMED",
+  "display": "Follow-up visit date",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.232017",
+  "name": "SNOMED|390840006"
+ },
+ {
+  "code": "3950001",
+  "code_system": "SNOMED",
+  "display": "Place of delivery",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.232840",
+  "name": "SNOMED|3950001"
+ },
+ {
+  "code": "406859001",
+  "code_system": "SNOMED",
+  "display": "Pseudophakia post-cataract",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.233700",
+  "name": "SNOMED|406859001"
+ },
+ {
+  "code": "408826000",
+  "code_system": "SNOMED",
+  "display": "Skilled birth attendant",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.234518",
+  "name": "SNOMED|408826000"
+ },
+ {
+  "code": "410666004",
+  "code_system": "SNOMED",
+  "display": "Reason",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.235327",
+  "name": "SNOMED|410666004"
+ },
+ {
+  "code": "414580003",
+  "code_system": "SNOMED",
+  "display": "Deworming medicine",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.236149",
+  "name": "SNOMED|414580003"
+ },
+ {
+  "code": "415510000",
+  "code_system": "SNOMED",
+  "display": "Desire for future children",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.236962",
+  "name": "SNOMED|415510000"
+ },
+ {
+  "code": "417662000",
+  "code_system": "SNOMED",
+  "display": "History of disease",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.237773",
+  "name": "SNOMED|417662000"
+ },
+ {
+  "code": "418633004",
+  "code_system": "SNOMED",
+  "display": "Medication compliance (blood glucose)",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.238580",
+  "name": "SNOMED|418633004"
+ },
+ {
+  "code": "418799008",
+  "code_system": "SNOMED",
+  "display": "New or worsening symptoms",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.239468",
+  "name": "SNOMED|418799008"
+ },
+ {
+  "code": "424144002",
+  "code_system": "SNOMED",
+  "display": "Age of last child",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.240318",
+  "name": "SNOMED|424144002"
+ },
+ {
+  "code": "424525001",
+  "code_system": "SNOMED",
+  "display": "ANC from medical doctor",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.241155",
+  "name": "SNOMED|424525001"
+ },
+ {
+  "code": "5540006",
+  "code_system": "SNOMED",
+  "display": "Calcium tablets provided",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.241993",
+  "name": "SNOMED|5540006"
+ },
+ {
+  "code": "56844000",
+  "code_system": "SNOMED",
+  "display": "TT/TD vaccination completed",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.242866",
+  "name": "SNOMED|56844000"
+ },
+ {
+  "code": "57036006",
+  "code_system": "SNOMED",
+  "display": "Gestational week",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.243687",
+  "name": "SNOMED|57036006"
+ },
+ {
+  "code": "63718003",
+  "code_system": "SNOMED",
+  "display": "Folic acid provided this visit",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.244503",
+  "name": "SNOMED|63718003"
+ },
+ {
+  "code": "73211009",
+  "code_system": "SNOMED",
+  "display": "Prior diabetes diagnosis",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.245307",
+  "name": "SNOMED|73211009"
+ },
+ {
+  "code": "767399006",
+  "code_system": "SNOMED",
+  "display": "IFA tablets provided",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.246111",
+  "name": "SNOMED|767399006"
+ },
+ {
+  "code": "87612001",
+  "code_system": "SNOMED",
+  "display": "Blood glucose investigation type",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.246938",
+  "name": "SNOMED|87612001"
+ },
+ {
+  "code": "90708001",
+  "code_system": "SNOMED",
+  "display": "Kidney disease",
+  "docstatus": 0,
+  "doctype": "Concept",
+  "modified": "2026-08-25 14:30:04.247830",
+  "name": "SNOMED|90708001"
+ }
+]

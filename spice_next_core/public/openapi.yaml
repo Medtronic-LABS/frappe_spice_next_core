@@ -1,0 +1,1075 @@
+openapi: 3.0.3
+info:
+  title: Spice Next Core API
+  version: "1.0.0"
+  license:
+    name: GPL-3.0-or-later
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  description: >
+    Whitelisted API surface of spice_next_core (Frappe v15). Every endpoint is
+    POST /api/method/spice_next_core.api.<module>.<method> — this app never
+    exposes frappe.client.* generic CRUD or stock REST resource routes.
+    See sync-envelope.md and form-config-schema.md for the prose contract
+    this spec mirrors (sync.push/pull/config and the form-config shape).
+    Successful responses are wrapped by Frappe's RPC dispatcher as
+    {"message": <return value>} — every 200 schema below reflects that.
+servers:
+  - url: http://uhis.localhost:8081
+    description: Local dev (nginx-fronted)
+components:
+  securitySchemes:
+    frappeTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        Frappe API key/secret pair issued by auth.login:
+        `token <api_key>:<api_secret>`.
+    mobileJwtAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: >
+        Unsigned mobile JWT: `Bearer <jwt>`. NOT the standard Authorization
+        header — Frappe''s own auth middleware (frappe.auth.validate_auth)
+        intercepts that header globally and rejects any scheme it doesn''t
+        recognize, before allow_guest endpoints can run. See
+        spice_next_core/auth/jwt_token_validator.py. Signature is not
+        verified yet (phase 1) — only the payload''s `sub` claim is read.
+  schemas:
+    FrappeErrorResponse:
+      type: object
+      properties:
+        exception: { type: string }
+        exc_type: { type: string }
+        _server_messages: { type: string }
+
+    # ── sync.config sub-shapes ──────────────────────────────────────────────
+    FormField:
+      type: object
+      properties:
+        fieldname: { type: string }
+        label: { type: string }
+        type: { type: string, enum: [string, integer, number, boolean, date, datetime, select, text, link, table] }
+        required: { type: boolean }
+        read_only: { type: boolean }
+        options:
+          type: array
+          items: { type: string }
+        sva_ft:
+          type: object
+          description: FHIR concept mapping copied verbatim from the field's Property Setter (invariant 6).
+          properties:
+            fhir_concept: { type: string }
+            code_system: { type: string }
+            code: { type: string }
+    ProgrammeFormEntry:
+      type: object
+      properties:
+        form_doctype: { type: string }
+        sequence: { type: integer }
+        mandatory: { type: boolean }
+        fields:
+          type: array
+          items: { $ref: "#/components/schemas/FormField" }
+        trigger:
+          type: object
+          nullable: true
+          properties:
+            field: { type: string }
+            operator: { type: string, enum: ["=", "!=", ">", ">=", "<", "<=", "in"] }
+            value: { type: string }
+            next_form: { type: string }
+    ClinicalQuestion:
+      type: object
+      properties:
+        question_id: { type: string }
+        label: { type: string }
+        form_group: { type: string }
+        question_type: { type: string, example: assessment }
+        sequence: { type: integer }
+        type: { type: string, description: Frappe fieldtype, example: Select }
+        mandatory: { type: boolean }
+        clinical: { type: boolean }
+        options:
+          type: array
+          items: { type: string }
+        eligibility:
+          type: object
+          properties:
+            min_age_months: { type: integer, nullable: true }
+            max_age_months: { type: integer, nullable: true }
+            gender: { type: string, example: Any }
+        visibility_expression: { type: string, nullable: true }
+        mandatory_expression: { type: string, nullable: true }
+        concept:
+          type: object
+          nullable: true
+          properties:
+            fhir_concept: { type: string }
+            code_system: { type: string }
+            code: { type: string }
+    GeographyNode:
+      type: object
+      properties:
+        name: { type: string }
+        label: { type: string }
+        geography_type: { type: string }
+        parent_node: { type: string, nullable: true }
+    Concept:
+      type: object
+      properties:
+        name: { type: string }
+        code_system: { type: string, example: LOINC }
+        code: { type: string }
+        display: { type: string }
+    SymptomObservationMapping:
+      type: object
+      properties:
+        name: { type: string }
+        symptom_question_id: { type: string }
+        observation_question_id: { type: string }
+        mandatory_if_present: { type: boolean }
+        display_order: { type: integer }
+        programme: { type: string }
+    RuleCondition:
+      type: object
+      properties:
+        condition_field: { type: string }
+        condition_operator: { type: string, enum: ["=", "!=", ">", ">=", "<", "<=", "in", "contains"] }
+        condition_value: { type: string }
+    PriorityRule:
+      type: object
+      properties:
+        name: { type: string }
+        rule_name: { type: string }
+        programme: { type: string }
+        condition_field: { type: string }
+        condition_operator: { type: string }
+        condition_value: { type: string }
+        weight: { type: integer }
+        reason_label: { type: string }
+    ProtocolSelectionRule:
+      type: object
+      properties:
+        name: { type: string }
+        rule_name: { type: string }
+        programme: { type: string }
+        priority: { type: integer }
+        allow_concurrent: { type: boolean }
+        condition_logic: { type: string, enum: [AND, OR] }
+        conditions:
+          type: array
+          items: { $ref: "#/components/schemas/RuleCondition" }
+    RecommendationRule:
+      type: object
+      properties:
+        name: { type: string }
+        rule_name: { type: string }
+        programme: { type: string }
+        priority: { type: integer }
+        condition_logic: { type: string, enum: [AND, OR] }
+        severity: { type: string, enum: [low, moderate, high, critical] }
+        action_type: { type: string }
+        action_label: { type: string }
+        rationale_template: { type: string }
+        guideline_id: { type: string }
+        conditions:
+          type: array
+          items: { $ref: "#/components/schemas/RuleCondition" }
+
+    # ── sync.push / pull sub-shapes ─────────────────────────────────────────
+    SyncOp:
+      type: object
+      required: [client_op_id, doctype, client_uuid]
+      properties:
+        client_op_id: { type: string, description: "UUIDv7 idempotency key" }
+        op: { type: string, enum: [upsert, submit, answers], default: upsert }
+        doctype: { type: string, example: Encounter }
+        client_uuid: { type: string, description: "UUIDv7, the record's primary key" }
+        lamport: { type: integer, description: "Per-device monotonic counter; ignored for append-only facts" }
+        client_ts: { type: string, format: date-time }
+        payload:
+          type: object
+          description: 'DocType fields (upsert/submit), or {"answers": [...]} for op=answers.'
+    SyncOpResult:
+      type: object
+      properties:
+        client_op_id: { type: string }
+        status: { type: string, enum: [applied, duplicate, conflict, rejected] }
+        server_seq: { type: integer }
+        name: { type: string }
+        reason: { type: string, description: "Present for conflict/rejected" }
+        observations_created: { type: integer, description: "Present only for op=answers" }
+    SyncChange:
+      type: object
+      properties:
+        doctype: { type: string }
+        name: { type: string }
+        sync_seq: { type: integer }
+        deleted: { type: boolean }
+        doc: { type: object, description: "Full DocType record as_dict()" }
+
+security:
+  - frappeTokenAuth: []
+
+paths:
+  /api/method/spice_next_core.api.auth.login:
+    post:
+      summary: PIN login → api_key/secret + SK profile
+      operationId: auth_login
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string, example: rk@uhis.org }
+                password: { type: string, example: "1234" }
+                device:
+                  type: object
+                  properties:
+                    device_id: { type: string }
+                    model: { type: string, example: "Samsung Galaxy A52" }
+                    os_version: { type: string, example: "Android 13" }
+                    app_version: { type: string, example: "1.0.0" }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      api_key: { type: string }
+                      api_secret: { type: string }
+                      profile:
+                        type: object
+                        properties:
+                          user_id: { type: string }
+                          full_name: { type: string }
+                          full_name_bn: { type: string }
+                          programme: { type: string }
+                          geography_id: { type: string }
+                          photo_url: { type: string, nullable: true }
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+
+  /api/method/spice_next_core.api.sync.push:
+    post:
+      summary: Idempotent device→server op application (invariant 2)
+      operationId: sync_push
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [contract_version, ops]
+              properties:
+                contract_version: { type: integer, example: 1 }
+                device_id: { type: string }
+                ops:
+                  type: array
+                  items: { $ref: "#/components/schemas/SyncOp" }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      contract_version: { type: integer }
+                      results:
+                        type: array
+                        items: { $ref: "#/components/schemas/SyncOpResult" }
+        "409":
+          description: contract_version_unsupported
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+
+  /api/method/spice_next_core.api.sync.pull:
+    post:
+      summary: Cursor-based, catchment-scoped server→device pull (invariant 3)
+      operationId: sync_pull
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [contract_version]
+              properties:
+                contract_version: { type: integer, example: 1 }
+                cursor: { type: integer, default: 0, description: "Server-assigned sync_seq, never `modified`" }
+                limit: { type: integer, default: 200, maximum: 500 }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      contract_version: { type: integer }
+                      changes:
+                        type: array
+                        items: { $ref: "#/components/schemas/SyncChange" }
+                      next_cursor: { type: integer }
+                      has_more: { type: boolean }
+        "409":
+          description: contract_version_unsupported
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+
+  /api/method/spice_next_core.api.sync.config:
+    post:
+      summary: Versioned master/config pull (forms, geography, concepts, clinical questions, rules)
+      operationId: sync_config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [contract_version]
+              properties:
+                contract_version: { type: integer, example: 1 }
+                config_versions:
+                  type: object
+                  properties:
+                    forms: { type: integer }
+                    geography: { type: integer }
+                    concepts: { type: integer }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      contract_version: { type: integer }
+                      forms:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            programme: { type: string }
+                            forms:
+                              type: array
+                              items: { $ref: "#/components/schemas/ProgrammeFormEntry" }
+                      geography:
+                        type: array
+                        items: { $ref: "#/components/schemas/GeographyNode" }
+                      concepts:
+                        type: array
+                        items: { $ref: "#/components/schemas/Concept" }
+                      clinical_questions:
+                        type: array
+                        items: { $ref: "#/components/schemas/ClinicalQuestion" }
+                      symptom_obs_mappings:
+                        type: array
+                        items: { $ref: "#/components/schemas/SymptomObservationMapping" }
+                      priority_rules:
+                        type: array
+                        items: { $ref: "#/components/schemas/PriorityRule" }
+                      protocol_selection_rules:
+                        type: array
+                        items: { $ref: "#/components/schemas/ProtocolSelectionRule" }
+                      recommendation_rules:
+                        type: array
+                        items: { $ref: "#/components/schemas/RecommendationRule" }
+                      versions:
+                        type: object
+                        properties:
+                          forms: { type: integer }
+                          geography: { type: integer }
+                          concepts: { type: integer }
+                          clinical_questions: { type: integer }
+                          symptom_obs_mappings: { type: integer }
+                          priority_rules: { type: integer }
+                          protocol_selection_rules: { type: integer }
+                          recommendation_rules: { type: integer }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.scribe.transcribe:
+    post:
+      summary: Transcribe a recorded consultation audio file (AI Scribe, ADR-005)
+      operationId: scribe_transcribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [audio_file_path]
+              properties:
+                audio_file_path: { type: string, example: "/files/audio_enc-uuid_1234.m4a" }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      transcript: { type: string }
+                      duration_seconds: { type: integer }
+        "417":
+          description: audio_file_path missing, or AI transcription unavailable
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+
+  /api/method/spice_next_core.api.cdss.recommend:
+    post:
+      summary: Clinical decision support recommendation for a single encounter
+      operationId: cdss_recommend
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_uuid: { type: string }
+                encounter_uuid: { type: string }
+                programme: { type: string, example: ncd }
+                observations:
+                  type: object
+                  additionalProperties: { type: string }
+                  example: { "LOINC|8480-6": "152", "LOINC|8462-4": "96" }
+                symptoms:
+                  type: array
+                  items: { type: string }
+                  example: [fever, headache]
+                patient_context:
+                  type: object
+                  properties:
+                    age_months: { type: integer }
+                    gender: { type: string }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      recommendation: { type: string }
+                      risk_level: { type: string, enum: [low, moderate, high, critical] }
+                      rationale:
+                        type: object
+                        properties:
+                          guideline_ids:
+                            type: array
+                            items: { type: string }
+                          source_observations:
+                            type: array
+                            items: { type: string }
+                          human_review_required: { type: boolean }
+                          model_version: { type: string }
+                          confidence: { type: number, format: float }
+                          summary: { type: string }
+                      findings:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            rule_name: { type: string }
+                            severity: { type: string, enum: [low, moderate, high, critical] }
+                            action_type: { type: string }
+                            action_label: { type: string }
+                            rationale: { type: string }
+                            guideline_id: { type: string }
+                            source: { type: string, enum: [rule] }
+                            confidence: { type: number, format: float }
+                      steps:
+                        type: array
+                        items: { type: string }
+                      source: { type: string, enum: [online] }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.cdss.suggest_symptoms:
+    post:
+      summary: AI-suggested likely symptoms based on patient history (Step 2 Symptom Discovery)
+      operationId: cdss_suggest_symptoms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_uuid: { type: string }
+                programme: { type: string }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        symptom_question_id: { type: string }
+                        label: { type: string }
+                        confidence: { type: number, format: float }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.worklist.today:
+    post:
+      summary: Today's priority-sorted visit list for the caller's catchment
+      operationId: worklist_today
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        patient_uuid: { type: string }
+                        patient_name: { type: string }
+                        patient_name_bn: { type: string }
+                        programme: { type: string }
+                        priority: { type: string, enum: [low, normal, high] }
+                        priority_score: { type: integer }
+                        priority_reasons:
+                          type: array
+                          items: { type: string }
+                        scheduled_date: { type: string, format: date }
+                        care_gaps:
+                          type: array
+                          items: { type: string }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.worklist.notifications:
+    post:
+      summary: Pending high-priority referrals for the caller's catchment
+      operationId: worklist_notifications
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id: { type: string }
+                            type: { type: string, enum: [referral] }
+                            title: { type: string }
+                            programme: { type: string }
+                            created_at: { type: string, format: date }
+                      total: { type: integer }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_patient:
+    post:
+      summary: FHIR R4 Patient (egress-only, invariant 7)
+      operationId: fhir_read_patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [patient]
+              properties: { patient: { type: string, description: Patient docname/client_uuid } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 Patient resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_encounter:
+    post:
+      summary: FHIR R4 Encounter (egress-only, invariant 7)
+      operationId: fhir_read_encounter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [encounter]
+              properties: { encounter: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 Encounter resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_condition:
+    post:
+      summary: FHIR R4 Condition (egress-only, invariant 7)
+      operationId: fhir_read_condition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [condition]
+              properties: { condition: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 Condition resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_referral:
+    post:
+      summary: FHIR R4 ServiceRequest for a Referral (egress-only, invariant 7)
+      operationId: fhir_read_referral
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [referral]
+              properties: { referral: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 ServiceRequest resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_household:
+    post:
+      summary: FHIR R4 Group for a Household (egress-only, invariant 7)
+      operationId: fhir_read_household
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [household]
+              properties: { household: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 Group resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.read_patient_bundle:
+    post:
+      summary: FHIR R4 Bundle — full patient record (Patient, EpisodeOfCare, Encounter, Observation, Condition)
+      operationId: fhir_read_patient_bundle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [patient]
+              properties: { patient: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      resourceType: { type: string, enum: [Bundle] }
+                      type: { type: string, enum: [searchset] }
+                      total: { type: integer }
+                      entry:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            resource: { type: object }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.to_questionnaire_response:
+    post:
+      summary: "FHIR R4 QuestionnaireResponse from any form DocType (legacy)"
+      operationId: fhir_to_questionnaire_response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [form_doc_name, form_doctype]
+              properties:
+                form_doc_name: { type: string }
+                form_doctype: { type: string }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 QuestionnaireResponse resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.to_fhir_observation:
+    post:
+      summary: "FHIR R4 Observation for an Observation record (legacy)"
+      operationId: fhir_to_fhir_observation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [obs_name]
+              properties: { obs_name: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 Observation resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.fhir.to_episode_of_care:
+    post:
+      summary: "FHIR R4 EpisodeOfCare for a Case (legacy)"
+      operationId: fhir_to_episode_of_care
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [case_name]
+              properties: { case_name: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: object, description: "FHIR R4 EpisodeOfCare resource" }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.case_summary.get_case_summary:
+    post:
+      summary: Case Overview panel payload
+      operationId: case_summary_get_case_summary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [case]
+              properties: { case: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      patient_name: { type: string }
+                      patient_gender: { type: string }
+                      patient_dob: { type: string, format: date, nullable: true }
+                      care_team: { type: string }
+                      programme: { type: string }
+                      status: { type: string }
+                      days_open: { type: integer, nullable: true }
+                      last_encounter:
+                        type: object
+                        nullable: true
+                        properties:
+                          encounter_type: { type: string }
+                          encounter_dt: { type: string, format: date }
+                          provider: { type: string }
+                          facility: { type: string }
+                      days_since_encounter: { type: integer, nullable: true }
+                      encounter_count: { type: integer }
+                      latest_vitals:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          properties:
+                            label: { type: string }
+                            value: { type: string }
+                            unit: { type: string }
+                            date: { type: string, format: date }
+                            is_alert: { type: boolean }
+                      conditions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            concept: { type: string }
+                            label: { type: string }
+                            status: { type: string }
+                      open_task_count: { type: integer }
+                      overdue_tasks:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            description: { type: string }
+                            due_date: { type: string, format: date }
+                      referral:
+                        type: object
+                        nullable: true
+                        properties:
+                          to_facility: { type: string }
+                          status: { type: string }
+                      risk_level: { type: string, nullable: true }
+                      risk_factors: { type: string }
+                      ai_summary: { type: string }
+                      ai_summary_generated_at: { type: string, format: date-time, nullable: true }
+                      ai_insights_enabled: { type: boolean }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.household_summary.get_household_summary:
+    post:
+      summary: Household Overview panel payload
+      operationId: household_summary_get_household_summary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [household]
+              properties: { household: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      members:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name: { type: string }
+                            full_name: { type: string }
+                            dob: { type: string, format: date, nullable: true }
+                            gender: { type: string }
+                            programmes:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  programme: { type: string }
+                                  status: { type: string }
+                            bp_sys: { type: string, nullable: true }
+                            glucose: { type: string, nullable: true }
+                            hba1c: { type: string, nullable: true }
+                      active_by_prog:
+                        type: object
+                        additionalProperties: { type: integer }
+                      total_encounters: { type: integer }
+                      last_encounter_dt: { type: string, format: date, nullable: true }
+                      ai_summary: { type: string, nullable: true }
+                      ai_summary_generated_at: { type: string, format: date-time, nullable: true }
+                      ai_insights_enabled: { type: boolean }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.patient_summary.get_health_summary:
+    post:
+      summary: Patient Health Summary payload
+      operationId: patient_summary_get_health_summary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [patient]
+              properties: { patient: { type: string } }
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      dob: { type: string, format: date, nullable: true }
+                      gender: { type: string }
+                      phone: { type: string }
+                      primary_household: { type: string }
+                      cases:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            programme: { type: string }
+                            status: { type: string }
+                      latest_vitals:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          properties:
+                            value: { type: string }
+                            date: { type: string, format: date }
+                      last_encounter:
+                        type: object
+                        nullable: true
+                        properties:
+                          encounter_type: { type: string }
+                          encounter_dt: { type: string, format: date }
+                          provider: { type: string }
+                          facility: { type: string }
+                      encounter_count: { type: integer }
+                      ai_summary: { type: string, nullable: true }
+                      ai_summary_generated_at: { type: string, format: date-time, nullable: true }
+                      ai_insights_enabled: { type: boolean }
+        "403":
+          description: Permission denied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }
+  /api/method/spice_next_core.api.controls.get_controls:
+    post:
+      summary: Mobile app version/feature controls for the caller (system default, per-user override)
+      operationId: controls_get_controls
+      security:
+        - mobileJwtAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      minAppVersion: { type: string, example: "1.4.0" }
+                      latestAppVersion: { type: string, example: "1.6.2" }
+                      language: { type: string, example: en }
+                      AIFeature: { type: boolean }
+        "401":
+          description: Missing/malformed X-Auth-Token
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FrappeErrorResponse" }

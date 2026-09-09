@@ -19,7 +19,7 @@ env:
   # GHCR requires a lowercase repository path — github.repository preserves the
   # GitHub org's actual casing (Medtronic-LABS/...), so this is spelled out
   # explicitly rather than derived, to avoid a push-time rejection.
-  IMAGE_NAME: medtronic-labs/frappe_uhis_next_core
+  IMAGE_NAME: medtronic-labs/frappe_spice_next_core
 
 jobs:
   build-and-push:

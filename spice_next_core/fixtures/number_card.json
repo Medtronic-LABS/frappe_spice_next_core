@@ -1,0 +1,122 @@
+[
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Active Patients",
+  "label": "Active Patients",
+  "type": "Document Type",
+  "document_type": "Patient",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Open Cases",
+  "label": "Open Cases",
+  "type": "Document Type",
+  "document_type": "Case",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[[\"status\", \"=\", \"Active\"]]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Total Encounters",
+  "label": "Total Encounters",
+  "type": "Document Type",
+  "document_type": "Encounter",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Pending Tasks",
+  "label": "Pending Tasks",
+  "type": "Document Type",
+  "document_type": "Task",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[[\"status\", \"!=\", \"Closed\"]]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Total Facilities",
+  "label": "Total Facilities",
+  "type": "Document Type",
+  "document_type": "Facility",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Providers",
+  "label": "Providers",
+  "type": "Document Type",
+  "document_type": "Provider",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Care Teams",
+  "label": "Care Teams",
+  "type": "Document Type",
+  "document_type": "Care Team",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[]",
+  "color": "#0E7490",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - High Risk Cases",
+  "label": "High Risk Cases",
+  "type": "Document Type",
+  "document_type": "Case",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[[\"risk_level\", \"=\", \"High\"]]",
+  "color": "#DC2626",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Active Referrals",
+  "label": "Active Referrals",
+  "type": "Document Type",
+  "document_type": "Referral",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[[\"status\", \"=\", \"Pending\"]]",
+  "color": "#EA580C",
+  "module": "Spice Next Core"
+ },
+ {
+  "doctype": "Number Card",
+  "name": "UHIS - Overdue Follow-ups",
+  "label": "Overdue Follow-ups",
+  "type": "Document Type",
+  "document_type": "Case",
+  "function": "Count",
+  "is_public": 1,
+  "filters_json": "[[\"last_encounter_dt\", \"timespan\", \"1 month ago\"]]",
+  "color": "#D97706",
+  "module": "Spice Next Core"
+ }
+]

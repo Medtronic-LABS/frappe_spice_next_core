@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "autoname": "field:client_uuid",
+ "creation": "2026-06-05 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_details",
+  "sva_ai_summary",
+  "members_html",
+  "column_break_xlep",
+  "cases_html",
+  "column_break_wmgw",
+  "encounters_html",
+  "section_break_qbdq",
+  "client_uuid",
+  "display_title",
+  "address",
+  "geography_node",
+  "socioeconomic_tier",
+  "members",
+  "ai_summary",
+  "ai_summary_generated_at",
+  "tab_patients",
+  "sva_patients",
+  "sync_seq"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_details",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "sva_ai_summary",
+   "fieldtype": "HTML",
+   "label": "AI Summary"
+  },
+  {
+   "fieldname": "members_html",
+   "fieldtype": "HTML",
+   "label": "Members"
+  },
+  {
+   "fieldname": "column_break_xlep",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cases_html",
+   "fieldtype": "HTML",
+   "label": "Cases",
+   "options": "<h1>Cases</h1>"
+  },
+  {
+   "fieldname": "column_break_wmgw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "encounters_html",
+   "fieldtype": "HTML",
+   "label": "Encounters",
+   "options": "<h1>Encounters</h1>"
+  },
+  {
+   "fieldname": "section_break_qbdq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "client_uuid",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client UUID",
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "display_title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "geography_node",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Geography Node",
+   "options": "Geography Node"
+  },
+  {
+   "fieldname": "socioeconomic_tier",
+   "fieldtype": "Select",
+   "label": "Socioeconomic Tier",
+   "options": "1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "members",
+   "fieldtype": "Table",
+   "label": "Members",
+   "options": "Household Member"
+  },
+  {
+   "fieldname": "ai_summary",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "AI Summary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ai_summary_generated_at",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "AI Summary Generated At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_patients",
+   "fieldtype": "Tab Break",
+   "label": "Patients"
+  },
+  {
+   "fieldname": "sva_patients",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "sync_seq",
+   "fieldtype": "Int",
+   "label": "Sync Seq",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "links": [],
+ "modified": "2026-06-12 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Household",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "display_title,geography_node",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "display_title",
+ "track_changes": 1
+}

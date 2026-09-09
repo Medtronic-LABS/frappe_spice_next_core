@@ -1,0 +1,184 @@
+{
+ "doctype": "Workspace",
+ "name": "UHIS Facility",
+ "title": "UHIS Facility",
+ "label": "UHIS Facility",
+ "module": "Spice Next Core",
+ "icon": "map-pin",
+ "indicator_color": "green",
+ "public": 1,
+ "content": "[{\"id\": \"uhis0015\", \"type\": \"header\", \"data\": {\"text\": \"<b>Facility Management</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0016\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Total Facilities\", \"col\": 4}}, {\"id\": \"uhis0017\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Providers\", \"col\": 4}}, {\"id\": \"uhis0018\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Care Teams\", \"col\": 4}}, {\"id\": \"uhis0019\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0020\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Facility List\", \"col\": 3}}, {\"id\": \"uhis0021\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Facility\", \"col\": 3}}, {\"id\": \"uhis0022\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Provider List\", \"col\": 3}}, {\"id\": \"uhis0023\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Provider\", \"col\": 3}}, {\"id\": \"uhis0024\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Care Team List\", \"col\": 3}}, {\"id\": \"uhis0025\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Care Team\", \"col\": 3}}, {\"id\": \"uhis0026\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Geography Node List\", \"col\": 3}}, {\"id\": \"uhis0027\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Organization List\", \"col\": 3}}]",
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "link_to": "Facility",
+   "label": "Facility List",
+   "color": "Green",
+   "doc_view": "List",
+   "idx": 1,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Facility",
+   "label": "New Facility",
+   "color": "Green",
+   "doc_view": "New",
+   "idx": 2,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Provider",
+   "label": "Provider List",
+   "color": "Cyan",
+   "doc_view": "List",
+   "idx": 3,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Provider",
+   "label": "New Provider",
+   "color": "Cyan",
+   "doc_view": "New",
+   "idx": 4,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Care Team",
+   "label": "Care Team List",
+   "color": "Blue",
+   "doc_view": "List",
+   "idx": 5,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Care Team",
+   "label": "New Care Team",
+   "color": "Blue",
+   "doc_view": "New",
+   "idx": 6,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Geography Node",
+   "label": "Geography Node List",
+   "color": "Grey",
+   "doc_view": "List",
+   "idx": 7,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Organization",
+   "label": "Organization List",
+   "color": "Grey",
+   "doc_view": "List",
+   "idx": 8,
+   "doctype": "Workspace Shortcut"
+  }
+ ],
+ "number_cards": [
+  {
+   "number_card_name": "UHIS - Total Facilities",
+   "idx": 1,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Providers",
+   "idx": 2,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Care Teams",
+   "idx": 3,
+   "doctype": "Workspace Number Card"
+  }
+ ],
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Infrastructure",
+   "description": "Health system infrastructure",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 1,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Facility",
+   "link_to": "Facility",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 2,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Organization",
+   "link_to": "Organization",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 3,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Geography Node",
+   "link_to": "Geography Node",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 4,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Card Break",
+   "label": "Workforce",
+   "description": "Providers and teams",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 5,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Provider",
+   "link_to": "Provider",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 6,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Care Team",
+   "link_to": "Care Team",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 7,
+   "doctype": "Workspace Link"
+  }
+ ],
+ "type": "Workspace",
+ "app": "spice_next_core",
+ "sequence_id": 0.1
+}

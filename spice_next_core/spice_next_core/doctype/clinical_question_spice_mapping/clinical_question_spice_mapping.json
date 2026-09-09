@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "creation": "2026-07-06 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "istable": 1,
+ "field_order": [
+  "workflow_name",
+  "clinical_workflow_id",
+  "form_type",
+  "field_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "workflow_name",
+   "fieldtype": "Data",
+   "label": "Workflow Name",
+   "in_list_view": 1,
+   "description": "e.g. RMNCH. Some legacy forms (e.g. household_registration) have no workflow — leave blank for those."
+  },
+  {
+   "fieldname": "clinical_workflow_id",
+   "fieldtype": "Int",
+   "label": "Clinical Workflow ID",
+   "in_list_view": 1,
+   "description": "Numeric id from spice's formData[], e.g. 4"
+  },
+  {
+   "fieldname": "form_type",
+   "fieldtype": "Data",
+   "label": "Form Type",
+   "in_list_view": 1,
+   "reqd": 1,
+   "description": "e.g. pncNeonatal"
+  },
+  {
+   "fieldname": "field_id",
+   "fieldtype": "Data",
+   "label": "Field ID",
+   "in_list_view": 1,
+   "reqd": 1,
+   "description": "The field's own id/fieldName inside formLayout, e.g. pncNeonateSigns"
+  }
+ ],
+ "links": [],
+ "modified": "2026-07-06 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Clinical Question Spice Mapping",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": []
+}

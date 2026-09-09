@@ -11,9 +11,9 @@ it's actually deployed.
 ## Architecture
 
 `docker/allinone/Dockerfile` builds a single all-in-one image — bench (Frappe +
-`uhis_next_core` + `frappe_theme`), MariaDB, and Redis all running as processes
+`spice_next_core` + `frappe_theme`), MariaDB, and Redis all running as processes
 supervised by `supervisord` inside one container. Published to GHCR as
-`ghcr.io/medtronic-labs/frappe_uhis_next_core`.
+`ghcr.io/medtronic-labs/frappe_spice_next_core`.
 
 This replaced an earlier design that split those roles across nine separate
 containers. That design assumed a `frappe/bench:latest` container would already have
@@ -47,10 +47,10 @@ A new image build is how code ships, not a volume.
    content-hashed and change on every rebuild; an old volume that skipped this would
    keep serving a stale `assets.json` referencing files the new image doesn't have.
 3. `site-setup.sh` (a one-shot supervised program): create the site if it doesn't
-   exist, install `frappe_theme` and `uhis_next_core` if not already installed
-   (`uhis_next_core`'s `hooks.py` declares `required_apps = ["frappe_theme"]`, so a
+   exist, install `frappe_theme` and `spice_next_core` if not already installed
+   (`spice_next_core`'s `hooks.py` declares `required_apps = ["frappe_theme"]`, so a
    fresh install pulls it in automatically — the explicit check here additionally
-   covers upgrading a site that had `uhis_next_core` installed *before* that
+   covers upgrading a site that had `spice_next_core` installed *before* that
    dependency existed), then **always** run `bench migrate`. Automating migrate on
    every boot is safe specifically because this image is deliberately
    single-instance — there are no concurrent replicas to race on schema migration.
@@ -75,25 +75,25 @@ on disk. `wsgi.py` applies that same wrapping.
 
 ```bash
 # From the repo root
-docker build -f docker/allinone/Dockerfile -t uhis-next-core:local .
+docker build -f docker/allinone/Dockerfile -t spice-next-core:local .
 
 docker volume create uhis-next-test-mariadb
 docker volume create uhis-next-test-sites
 
-docker run -d --name uhis-next-core-test \
+docker run -d --name spice-next-core-test \
   -e SITE_NAME=test.localhost \
   -e DB_ROOT_PASSWORD=<pick one> \
   -e ADMIN_PASSWORD=<pick one> \
   -v uhis-next-test-mariadb:/var/lib/mysql \
   -v uhis-next-test-sites:/home/frappe/frappe-bench/sites \
   -p 8000:8000 -p 9000:9000 \
-  uhis-next-core:local
+  spice-next-core:local
 
 # Wait for first-boot site creation (new-site + install-app + migrate) to finish:
-docker exec uhis-next-core-test test -f /home/frappe/frappe-bench/sites/.site_setup_complete
+docker exec spice-next-core-test test -f /home/frappe/frappe-bench/sites/.site_setup_complete
 
 # Every long-running program should be RUNNING, site-setup EXITED(0) — not FATAL:
-docker exec uhis-next-core-test supervisorctl -c /etc/supervisor/supervisord.conf status
+docker exec spice-next-core-test supervisorctl -c /etc/supervisor/supervisord.conf status
 
 # Direct check (bypassing nginx, so the site-name header must be set explicitly):
 curl -H "X-Frappe-Site-Name: test.localhost" http://localhost:8000/api/method/ping
@@ -120,7 +120,7 @@ No insecure defaults — the container will not start without all three set.
 - **`build-and-push`** — triggers on push to `main`, a `v*.*.*` tag, or manual
   dispatch. Builds `docker/allinone/Dockerfile`, tags it (`latest` on `main`,
   short-SHA always, semver on a version tag), pushes to
-  `ghcr.io/medtronic-labs/frappe_uhis_next_core`.
+  `ghcr.io/medtronic-labs/frappe_spice_next_core`.
 - **`deploy`** — gated to `main` only (a version-tag push publishes an image without
   also redeploying whatever `main` most recently put live). SSHes into the
   production server (`appleboy/ssh-action`) and runs `docker compose pull backend &&

@@ -1,4 +1,4 @@
-# UHIS Next Core
+# Spice Next Core
 
 [![Python](https://img.shields.io/badge/python-%3E%3D3.10-blue)](https://www.python.org/)
 [![Frappe](https://img.shields.io/badge/frappe-v15-blue)](https://frappeframework.com/)
@@ -36,10 +36,10 @@ A [Frappe](https://frappeframework.com) app built by [Medtronic Labs](https://me
 
 ```bash
 # From inside your bench directory
-bench get-app https://github.com/Medtronic-LABS/frappe_uhis_next_core.git
+bench get-app https://github.com/Medtronic-LABS/frappe_spice_next_core.git
 
 # Install on a site
-bench --site <your-site> install-app uhis_next_core
+bench --site <your-site> install-app spice_next_core
 bench --site <your-site> migrate
 ```
 
@@ -52,14 +52,14 @@ bench --site <your-site> migrate
 ```bash
 # Clone into your bench apps directory
 cd frappe-bench/apps
-git clone https://github.com/Medtronic-LABS/frappe_uhis_next_core.git uhis_next_core
+git clone https://github.com/Medtronic-LABS/frappe_spice_next_core.git spice_next_core
 
 # Install the app in editable mode
-../env/bin/pip install -e uhis_next_core
+../env/bin/pip install -e spice_next_core
 
 # Install pre-commit hooks
 pip install pre-commit
-cd uhis_next_core
+cd spice_next_core
 pre-commit install
 ```
 
@@ -70,8 +70,8 @@ pre-commit install
 pre-commit run --all-files
 
 # Run ruff directly
-ruff check uhis_next_core/
-ruff format uhis_next_core/
+ruff check spice_next_core/
+ruff format spice_next_core/
 ```
 
 ---
@@ -79,7 +79,7 @@ ruff format uhis_next_core/
 ## Running tests
 
 ```bash
-bench --site <your-site> run-tests --app uhis_next_core
+bench --site <your-site> run-tests --app spice_next_core
 ```
 
 ---
@@ -87,7 +87,7 @@ bench --site <your-site> run-tests --app uhis_next_core
 ## Architecture overview
 
 ```
-uhis_next_core/
+spice_next_core/
 ├── hooks.py              # App hooks — CSS/JS includes, doc_events, scheduler
 ├── hooks_impl.py         # advance_sync_seq, validate_clinical_fields
 ├── api/                  # Whitelisted API endpoints
@@ -101,7 +101,7 @@ uhis_next_core/
 ├── ai/                   # LLM narrative generation and chat
 ├── risk/                 # Risk scoring engine
 ├── overrides/            # append_only_guard for Observation/Encounter
-└── uhis_next_core/
+└── spice_next_core/
     └── doctype/          # 22 DocType definitions
 ```
 
