@@ -9,6 +9,7 @@ Usage (single decorator, preferred):
 	@whitelist(methods=["POST"], remote_auth=True)
 	def my_endpoint():
 		user_id = current_remote_user_id()
+		tenant_id = current_remote_tenant_id()  # None if the caller sent no tenantId header
 		...
 
 Usage (manual composition, if you need require_remote_auth standalone):
@@ -68,6 +69,7 @@ def require_remote_auth(fn):
 			return  # unreachable — frappe.throw always raises
 
 		frappe.local.remote_user_id = user_id
+		frappe.local.remote_tenant_id = tenant_id
 		_log_activity(endpoint, user_id, "Success", None)
 		return fn(*args, **kwargs)
 
@@ -103,6 +105,12 @@ def _create_activity_log(endpoint, user_id, status, reason):
 def current_remote_user_id():
 	"""The user id resolved by @require_remote_auth for the current request."""
 	return getattr(frappe.local, "remote_user_id", None)
+
+
+def current_remote_tenant_id():
+	"""The tenantId header value captured by @require_remote_auth for the
+	current request. None if the caller didn't send one."""
+	return getattr(frappe.local, "remote_tenant_id", None)
 
 
 def whitelist(*args, remote_auth=False, **kwargs):
