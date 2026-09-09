@@ -104,8 +104,9 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-09 19:09:53.192716",
+ "modified": "2026-09-09 22:46:07.972011",
  "modified_by": "Administrator",
+ "module": "Spice Next Core",
  "name": "UHIS Clinical",
  "owner": "Administrator",
  "standard": 1,

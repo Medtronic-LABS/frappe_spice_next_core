@@ -42,6 +42,16 @@ def rebuild(workspace_name):
 	ws = frappe.get_doc("Workspace", workspace_name)
 	if frappe.db.exists("Workspace Sidebar", workspace_name):
 		sidebar = frappe.get_doc("Workspace Sidebar", workspace_name)
+		# Reassigning sidebar.items to a fresh list and calling .save() is not
+		# reliably idempotent for child tables here -- re-running this script
+		# against an already-built sidebar has silently doubled every row
+		# (confirmed live: 9/8/5 items became 18/16/10). Delete the existing
+		# child rows outright before rebuilding, so a re-run always starts
+		# from a clean slate regardless of ORM merge behavior on save().
+		frappe.db.delete(
+			"Workspace Sidebar Item", {"parent": workspace_name, "parenttype": "Workspace Sidebar"}
+		)
+		sidebar.reload()
 	else:
 		sidebar = frappe.new_doc("Workspace Sidebar")
 		sidebar.title = workspace_name
