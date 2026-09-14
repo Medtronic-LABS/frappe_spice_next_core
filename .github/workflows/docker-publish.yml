@@ -2,12 +2,21 @@
 # MariaDB + Redis in one container, see docker/allinone/ and
 # frappe-uhis-next/docs/deployment/production.md for the full architecture),
 # pushes it to GHCR, and — only on main — redeploys the production server over SSH.
+#
+# DISABLED (push/tag triggers commented out below): CI/CD control has moved to
+# the uhis app repo (Medtronic-LABS/frappe_uhis, .github/workflows/docker-publish.yml)
+# since uhis is the client-specific app that assembles everything a deployment
+# actually ships (spice_next_core + shukhee_integration + leapwell_telemetry +
+# uhis itself — see uhis/hooks.py required_apps), while this is the shared core
+# package reused across deployments. Kept as workflow_dispatch-only so this image
+# can still be built manually (e.g. to sanity-check spice_next_core in isolation)
+# without also firing a production deploy.
 name: Build, publish, and deploy
 
 on:
-  push:
-    branches: [main]
-    tags: ["v*.*.*"]
+  # push:
+  #   branches: [main]
+  #   tags: ["v*.*.*"]
   workflow_dispatch: {}
 
 permissions:
