@@ -66,7 +66,7 @@ jobs:
           context: .
           file: docker/allinone/Dockerfile
           build-args: |
-            FRAPPE_BRANCH=version-15
+            FRAPPE_BRANCH=version-16
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

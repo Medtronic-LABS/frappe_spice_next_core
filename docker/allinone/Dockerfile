@@ -12,7 +12,7 @@ FROM frappe/bench:latest
 # can drop privileges per-program (mariadb as `mysql`, everything else as `frappe`).
 USER root
 
-ARG FRAPPE_BRANCH=version-15
+ARG FRAPPE_BRANCH=version-16
 ENV PATH="/home/frappe/.local/bin:${PATH}"
 
 RUN apt-get update \
