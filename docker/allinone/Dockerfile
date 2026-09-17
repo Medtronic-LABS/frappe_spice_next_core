@@ -52,7 +52,9 @@ WORKDIR /home/frappe/frappe-bench
 # spice_next_core's hooks.py declares required_apps = ["frappe_theme"] (it builds on
 # frappe_theme's SVADatatable/dashboard/report chart config layer), so its source must
 # already be present in this bench before spice_next_core is installed on any site.
-RUN bench get-app --branch development https://github.com/Suvaidyam/frappe_theme
+# Guarded on apps/frappe_theme so a rebuild that already has it on disk (e.g. a
+# cached layer restored from a build-context mount) doesn't re-clone it.
+RUN [ -d apps/frappe_theme ] || bench get-app --branch development https://github.com/Suvaidyam/frappe_theme
 
 # App source is the CI checkout of THIS repo, not a re-clone from GitHub — the exact
 # commit under test is already on disk, so this avoids a build-time GitHub credential
