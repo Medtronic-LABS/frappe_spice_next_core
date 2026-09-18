@@ -9,20 +9,25 @@
 set -eu
 
 : "${SITE_NAME:?SITE_NAME must be set}"
-: "${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD must be set}"
+: "${DB_HOST:?DB_HOST must be set}"
+: "${DB_NAME:?DB_NAME must be set}"
+: "${DB_USER:?DB_USER must be set}"
+: "${DB_PASSWORD:?DB_PASSWORD must be set}"
+: "${DB_SCHEMA:?DB_SCHEMA must be set}"
 : "${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set}"
+DB_PORT="${DB_PORT:-5432}"
 
 cd /home/frappe/frappe-bench
 MARKER="sites/.site_setup_complete"
 rm -f "${MARKER}"
 
-echo "[site-setup] waiting for MariaDB and Redis to accept connections"
+echo "[site-setup] waiting for Postgres and Redis to accept connections"
 for i in $(seq 1 60); do
-	mysqladmin -h 127.0.0.1 -uroot -p"${DB_ROOT_PASSWORD}" ping >/dev/null 2>&1 && break
+	pg_isready -h "${DB_HOST}" -p "${DB_PORT}" >/dev/null 2>&1 && break
 	sleep 2
 done
-mysqladmin -h 127.0.0.1 -uroot -p"${DB_ROOT_PASSWORD}" ping >/dev/null 2>&1 || {
-	echo "[site-setup] MariaDB never became reachable — aborting" >&2
+pg_isready -h "${DB_HOST}" -p "${DB_PORT}" >/dev/null 2>&1 || {
+	echo "[site-setup] Postgres never became reachable — aborting" >&2
 	exit 1
 }
 for i in $(seq 1 60); do
@@ -37,17 +42,24 @@ redis-cli -h 127.0.0.1 -p 6379 ping >/dev/null 2>&1 || {
 if [ -d "sites/${SITE_NAME}" ]; then
 	echo "[site-setup] site '${SITE_NAME}' already exists — skipping bench new-site"
 else
-	echo "[site-setup] creating site '${SITE_NAME}'"
-	# mariadb-uhis.cnf binds to 127.0.0.1 with skip-name-resolve off, so MariaDB
-	# resolves any loopback TCP connection's apparent host as literally 'localhost'
-	# (confirmed empirically: a user granted only '%' is rejected over this same TCP
-	# connection that a 'localhost'-scoped user authenticates fine over) — scope the
-	# new site's DB user to 'localhost' to match, not the more common '%' wildcard.
+	echo "[site-setup] creating site '${SITE_NAME}' against existing schema '${DB_SCHEMA}'"
+	# --no-setup-db: DB_NAME/DB_SCHEMA already exist and are shared with another
+	# service's tables, so this must NOT run Frappe's normal DROP DATABASE/CREATE
+	# DATABASE/CREATE USER step -- --no-setup-db skips straight to creating only
+	# Frappe's own (tab-prefixed) tables, using the already-granted DB_USER role.
+	# db_schema itself comes from common_site_config.json (written by
+	# entrypoint.sh from DB_SCHEMA) -- there's no --db-schema flag here; Frappe
+	# reads it before this process's first connection. See
+	# docs/superpowers/specs/2026-09-18-postgres-reuse-design.md in the uhis app repo.
 	bench new-site "${SITE_NAME}" \
-		--db-host 127.0.0.1 \
-		--db-root-password "${DB_ROOT_PASSWORD}" \
-		--admin-password "${ADMIN_PASSWORD}" \
-		--mariadb-user-host-login-scope=localhost
+		--no-setup-db \
+		--db-type postgres \
+		--db-host "${DB_HOST}" \
+		--db-port "${DB_PORT}" \
+		--db-name "${DB_NAME}" \
+		--db-user "${DB_USER}" \
+		--db-password "${DB_PASSWORD}" \
+		--admin-password "${ADMIN_PASSWORD}"
 fi
 
 # spice_next_core's required_apps = ["frappe_theme"] makes `install-app spice_next_core`
