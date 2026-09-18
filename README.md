@@ -110,9 +110,11 @@ spice_next_core/
 ## Deployment
 
 This app ships as a single all-in-one production image (bench + MariaDB + Redis,
-built from `docker/allinone/Dockerfile` and published to GHCR by
-`.github/workflows/docker-publish.yml`) — see [`docs/deployment.md`](docs/deployment.md)
-for the image's architecture, how to build/test it locally, and the CI/CD pipeline.
+built from `docker/allinone/Dockerfile`). The build/publish/deploy pipeline lives in
+the `uhis` app repo (Medtronic-LABS/frappe_uhis), which assembles this app alongside
+its other dependencies for the shipped deployment — this repo has no CI/CD workflow
+of its own. See [`docs/deployment.md`](docs/deployment.md) for this image's own
+architecture and how to build/test it locally.
 
 ---
 
