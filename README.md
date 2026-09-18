@@ -109,14 +109,14 @@ spice_next_core/
 
 ## Deployment
 
-This app ships as a single all-in-one production image (bench + Redis, built from
-`docker/allinone/Dockerfile`; Postgres is external — see
-`docs/superpowers/specs/2026-09-18-postgres-reuse-design.md` in the `uhis` app
-repo). The build/publish/deploy pipeline lives in
-the `uhis` app repo (Medtronic-LABS/frappe_uhis), which assembles this app alongside
-its other dependencies for the shipped deployment — this repo has no CI/CD workflow
-of its own. See [`docs/deployment.md`](docs/deployment.md) for this image's own
-architecture and how to build/test it locally.
+This repo has no independent deployment — it's a shared core package with no
+meaning as a standalone runtime, only as a dependency. `uhis` (Medtronic-LABS/
+frappe_uhis) is the only app that owns a production image, a CI/CD pipeline, and
+a deployment target: it checks out this repo at a pinned ref alongside
+`frappe_theme`, `shukhee_integration`, and `leapwell_telemetry`, builds one
+all-in-one image from all four, and publishes/deploys that. See `uhis`'s own
+`docker/allinone/` and `.github/workflows/docker-publish.yml` for the actual
+build and deploy pipeline.
 
 ---
 
