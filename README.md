@@ -109,8 +109,10 @@ spice_next_core/
 
 ## Deployment
 
-This app ships as a single all-in-one production image (bench + MariaDB + Redis,
-built from `docker/allinone/Dockerfile`). The build/publish/deploy pipeline lives in
+This app ships as a single all-in-one production image (bench + Redis, built from
+`docker/allinone/Dockerfile`; Postgres is external — see
+`docs/superpowers/specs/2026-09-18-postgres-reuse-design.md` in the `uhis` app
+repo). The build/publish/deploy pipeline lives in
 the `uhis` app repo (Medtronic-LABS/frappe_uhis), which assembles this app alongside
 its other dependencies for the shipped deployment — this repo has no CI/CD workflow
 of its own. See [`docs/deployment.md`](docs/deployment.md) for this image's own
