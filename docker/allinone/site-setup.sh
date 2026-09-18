@@ -1,6 +1,6 @@
 #!/bin/bash
 # One-shot supervisord program: create the site (if missing), install
-# frappe_theme and uhis_next_core (if missing), always run bench migrate and
+# frappe_theme and spice_next_core (if missing), always run bench migrate and
 # clear-cache, then drop a marker file that wait-for-site.sh polls for.
 # Adapted from the old multi-container docker/create-site/create-site.sh,
 # plus the always-migrate/clear-cache steps — safe to automate here because
@@ -50,9 +50,9 @@ else
 		--mariadb-user-host-login-scope=localhost
 fi
 
-# uhis_next_core's required_apps = ["frappe_theme"] makes `install-app uhis_next_core`
+# spice_next_core's required_apps = ["frappe_theme"] makes `install-app spice_next_core`
 # install frappe_theme automatically on a genuinely fresh site — but this explicit,
-# idempotent check also covers a site that had uhis_next_core installed BEFORE
+# idempotent check also covers a site that had spice_next_core installed BEFORE
 # frappe_theme became a dependency, where required_apps recursion never retroactively
 # runs.
 if bench --site "${SITE_NAME}" list-apps | grep -qx "frappe_theme"; then
@@ -62,11 +62,11 @@ else
 	bench --site "${SITE_NAME}" install-app frappe_theme
 fi
 
-if bench --site "${SITE_NAME}" list-apps | grep -qx "uhis_next_core"; then
-	echo "[site-setup] uhis_next_core already installed on '${SITE_NAME}'"
+if bench --site "${SITE_NAME}" list-apps | grep -qx "spice_next_core"; then
+	echo "[site-setup] spice_next_core already installed on '${SITE_NAME}'"
 else
-	echo "[site-setup] installing uhis_next_core on '${SITE_NAME}'"
-	bench --site "${SITE_NAME}" install-app uhis_next_core
+	echo "[site-setup] installing spice_next_core on '${SITE_NAME}'"
+	bench --site "${SITE_NAME}" install-app spice_next_core
 fi
 
 echo "[site-setup] running bench migrate"

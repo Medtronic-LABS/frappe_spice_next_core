@@ -1,4 +1,4 @@
-# All-in-one production image: bench (Frappe + uhis_next_core) + MariaDB + Redis,
+# All-in-one production image: bench (Frappe + spice_next_core) + MariaDB + Redis,
 # all running as supervised processes in one container. Built and pushed to GHCR by
 # .github/workflows/docker-publish.yml on every merge to main / version tag.
 #
@@ -12,7 +12,7 @@ FROM frappe/bench:latest
 # can drop privileges per-program (mariadb as `mysql`, everything else as `frappe`).
 USER root
 
-ARG FRAPPE_BRANCH=version-15
+ARG FRAPPE_BRANCH=version-16
 ENV PATH="/home/frappe/.local/bin:${PATH}"
 
 RUN apt-get update \
@@ -49,30 +49,32 @@ RUN bench init --frappe-branch "${FRAPPE_BRANCH}" --python python3 \
 
 WORKDIR /home/frappe/frappe-bench
 
-# uhis_next_core's hooks.py declares required_apps = ["frappe_theme"] (it builds on
+# spice_next_core's hooks.py declares required_apps = ["frappe_theme"] (it builds on
 # frappe_theme's SVADatatable/dashboard/report chart config layer), so its source must
-# already be present in this bench before uhis_next_core is installed on any site.
-RUN bench get-app --branch development https://github.com/Suvaidyam/frappe_theme
+# already be present in this bench before spice_next_core is installed on any site.
+# Guarded on apps/frappe_theme so a rebuild that already has it on disk (e.g. a
+# cached layer restored from a build-context mount) doesn't re-clone it.
+RUN [ -d apps/frappe_theme ] || bench get-app --branch development https://github.com/Suvaidyam/frappe_theme
 
 # App source is the CI checkout of THIS repo, not a re-clone from GitHub — the exact
 # commit under test is already on disk, so this avoids a build-time GitHub credential
 # and any ref-drift between "what CI tested" and "what got baked into the image".
-COPY --chown=frappe:frappe . apps/uhis_next_core
+COPY --chown=frappe:frappe . apps/spice_next_core
 
 # frappe.get_all_apps() (what `bench install-app` and `bench build` both use to decide
 # which apps exist in this bench) reads sites/apps.txt — NOT the bench-root apps.txt.
-# Missing this meant install-app failed with "App uhis_next_core not in apps.txt" and
+# Missing this meant install-app failed with "App spice_next_core not in apps.txt" and
 # bench build silently skipped building its assets entirely.
 #
 # sites/apps.txt is rewritten wholesale (not appended) because `bench init` leaves it
-# without a trailing newline — a naive `echo uhis_next_core >> sites/apps.txt` silently
-# concatenates onto the previous line ("frappeuhis_next_core"), which frappe then can't
-# resolve as an installed app at all. frappe_theme is listed before uhis_next_core to
-# match the load/dependency order (uhis_next_core's own theme CSS is meant to load
+# without a trailing newline — a naive `echo spice_next_core >> sites/apps.txt` silently
+# concatenates onto the previous line ("frappespice_next_core"), which frappe then can't
+# resolve as an installed app at all. frappe_theme is listed before spice_next_core to
+# match the load/dependency order (spice_next_core's own theme CSS is meant to load
 # after frappe_theme's — see hooks.py).
-RUN ./env/bin/pip install --no-cache-dir -e ./apps/uhis_next_core \
-	&& grep -qxF uhis_next_core apps.txt || echo uhis_next_core >> apps.txt \
-	&& printf 'frappe\nfrappe_theme\nuhis_next_core\n' > sites/apps.txt
+RUN ./env/bin/pip install --no-cache-dir -e ./apps/spice_next_core \
+	&& grep -qxF spice_next_core apps.txt || echo spice_next_core >> apps.txt \
+	&& printf 'frappe\nfrappe_theme\nspice_next_core\n' > sites/apps.txt
 
 # Bench-level config: single in-container MariaDB + single in-container Redis
 # instance serving all three of Frappe's logical roles via DB index.

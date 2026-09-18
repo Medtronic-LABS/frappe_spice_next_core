@@ -1,0 +1,167 @@
+[
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.901285",
+  "name": "sym_headache-bp_systolic-NCD",
+  "observation_question_id": "systolic",
+  "programme": "NCD",
+  "symptom_question_id": "sym_headache"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.905507",
+  "name": "sym_headache-bp_diastolic-NCD",
+  "observation_question_id": "diastolic",
+  "programme": "NCD",
+  "symptom_question_id": "sym_headache"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.909196",
+  "name": "sym_fever-bp_systolic-NCD",
+  "observation_question_id": "systolic",
+  "programme": "NCD",
+  "symptom_question_id": "sym_fever"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 0,
+  "modified": "2026-08-25 14:30:04.912473",
+  "name": "sym_fever-blood_glucose-NCD",
+  "observation_question_id": "glucose",
+  "programme": "NCD",
+  "symptom_question_id": "sym_fever"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.915321",
+  "name": "ncd_sym_chest_pain-bp_systolic-NCD",
+  "observation_question_id": "systolic",
+  "programme": "NCD",
+  "symptom_question_id": "ncd_sym_chest_pain"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.918153",
+  "name": "ncd_sym_chest_pain-bp_diastolic-NCD",
+  "observation_question_id": "diastolic",
+  "programme": "NCD",
+  "symptom_question_id": "ncd_sym_chest_pain"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.920886",
+  "name": "sym_dizziness-bp_systolic-NCD",
+  "observation_question_id": "systolic",
+  "programme": "NCD",
+  "symptom_question_id": "sym_dizziness"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.923749",
+  "name": "sym_dizziness-bp_diastolic-NCD",
+  "observation_question_id": "diastolic",
+  "programme": "NCD",
+  "symptom_question_id": "sym_dizziness"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.926560",
+  "name": "ch_sym_fever-ch_vit_temperature-Child Health",
+  "observation_question_id": "temperature",
+  "programme": "Child Health",
+  "symptom_question_id": "ch_sym_fever"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 0,
+  "modified": "2026-08-25 14:30:04.929291",
+  "name": "ch_sym_fever-ch_vit_respiratory_rate-Child Health",
+  "observation_question_id": "respiratoryRate",
+  "programme": "Child Health",
+  "symptom_question_id": "ch_sym_fever"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.932115",
+  "name": "ch_sym_fast_breathing-ch_vit_respiratory_rate-Child Health",
+  "observation_question_id": "respiratoryRate",
+  "programme": "Child Health",
+  "symptom_question_id": "ch_sym_fast_breathing"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.934945",
+  "name": "ch_sym_fast_breathing-ch_vit_spo2-Child Health",
+  "observation_question_id": "ch_vit_spo2",
+  "programme": "Child Health",
+  "symptom_question_id": "ch_sym_fast_breathing"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.937813",
+  "name": "sym_headache-anc_systolic-ANC",
+  "observation_question_id": "systolic",
+  "programme": "ANC",
+  "symptom_question_id": "sym_headache"
+ },
+ {
+  "display_order": 2,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.940565",
+  "name": "sym_headache-anc_diastolic-ANC",
+  "observation_question_id": "diastolic",
+  "programme": "ANC",
+  "symptom_question_id": "sym_headache"
+ },
+ {
+  "display_order": 1,
+  "docstatus": 0,
+  "doctype": "Symptom Observation Mapping",
+  "mandatory_if_present": 1,
+  "modified": "2026-08-25 14:30:04.943313",
+  "name": "sym_fever-anc_temperature-ANC",
+  "observation_question_id": "temperature",
+  "programme": "ANC",
+  "symptom_question_id": "sym_fever"
+ }
+]

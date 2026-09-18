@@ -1,0 +1,321 @@
+{
+ "actions": [],
+ "creation": "2026-06-09 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_integrations",
+  "fhir_section",
+  "fhir_sync_enabled",
+  "fhir_server_url",
+  "fhir_auth_token",
+  "fhir_last_pull_dt",
+  "ai_section",
+  "ai_insights_enabled",
+  "ai_provider",
+  "ai_api_key",
+  "ai_base_url",
+  "ai_model",
+  "remote_auth_section",
+  "remote_auth_url",
+  "remote_auth_client_tag",
+  "tab_mobile_ai_controls",
+  "app_version_control_section",
+  "min_app_version",
+  "latest_app_version",
+  "column_break_avc_1",
+  "default_language",
+  "ai_feature_enabled",
+  "ai_widget_controls_section",
+  "step1_summary_enabled",
+  "step1_asr_enabled",
+  "step2_asr_enabled",
+  "column_break_awc_1",
+  "step3_summary_enabled",
+  "step3_referral_alert_enabled",
+  "step3_whatsapp_enabled",
+  "vad_tuning_section",
+  "vad_enter_margin_db",
+  "vad_sustain_margin_db",
+  "vad_floor_ceiling_dbfs",
+  "vad_floor_alpha",
+  "column_break_vad_1",
+  "vad_bootstrap_ms",
+  "vad_debounce_ms",
+  "vad_hangover_ms",
+  "vad_preroll_ms"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_integrations",
+   "fieldtype": "Tab Break",
+   "label": "Integrations"
+  },
+  {
+   "fieldname": "fhir_section",
+   "fieldtype": "Section Break",
+   "label": "FHIR Integration"
+  },
+  {
+   "fieldname": "fhir_sync_enabled",
+   "fieldtype": "Check",
+   "label": "Enable FHIR Sync",
+   "description": "When enabled, clinical records are pushed to the FHIR server on save and pulls are allowed."
+  },
+  {
+   "fieldname": "fhir_server_url",
+   "fieldtype": "Data",
+   "label": "FHIR Server URL",
+   "description": "Base URL of the FHIR R4 server, e.g. http://hapi:8091/fhir"
+  },
+  {
+   "fieldname": "fhir_auth_token",
+   "fieldtype": "Password",
+   "label": "Auth Token (Bearer)",
+   "description": "Optional Bearer token sent in the Authorization header. Leave blank for unauthenticated servers."
+  },
+  {
+   "fieldname": "fhir_last_pull_dt",
+   "fieldtype": "Datetime",
+   "label": "Last Pull At",
+   "read_only": 1,
+   "description": "Automatically stamped after each successful pull run."
+  },
+  {
+   "fieldname": "ai_section",
+   "fieldtype": "Section Break",
+   "label": "AI Insights"
+  },
+  {
+   "fieldname": "ai_insights_enabled",
+   "fieldtype": "Check",
+   "label": "Enable AI Case Summaries",
+   "description": "When enabled, AI-powered clinical summaries are generated for each Case when new observations are recorded."
+  },
+  {
+   "fieldname": "ai_provider",
+   "fieldtype": "Select",
+   "label": "AI Provider",
+   "options": "Local (OpenAI-compatible)\nClaude\nOpenAI",
+   "default": "Local (OpenAI-compatible)",
+   "description": "Select the AI provider. Default uses the bundled Ollama container. Switch to Claude or OpenAI for managed API access."
+  },
+  {
+   "fieldname": "ai_api_key",
+   "fieldtype": "Password",
+   "label": "API Key",
+   "description": "Anthropic API key (Claude), OpenAI API key, or leave blank for unauthenticated local models."
+  },
+  {
+   "fieldname": "ai_base_url",
+   "fieldtype": "Data",
+   "label": "Base URL (Local provider)",
+   "default": "http://ollama:11434/v1",
+   "description": "Bundled Ollama service: http://ollama:11434/v1. Override for LM Studio or external endpoints."
+  },
+  {
+   "fieldname": "ai_model",
+   "fieldtype": "Data",
+   "label": "Model Name",
+   "default": "llama3.1:8b",
+   "description": "Bundled default: llama3.1:8b. For Claude: claude-haiku-4-5-20251001. For OpenAI: gpt-4o-mini."
+  },
+  {
+   "fieldname": "remote_auth_section",
+   "fieldtype": "Section Break",
+   "label": "Remote Auth"
+  },
+  {
+   "fieldname": "remote_auth_url",
+   "fieldtype": "Data",
+   "label": "Remote Auth URL",
+   "description": "Legacy auth-service token-introspection endpoint, e.g. http://auth-service:8089/authenticate. Leave blank to keep the unverified local-decode fallback (dev/test only) for the X-Auth-Token mobile flow."
+  },
+  {
+   "fieldname": "remote_auth_client_tag",
+   "fieldtype": "Data",
+   "label": "Client Tag",
+   "description": "Value sent as the 'client' header on the remote validation call. Only affects the legacy service's own role-gating; does not affect this app's validity check."
+  },
+  {
+   "fieldname": "tab_mobile_ai_controls",
+   "fieldtype": "Tab Break",
+   "label": "Mobile AI Controls"
+  },
+  {
+   "fieldname": "app_version_control_section",
+   "fieldtype": "Section Break",
+   "label": "App Version Control"
+  },
+  {
+   "fieldname": "min_app_version",
+   "fieldtype": "Data",
+   "label": "Minimum App Version",
+   "description": "System-wide minimum mobile app version, e.g. 1.4.0. Fallback when a user has no override in User App Control."
+  },
+  {
+   "fieldname": "latest_app_version",
+   "fieldtype": "Data",
+   "label": "Latest App Version",
+   "description": "Latest available mobile app version, e.g. 1.6.2. No per-user override exists for this value."
+  },
+  {
+   "fieldname": "column_break_avc_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_language",
+   "fieldtype": "Select",
+   "label": "Default Language",
+   "options": "en\nbn",
+   "default": "en",
+   "description": "System-level default language code (matches Flutter client locales en/bn). Fallback when no per-user override."
+  },
+  {
+   "fieldname": "ai_feature_enabled",
+   "fieldtype": "Check",
+   "label": "AI Feature Enabled (Default)",
+   "default": "0",
+   "description": "System-level default for mobile AI feature. Fallback when no per-user override."
+  },
+  {
+   "fieldname": "ai_widget_controls_section",
+   "fieldtype": "Section Break",
+   "label": "AI Widget Toggles",
+   "description": "Per-step on/off switches for the mobile visit flow's AI-generated widgets. Mirrors the Flutter client's AiFeatureTogglesNotifier — served to the app via controls.get_controls, no per-user override."
+  },
+  {
+   "fieldname": "step1_summary_enabled",
+   "fieldtype": "Check",
+   "label": "Step 1: Visit Summary",
+   "default": "1",
+   "description": "The \"Before You Knock\" AI briefing cards shown before symptom entry."
+  },
+  {
+   "fieldname": "step1_asr_enabled",
+   "fieldtype": "Check",
+   "label": "Step 1: Voice Symptom Capture",
+   "default": "1",
+   "description": "AI Scribe voice capture that pre-ticks symptom cards from what the SK says."
+  },
+  {
+   "fieldname": "step2_asr_enabled",
+   "fieldtype": "Check",
+   "label": "Step 2: Voice Form Fill",
+   "default": "1",
+   "description": "AI Scribe voice capture that fills the vitals and clinical assessment form."
+  },
+  {
+   "fieldname": "column_break_awc_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "step3_summary_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: Visit Summary & Recommendations",
+   "default": "1",
+   "description": "The AI-generated visit summary, next actions, counselling, and follow-up plan."
+  },
+  {
+   "fieldname": "step3_referral_alert_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: Danger Sign / Referral Alert",
+   "default": "1",
+   "description": "The alert card that flags danger signs and recommends a referral."
+  },
+  {
+   "fieldname": "step3_whatsapp_enabled",
+   "fieldtype": "Check",
+   "label": "Step 3: WhatsApp Draft",
+   "default": "1",
+   "description": "The pre-written WhatsApp message summarising the visit for the patient."
+  },
+  {
+   "fieldname": "vad_tuning_section",
+   "fieldtype": "Section Break",
+   "label": "VAD Gate Tuning",
+   "description": "Realtime-ASR voice-activity-detection gate thresholds — saves mobile data by not streaming silence. Mirrors the Flutter client's VadTuningNotifier/AppConfig.vad* defaults."
+  },
+  {
+   "fieldname": "vad_enter_margin_db",
+   "fieldtype": "Float",
+   "label": "Entry Margin (dB)",
+   "precision": "2",
+   "default": "9",
+   "description": "dB above the noise floor required to start treating audio as speech."
+  },
+  {
+   "fieldname": "vad_sustain_margin_db",
+   "fieldtype": "Float",
+   "label": "Sustain Margin (dB)",
+   "precision": "2",
+   "default": "6",
+   "description": "Lower bar used to stay in speech mode once started."
+  },
+  {
+   "fieldname": "vad_floor_ceiling_dbfs",
+   "fieldtype": "Float",
+   "label": "Noise Floor Ceiling (dBFS)",
+   "precision": "2",
+   "default": "-35",
+   "description": "Caps how high the background-noise estimate is allowed to climb in a loud room."
+  },
+  {
+   "fieldname": "vad_floor_alpha",
+   "fieldtype": "Float",
+   "label": "Noise Floor Adaptation Speed",
+   "precision": "2",
+   "default": "0.08",
+   "description": "How quickly the background-noise estimate adapts to the room."
+  },
+  {
+   "fieldname": "column_break_vad_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vad_bootstrap_ms",
+   "fieldtype": "Int",
+   "label": "Startup Calibration Window (ms)",
+   "default": "500",
+   "description": "How long at the start of a recording is assumed silent, to measure the room's baseline noise."
+  },
+  {
+   "fieldname": "vad_debounce_ms",
+   "fieldtype": "Int",
+   "label": "Speech Confirmation Window (ms)",
+   "default": "180",
+   "description": "How long a sound must stay above the entry threshold before it's confirmed as real speech."
+  },
+  {
+   "fieldname": "vad_hangover_ms",
+   "fieldtype": "Int",
+   "label": "Trailing Silence Window (ms)",
+   "default": "700",
+   "description": "How long to keep recording after volume drops, to bridge a natural pause."
+  },
+  {
+   "fieldname": "vad_preroll_ms",
+   "fieldtype": "Int",
+   "label": "Pre-Speech Buffer (ms)",
+   "default": "350",
+   "description": "How much audio just before speech is confirmed gets included anyway."
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-06-09 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "UHIS Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

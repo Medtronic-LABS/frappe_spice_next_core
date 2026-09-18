@@ -1,0 +1,174 @@
+[
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "AND",
+  "conditions": [
+   {
+    "condition_field": "programme",
+    "condition_operator": "=",
+    "condition_value": "ncd",
+    "parent": "NCD-High-Risk-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   },
+   {
+    "condition_field": "risk_level",
+    "condition_operator": "=",
+    "condition_value": "high",
+    "parent": "NCD-High-Risk-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.674244",
+  "name": "NCD-High-Risk-Protocol",
+  "priority": 10,
+  "programme": "NCD",
+  "rule_name": "NCD Urgent Protocol — high risk"
+ },
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "AND",
+  "conditions": [
+   {
+    "condition_field": "programme",
+    "condition_operator": "=",
+    "condition_value": "ncd",
+    "parent": "NCD-Routine-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.679906",
+  "name": "NCD-Routine-Protocol",
+  "priority": 50,
+  "programme": "NCD",
+  "rule_name": "NCD Routine Assessment"
+ },
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "OR",
+  "conditions": [
+   {
+    "condition_field": "symptom_ch_sym_fever",
+    "condition_operator": "=",
+    "condition_value": "true",
+    "parent": "CH-Fever-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   },
+   {
+    "condition_field": "temperature",
+    "condition_operator": ">=",
+    "condition_value": "38.5",
+    "parent": "CH-Fever-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.684022",
+  "name": "CH-Fever-Protocol",
+  "priority": 10,
+  "programme": "Child Health",
+  "rule_name": "Child Illness Protocol — fever"
+ },
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "OR",
+  "conditions": [
+   {
+    "condition_field": "symptom_ch_sym_fast_breathing",
+    "condition_operator": "=",
+    "condition_value": "true",
+    "parent": "CH-Breathing-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   },
+   {
+    "condition_field": "respiratoryRate",
+    "condition_operator": ">=",
+    "condition_value": "50",
+    "parent": "CH-Breathing-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.687758",
+  "name": "CH-Breathing-Protocol",
+  "priority": 5,
+  "programme": "Child Health",
+  "rule_name": "Child Illness Protocol — respiratory"
+ },
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "AND",
+  "conditions": [
+   {
+    "condition_field": "programme",
+    "condition_operator": "=",
+    "condition_value": "anc",
+    "parent": "ANC-Routine-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.691522",
+  "name": "ANC-Routine-Protocol",
+  "priority": 50,
+  "programme": "ANC",
+  "rule_name": "ANC Routine Assessment"
+ },
+ {
+  "active": 1,
+  "allow_concurrent": 1,
+  "condition_logic": "OR",
+  "conditions": [
+   {
+    "condition_field": "symptom_anc_sym_bleeding",
+    "condition_operator": "=",
+    "condition_value": "true",
+    "parent": "ANC-Danger-Signs-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   },
+   {
+    "condition_field": "symptom_anc_sym_headache",
+    "condition_operator": "=",
+    "condition_value": "true",
+    "parent": "ANC-Danger-Signs-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   },
+   {
+    "condition_field": "temperature",
+    "condition_operator": ">=",
+    "condition_value": "38.0",
+    "parent": "ANC-Danger-Signs-Protocol",
+    "parentfield": "conditions",
+    "parenttype": "Protocol Selection Rule"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Protocol Selection Rule",
+  "modified": "2026-08-25 14:30:04.696146",
+  "name": "ANC-Danger-Signs-Protocol",
+  "priority": 5,
+  "programme": "ANC",
+  "rule_name": "ANC Danger Signs Protocol"
+ }
+]

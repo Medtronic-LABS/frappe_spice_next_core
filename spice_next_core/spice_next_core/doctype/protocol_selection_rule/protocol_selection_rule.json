@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "autoname": "prompt",
+ "creation": "2026-06-18 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "programme",
+  "active",
+  "priority",
+  "allow_concurrent",
+  "condition_logic",
+  "sec_conditions",
+  "conditions"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "programme",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Protocol to Activate",
+   "options": "Programme",
+   "reqd": 1,
+   "description": "Which protocol form group to show when this rule matches"
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Priority",
+   "default": "10",
+   "description": "Higher priority rules are evaluated first"
+  },
+  {
+   "fieldname": "allow_concurrent",
+   "fieldtype": "Check",
+   "label": "Allow Concurrent Protocols",
+   "default": "1",
+   "description": "When checked, multiple protocols can match simultaneously and all appear on screen"
+  },
+  {
+   "fieldname": "condition_logic",
+   "fieldtype": "Select",
+   "label": "Condition Logic",
+   "options": "AND\nOR",
+   "default": "AND",
+   "description": "How to combine the conditions below"
+  },
+  {
+   "fieldname": "sec_conditions",
+   "fieldtype": "Section Break",
+   "label": "Conditions"
+  },
+  {
+   "fieldname": "conditions",
+   "fieldtype": "Table",
+   "label": "Conditions",
+   "options": "Rule Condition",
+   "reqd": 1,
+   "description": "Visit context fields: symptom_<id>, vital_<fieldname>, patient_age_months, patient_gender, programme, risk_level"
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Protocol Selection Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "rule_name,programme",
+ "sort_field": "priority",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "rule_name"
+}

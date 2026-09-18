@@ -1,0 +1,132 @@
+[
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "NCD Programme",
+  "modified": "2026-08-25 14:30:04.485800",
+  "name": "NCD",
+  "program_type": "NCD"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Eye Care Programme",
+  "modified": "2026-08-25 14:30:04.489350",
+  "name": "Eye Care",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Cataract Programme",
+  "modified": "2026-08-25 14:30:04.492210",
+  "name": "Cataract",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Family Planning Programme",
+  "modified": "2026-08-25 14:30:04.495107",
+  "name": "Family Planning",
+  "program_type": "MCH"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "PW Profile Programme",
+  "modified": "2026-08-25 14:30:04.498039",
+  "name": "PW Profile",
+  "program_type": "MCH"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Pregnancy Outcome Programme",
+  "modified": "2026-08-25 14:30:04.500948",
+  "name": "Pregnancy Outcome",
+  "program_type": "MCH"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "ANC Programme",
+  "modified": "2026-08-25 14:30:04.503797",
+  "name": "ANC",
+  "program_type": "MCH"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "PNC Programme",
+  "modified": "2026-08-25 14:30:04.506723",
+  "name": "PNC",
+  "program_type": "MCH"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Household Programme",
+  "modified": "2026-08-25 14:30:04.509507",
+  "name": "Household",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Household Member Programme",
+  "modified": "2026-08-25 14:30:04.512347",
+  "name": "Household Member",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Enrollment Programme",
+  "modified": "2026-08-25 14:30:04.515162",
+  "name": "Enrollment",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "Child Health Programme",
+  "modified": "2026-08-25 14:30:04.518334",
+  "name": "Child Health",
+  "program_type": "General"
+ },
+ {
+  "active": 1,
+  "docstatus": 0,
+  "doctype": "Programme",
+  "forms": [],
+  "label": "TB Programme",
+  "modified": "2026-08-25 14:30:04.521229",
+  "name": "TB",
+  "program_type": "TB"
+ }
+]

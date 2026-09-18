@@ -1,0 +1,215 @@
+{
+ "doctype": "Workspace",
+ "name": "UHIS Clinical",
+ "title": "UHIS Clinical",
+ "label": "UHIS Clinical",
+ "module": "Spice Next Core",
+ "icon": "stethoscope",
+ "indicator_color": "blue",
+ "public": 1,
+ "content": "[{\"id\": \"uhis0001\", \"type\": \"header\", \"data\": {\"text\": \"<b>Clinical Overview</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0002\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Active Patients\", \"col\": 4}}, {\"id\": \"uhis0003\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Open Cases\", \"col\": 4}}, {\"id\": \"uhis0004\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Total Encounters\", \"col\": 4}}, {\"id\": \"uhis0005\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Pending Tasks\", \"col\": 4}}, {\"id\": \"uhis0039\", \"type\": \"header\", \"data\": {\"text\": \"<b>Risk &amp; Referral Intelligence</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0040\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - High Risk Cases\", \"col\": 4}}, {\"id\": \"uhis0041\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Active Referrals\", \"col\": 4}}, {\"id\": \"uhis0042\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Overdue Follow-ups\", \"col\": 4}}, {\"id\": \"uhis0006\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0007\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Patient\", \"col\": 3}}, {\"id\": \"uhis0008\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Patient List\", \"col\": 3}}, {\"id\": \"uhis0009\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Case\", \"col\": 3}}, {\"id\": \"uhis0010\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Case List\", \"col\": 3}}, {\"id\": \"uhis0011\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Encounter\", \"col\": 3}}, {\"id\": \"uhis0012\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Encounter List\", \"col\": 3}}, {\"id\": \"uhis0013\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New Task\", \"col\": 3}}, {\"id\": \"uhis0014\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Task List\", \"col\": 3}}]",
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "link_to": "Patient",
+   "label": "New Patient",
+   "color": "Cyan",
+   "doc_view": "New",
+   "idx": 1,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Patient",
+   "label": "Patient List",
+   "color": "Cyan",
+   "doc_view": "List",
+   "idx": 2,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Case",
+   "label": "New Case",
+   "color": "Blue",
+   "doc_view": "New",
+   "idx": 3,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Case",
+   "label": "Case List",
+   "color": "Blue",
+   "doc_view": "List",
+   "idx": 4,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Encounter",
+   "label": "New Encounter",
+   "color": "Teal",
+   "doc_view": "New",
+   "idx": 5,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Encounter",
+   "label": "Encounter List",
+   "color": "Teal",
+   "doc_view": "List",
+   "idx": 6,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Task",
+   "label": "New Task",
+   "color": "Green",
+   "doc_view": "New",
+   "idx": 7,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Task",
+   "label": "Task List",
+   "color": "Green",
+   "doc_view": "List",
+   "idx": 8,
+   "doctype": "Workspace Shortcut"
+  }
+ ],
+ "number_cards": [
+  {
+   "number_card_name": "UHIS - Active Patients",
+   "idx": 1,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Open Cases",
+   "idx": 2,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Total Encounters",
+   "idx": 3,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Pending Tasks",
+   "idx": 4,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - High Risk Cases",
+   "idx": 5,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Active Referrals",
+   "idx": 6,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Overdue Follow-ups",
+   "idx": 7,
+   "doctype": "Workspace Number Card"
+  }
+ ],
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Patients",
+   "description": "Register and manage patients",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 1,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Patient",
+   "link_to": "Patient",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 2,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Household",
+   "link_to": "Household",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 3,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Card Break",
+   "label": "Cases & Encounters",
+   "description": "Clinical workflow",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 4,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Case",
+   "link_to": "Case",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 5,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Encounter",
+   "link_to": "Encounter",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 6,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Observation",
+   "link_to": "Observation",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 7,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Task",
+   "link_to": "Task",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 8,
+   "doctype": "Workspace Link"
+  }
+ ],
+ "type": "Workspace",
+ "app": "spice_next_core",
+ "sequence_id": -1
+}

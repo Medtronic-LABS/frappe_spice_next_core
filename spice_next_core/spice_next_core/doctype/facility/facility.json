@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "autoname": "prompt",
+ "creation": "2026-06-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_details",
+  "sva_ai_summary",
+  "label",
+  "facility_type",
+  "organization",
+  "geography_node",
+  "ai_summary",
+  "ai_summary_generated_at",
+  "tab_providers",
+  "sva_providers",
+  "tab_care_teams",
+  "sva_care_teams"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_details",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "sva_ai_summary",
+   "fieldtype": "HTML",
+   "label": "AI Summary"
+  },
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "fieldname": "facility_type",
+   "fieldtype": "Select",
+   "label": "Facility Type",
+   "options": "Health Post\nHealth Centre\nDistrict Hospital\nRegional Hospital"
+  },
+  {
+   "fieldname": "organization",
+   "fieldtype": "Link",
+   "label": "Organization",
+   "options": "Organization"
+  },
+  {
+   "fieldname": "geography_node",
+   "fieldtype": "Link",
+   "label": "Geography Node",
+   "options": "Geography Node"
+  },
+  {
+   "fieldname": "ai_summary",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "AI Summary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ai_summary_generated_at",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "AI Summary Generated At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_providers",
+   "fieldtype": "Tab Break",
+   "label": "Providers"
+  },
+  {
+   "fieldname": "sva_providers",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_care_teams",
+   "fieldtype": "Tab Break",
+   "label": "Care Teams"
+  },
+  {
+   "fieldname": "sva_care_teams",
+   "fieldtype": "HTML"
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-12 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Facility",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "label",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "label",
+ "hide_toolbar": 1
+}

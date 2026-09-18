@@ -1,0 +1,259 @@
+{
+ "actions": [],
+ "autoname": "field:client_uuid",
+ "creation": "2026-06-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_details",
+  "sva_case_summary",
+  "section_break_case_fields",
+  "patient",
+  "patient_name",
+  "programme",
+  "column_break_case_2",
+  "care_team",
+  "status",
+  "risk_level",
+  "column_break_case_3",
+  "opened_on",
+  "closed_on",
+  "outcome",
+  "client_uuid",
+  "geography_node",
+  "risk_factors",
+  "ai_summary",
+  "ai_summary_generated_at",
+  "last_encounter_dt",
+  "tab_encounters",
+  "sva_encounters",
+  "tab_observations",
+  "sva_observations",
+  "tab_conditions",
+  "sva_conditions",
+  "tab_referrals",
+  "sva_referrals",
+  "tab_tasks",
+  "sva_tasks",
+  "sync_seq"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_details",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "sva_case_summary",
+   "fieldtype": "HTML",
+   "label": "Case Summary"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:!doc.__islocal",
+   "fieldname": "section_break_case_fields",
+   "fieldtype": "Section Break",
+   "label": "Case Details"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "patient_name",
+   "fieldtype": "Data",
+   "label": "Patient Name",
+   "fetch_from": "patient.full_name",
+   "read_only": 1,
+   "hidden": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "programme",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Programme",
+   "options": "Programme"
+  },
+  {
+   "fieldname": "column_break_case_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "care_team",
+   "fieldtype": "Link",
+   "label": "Care Team",
+   "options": "Care Team"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nClosed\nResolved\nReferred"
+  },
+  {
+   "fieldname": "risk_level",
+   "fieldtype": "Select",
+   "label": "Risk Level",
+   "options": "Low\nModerate\nHigh",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "column_break_case_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opened_on",
+   "fieldtype": "Date",
+   "label": "Opened On"
+  },
+  {
+   "fieldname": "closed_on",
+   "fieldtype": "Date",
+   "label": "Closed On"
+  },
+  {
+   "fieldname": "outcome",
+   "fieldtype": "Data",
+   "label": "Outcome"
+  },
+  {
+   "fieldname": "client_uuid",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client UUID",
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "geography_node",
+   "fieldtype": "Link",
+   "label": "Geography Node",
+   "options": "Geography Node",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "risk_factors",
+   "fieldtype": "Small Text",
+   "label": "Risk Factors",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "ai_summary",
+   "fieldtype": "Long Text",
+   "label": "AI Summary",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "ai_summary_generated_at",
+   "fieldtype": "Datetime",
+   "label": "AI Summary Generated At",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "last_encounter_dt",
+   "fieldtype": "Datetime",
+   "label": "Last Encounter",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "tab_encounters",
+   "fieldtype": "Tab Break",
+   "label": "Encounters"
+  },
+  {
+   "fieldname": "sva_encounters",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_observations",
+   "fieldtype": "Tab Break",
+   "label": "Observations"
+  },
+  {
+   "fieldname": "sva_observations",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_conditions",
+   "fieldtype": "Tab Break",
+   "label": "Conditions"
+  },
+  {
+   "fieldname": "sva_conditions",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_referrals",
+   "fieldtype": "Tab Break",
+   "label": "Referrals"
+  },
+  {
+   "fieldname": "sva_referrals",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_tasks",
+   "fieldtype": "Tab Break",
+   "label": "Tasks"
+  },
+  {
+   "fieldname": "sva_tasks",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "sync_seq",
+   "fieldtype": "Int",
+   "label": "Sync Seq",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Case",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "patient_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {"title": "Active",   "color": "Green"},
+  {"title": "Referred", "color": "Orange"},
+  {"title": "Resolved", "color": "Blue"},
+  {"title": "Closed",   "color": "Gray"}
+ ],
+ "title_field": "patient_name",
+ "track_changes": 1,
+ "hide_toolbar": 1
+}

@@ -1,0 +1,167 @@
+{
+ "actions": [],
+ "autoname": "field:client_uuid",
+ "creation": "2026-06-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_health_summary",
+  "sva_health_profile",
+  "sva_ai_summary",
+  "tab_details",
+  "client_uuid",
+  "full_name",
+  "full_name_bn",
+  "dob",
+  "gender",
+  "phone",
+  "primary_household",
+  "identifiers",
+  "ai_summary",
+  "ai_summary_generated_at",
+  "tab_cases",
+  "sva_cases",
+  "tab_encounters",
+  "sva_encounters",
+  "sync_seq"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_health_summary",
+   "fieldtype": "Tab Break",
+   "label": "Health Summary"
+  },
+  {
+   "fieldname": "sva_health_profile",
+   "fieldtype": "HTML",
+   "label": "Health Profile"
+  },
+  {
+   "fieldname": "sva_ai_summary",
+   "fieldtype": "HTML",
+   "label": "AI Summary"
+  },
+  {
+   "fieldname": "tab_details",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "client_uuid",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client UUID",
+   "read_only": 1,
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "full_name_bn",
+   "fieldtype": "Data",
+   "label": "Full Name (Bangla)"
+  },
+  {
+   "fieldname": "dob",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "Male\nFemale\nOther\nPrefer not to say"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "primary_household",
+   "fieldtype": "Link",
+   "label": "Primary Household",
+   "options": "Household"
+  },
+  {
+   "fieldname": "identifiers",
+   "fieldtype": "Table",
+   "label": "Identifiers",
+   "options": "Patient Identifier"
+  },
+  {
+   "fieldname": "ai_summary",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "AI Summary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ai_summary_generated_at",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "AI Summary Generated At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_cases",
+   "fieldtype": "Tab Break",
+   "label": "Cases"
+  },
+  {
+   "fieldname": "sva_cases",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "tab_encounters",
+   "fieldtype": "Tab Break",
+   "label": "Encounters"
+  },
+  {
+   "fieldname": "sva_encounters",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "sync_seq",
+   "fieldtype": "Int",
+   "label": "Sync Seq",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-12 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Patient",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "full_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1,
+ "hide_toolbar": 1
+}

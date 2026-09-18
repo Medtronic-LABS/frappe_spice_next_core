@@ -1,0 +1,155 @@
+{
+ "doctype": "Workspace",
+ "name": "UHIS NCD Programme",
+ "title": "UHIS NCD Programme",
+ "label": "UHIS NCD Programme",
+ "module": "Spice Next Core",
+ "icon": "heart",
+ "indicator_color": "orange",
+ "public": 1,
+ "content": "[{\"id\": \"uhis0028\", \"type\": \"header\", \"data\": {\"text\": \"<b>NCD Programme</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0029\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - NCD Screenings\", \"col\": 4}}, {\"id\": \"uhis0030\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - NCD Followups\", \"col\": 4}}, {\"id\": \"uhis0031\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"UHIS - Open Cases\", \"col\": 4}}, {\"id\": \"uhis0032\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Access</b>\", \"col\": 12, \"level\": 3}}, {\"id\": \"uhis0033\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"NCD Screening List\", \"col\": 3}}, {\"id\": \"uhis0034\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New NCD Screening\", \"col\": 3}}, {\"id\": \"uhis0035\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"NCD Followup List\", \"col\": 3}}, {\"id\": \"uhis0036\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"New NCD Followup\", \"col\": 3}}, {\"id\": \"uhis0037\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Concept List\", \"col\": 3}}, {\"id\": \"uhis0038\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Programme List\", \"col\": 3}}]",
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "link_to": "NCD Screening",
+   "label": "NCD Screening List",
+   "color": "Orange",
+   "doc_view": "List",
+   "idx": 1,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "NCD Screening",
+   "label": "New NCD Screening",
+   "color": "Orange",
+   "doc_view": "New",
+   "idx": 2,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "NCD Followup",
+   "label": "NCD Followup List",
+   "color": "Yellow",
+   "doc_view": "List",
+   "idx": 3,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "NCD Followup",
+   "label": "New NCD Followup",
+   "color": "Yellow",
+   "doc_view": "New",
+   "idx": 4,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Concept",
+   "label": "Concept List",
+   "color": "Grey",
+   "doc_view": "List",
+   "idx": 5,
+   "doctype": "Workspace Shortcut"
+  },
+  {
+   "type": "DocType",
+   "link_to": "Programme",
+   "label": "Programme List",
+   "color": "Grey",
+   "doc_view": "List",
+   "idx": 6,
+   "doctype": "Workspace Shortcut"
+  }
+ ],
+ "number_cards": [
+  {
+   "number_card_name": "UHIS - NCD Screenings",
+   "idx": 1,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - NCD Followups",
+   "idx": 2,
+   "doctype": "Workspace Number Card"
+  },
+  {
+   "number_card_name": "UHIS - Open Cases",
+   "idx": 3,
+   "doctype": "Workspace Number Card"
+  }
+ ],
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Programme Forms",
+   "description": "Clinical programme data",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 1,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "NCD Screening",
+   "link_to": "NCD Screening",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 2,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "NCD Followup",
+   "link_to": "NCD Followup",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 3,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Card Break",
+   "label": "Configuration",
+   "description": "Terminology and programmes",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 4,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Concept",
+   "link_to": "Concept",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 5,
+   "doctype": "Workspace Link"
+  },
+  {
+   "type": "Link",
+   "label": "Programme",
+   "link_to": "Programme",
+   "link_type": "DocType",
+   "hidden": 0,
+   "onboard": 0,
+   "is_query_report": 0,
+   "idx": 6,
+   "doctype": "Workspace Link"
+  }
+ ],
+ "type": "Workspace",
+ "app": "spice_next_core",
+ "sequence_id": 0.2
+}
