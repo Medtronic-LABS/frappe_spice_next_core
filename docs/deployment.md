@@ -1,12 +1,14 @@
 # Deployment
 
-This repo owns the **image** — the Dockerfile, process supervision, and the CI/CD
-pipeline that builds and publishes it. It does not own the production compose file,
-nginx config, or the shared-gateway integration with the legacy UHIS platform; that
-lives in `frappe-uhis-next` (the ops repo, Bitbucket `MDTLabs/platform-setup`), whose
+This repo owns the **image** — the Dockerfile and the process supervision it runs
+under. It does not own the CI/CD pipeline that builds, publishes, and deploys it
+(that lives in `uhis`, Medtronic-LABS/frappe_uhis — see its own
+`.github/workflows/docker-publish.yml`), nor the production compose file, nginx
+config, or the shared-gateway integration with the legacy UHIS platform; that lives in
+`frappe-uhis-next` (the ops repo, Bitbucket `MDTLabs/platform-setup`), whose
 `docs/deployment/production.md` and `STEPS.md` are the actual runbook. Nothing below
-duplicates that content — read this for what ships from *this* repo, read that for how
-it's actually deployed.
+duplicates that content — read this for what ships from *this* repo, read those for
+how it's actually built and deployed.
 
 ## Architecture
 
@@ -115,20 +117,14 @@ No insecure defaults — the container will not start without all three set.
 
 ## CI/CD
 
-`.github/workflows/docker-publish.yml`:
+This repo has **no GitHub Actions workflow of its own** — `spice_next_core` is a
+shared core package consumed by more than one deployment, so build/publish/deploy is
+owned by whichever app assembles a given deployment, not by this repo. For the
+uhis-next production deployment, that's `uhis` (Medtronic-LABS/frappe_uhis,
+`.github/workflows/docker-publish.yml`): it checks out this repo at a pinned ref
+alongside `frappe_theme`, `shukhee_integration`, and `leapwell_telemetry`, builds its
+own all-in-one image, publishes it to `ghcr.io/medtronic-labs/frappe_uhis`, and
+deploys it.
 
-- **`build-and-push`** — triggers on push to `main`, a `v*.*.*` tag, or manual
-  dispatch. Builds `docker/allinone/Dockerfile`, tags it (`latest` on `main`,
-  short-SHA always, semver on a version tag), pushes to
-  `ghcr.io/medtronic-labs/frappe_spice_next_core`.
-- **`deploy`** — gated to `main` only (a version-tag push publishes an image without
-  also redeploying whatever `main` most recently put live). SSHes into the
-  production server (`appleboy/ssh-action`) and runs `docker compose pull backend &&
-  up -d backend` against the ops repo's compose file, then polls the site's
-  `/api/method/ping` through the proxy and fails the workflow if it doesn't come up
-  healthy. No automated rollback.
-
-Required repo secrets for the `deploy` job: `DEPLOY_HOST`, `DEPLOY_USER`,
-`DEPLOY_SSH_KEY`, `DEPLOY_PORT` (optional, defaults to 22). GHCR auth on the
-production server is a one-time `docker login ghcr.io` with a `read:packages`-scoped
-PAT — not something this workflow repeats on every deploy.
+To sanity-check *this* repo's own image in isolation, with no deploy step involved,
+use the local build/test commands above.
