@@ -22,6 +22,13 @@ _SYNCABLE_DOCTYPES = [
 	"Condition",
 	"Referral",
 	"Task",
+	# Deliberately pull-only, unlike every doctype above: push() never consults
+	# this list at all (it dispatches generically on op["doctype"]), and there is
+	# no legitimate offline-authored path for Call Logs -- booking a call always
+	# requires a live round trip to the Shukhee vendor (shukhee_integration.api.
+	# consultation.start_consultation), which cannot happen offline in the first
+	# place. Do not add client_uuid/Sync Op Log push support for it.
+	"Call Logs",
 ]
 
 
