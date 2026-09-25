@@ -301,6 +301,7 @@ def pull(payload=None, **kwargs):
 
 def _changes_since(cursor, catchment, limit):
 	results = []
+	provider_name = _UNRESOLVED
 	for doctype in _SYNCABLE_DOCTYPES:
 		try:
 			meta = frappe.get_meta(doctype)
@@ -310,13 +311,40 @@ def _changes_since(cursor, catchment, limit):
 		has_care_team = meta.get_field("care_team")
 
 		filters = [["sync_seq", ">", cursor]]
-		if catchment and (has_geography or has_care_team):
+		or_filters = []
+
+		if doctype == "Call Logs":
+			# Call Logs' own geography_node is denormalized from its optional
+			# `patient` Link (see consultation.start_consultation's uhis_patient_id
+			# handling), which the mobile app does not currently populate -- there
+			# is no bridge yet between this app's cross-system Patient identity and
+			# the legacy platform's own patient ids, so `patient`/`geography_node`
+			# are null on every call made through the current mobile build.
+			# `uhis_user` (Provider Link), by contrast, is stamped unconditionally
+			# on every booking. OR it in alongside the (currently mostly-inert)
+			# geography filter, rather than replacing it, so a pulling SK always
+			# sees the calls they personally made -- regardless of geography
+			# catchment -- and the geography path still works once patient
+			# linking is wired up.
+			if catchment is not None:  # None == System Manager, unrestricted
+				if catchment and has_geography:
+					or_filters.append(["geography_node", "in", list(catchment)])
+				if provider_name is _UNRESOLVED:
+					provider_name = _current_provider_name(frappe.session.user)
+				if provider_name:
+					or_filters.append(["uhis_user", "=", provider_name])
+				if not or_filters:
+					# No geography match possible and no Provider record for this
+					# session -- this doctype contributes nothing for this caller.
+					continue
+		elif catchment and (has_geography or has_care_team):
 			scope_field = "geography_node" if has_geography else "care_team"
 			filters.append([scope_field, "in", list(catchment)])
 
 		rows = frappe.get_all(
 			doctype,
 			filters=filters,
+			or_filters=or_filters or None,
 			fields=["name", "sync_seq"],
 			order_by="sync_seq asc",
 			limit=limit,
@@ -326,6 +354,16 @@ def _changes_since(cursor, catchment, limit):
 
 	results.sort(key=lambda x: x["sync_seq"])
 	return results[:limit]
+
+
+_UNRESOLVED = object()
+
+
+def _current_provider_name(user):
+	"""Resolves a session user to their Provider record's name -- same
+	`Provider.user` Link lookup `get_user_catchment` performs, reused here for
+	Call Logs' `uhis_user` pull-scoping (see `_changes_since`)."""
+	return frappe.db.get_value("Provider", {"user": user}, "name")
 
 
 def _serialize_change(row):
