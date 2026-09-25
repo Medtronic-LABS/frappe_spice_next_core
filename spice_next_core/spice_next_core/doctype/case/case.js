@@ -246,7 +246,7 @@ function _render_ai_panel(frm, d) {
 			<div class="uhis-ai-panel-header">
 				<span class="uhis-ai-label">🤖 AI Summary</span>
 			</div>
-			<span class="uhis-ai-configure-note">AI insights available — configure API key in <a href="/app/uhis-settings" target="_blank">UHIS Settings</a></span>
+			<span class="uhis-ai-configure-note">AI insights available — configure API key in <a href="/app/spice-settings" target="_blank">Spice Settings</a></span>
 		</div>`;
 	}
 

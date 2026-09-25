@@ -1,7 +1,7 @@
 """
 Multi-provider AI client for UHIS Next.
 Dispatches to Claude (Anthropic), OpenAI, or a local OpenAI-compatible endpoint
-(Ollama, LM Studio, etc.) based on UHIS Settings.ai_provider.
+(Ollama, LM Studio, etc.) based on Spice Settings.ai_provider.
 
 Returns None when AI insights are disabled or no API key is configured so callers
 can treat a None result as a graceful no-op.
@@ -12,7 +12,7 @@ import frappe
 
 def call_ai(system_prompt, user_content):
 	"""Call the configured AI provider and return the response text, or None."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.ai_insights_enabled:
 		return None
 

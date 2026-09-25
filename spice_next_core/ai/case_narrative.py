@@ -49,7 +49,7 @@ def _mark_summary_stale(doc, event):
 
 def generate_narrative(case_name):
 	"""Background job: build context, call AI, store result."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.ai_insights_enabled:
 		return
 	# Local (Ollama) needs no API key; cloud providers do

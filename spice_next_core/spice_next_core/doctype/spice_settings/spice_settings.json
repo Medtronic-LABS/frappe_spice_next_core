@@ -306,7 +306,7 @@
  "modified": "2026-06-09 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Spice Next Core",
- "name": "UHIS Settings",
+ "name": "Spice Settings",
  "owner": "Administrator",
  "permissions": [
   {

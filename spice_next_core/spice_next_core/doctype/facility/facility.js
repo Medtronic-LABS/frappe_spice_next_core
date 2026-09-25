@@ -26,7 +26,7 @@ frappe.ui.form.on("Facility", {
 
 function _render_facility_ai_panel(frm) {
 	frappe.db.get_value(
-		"UHIS Settings", "UHIS Settings", "ai_insights_enabled",
+		"Spice Settings", "Spice Settings", "ai_insights_enabled",
 		(cfg) => {
 			const d = {
 				ai_insights_enabled:    !!(cfg && cfg.ai_insights_enabled),
@@ -39,7 +39,7 @@ function _render_facility_ai_panel(frm) {
 				if (!field) return;
 				const note = d.ai_insights_enabled
 					? `Click <strong>AI → Generate Facility Summary</strong> to create a situation report for this facility.`
-					: `AI insights available — configure API key in <a href="/app/uhis-settings" target="_blank">UHIS Settings</a>`;
+					: `AI insights available — configure API key in <a href="/app/spice-settings" target="_blank">Spice Settings</a>`;
 				field.$wrapper.html(`<div class="uhis-ai-panel">
 					<div class="uhis-ai-panel-header"><span class="uhis-ai-label">🤖 Facility AI Summary</span></div>
 					<span class="uhis-ai-configure-note">${note}</span>

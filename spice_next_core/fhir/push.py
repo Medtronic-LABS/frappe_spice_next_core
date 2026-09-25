@@ -1,6 +1,6 @@
 """
 FHIR outbound push — enqueued via doc_events after clinical records are saved.
-Silent no-op when FHIR sync is disabled or server URL is not configured in UHIS Settings.
+Silent no-op when FHIR sync is disabled or server URL is not configured in Spice Settings.
 """
 
 import frappe
@@ -20,7 +20,7 @@ def enqueue_fhir_push(doc, event):
 	if doc.doctype not in _FHIR_MAP:
 		return
 	try:
-		cfg = frappe.get_single("UHIS Settings")
+		cfg = frappe.get_single("Spice Settings")
 	except Exception:
 		return
 	if not cfg.fhir_sync_enabled or not cfg.fhir_server_url:
@@ -36,7 +36,7 @@ def enqueue_fhir_push(doc, event):
 
 def do_push(doctype, name):
 	"""Background job: map DocType record → FHIR resource → HTTP PUT to server."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.fhir_sync_enabled or not cfg.fhir_server_url:
 		return
 

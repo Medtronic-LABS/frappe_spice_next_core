@@ -113,7 +113,7 @@ def _run_response(doctype, docname, question, history, session_id, user):
 		frappe.publish_realtime(event=event, message=rt_msg, user=user)
 
 	try:
-		cfg = frappe.get_single("UHIS Settings")
+		cfg = frappe.get_single("Spice Settings")
 		if not cfg.ai_insights_enabled:
 			_emit(error="AI insights disabled", done=True)
 			return

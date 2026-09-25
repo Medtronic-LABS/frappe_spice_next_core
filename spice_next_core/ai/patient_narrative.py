@@ -40,7 +40,7 @@ def enqueue_patient_narrative(patient_name):
 
 def generate_patient_narrative(patient_name):
 	"""Background job: build context, call AI, store result, cascade to household."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.ai_insights_enabled:
 		return
 	needs_key = cfg.ai_provider in ("Claude", "OpenAI")

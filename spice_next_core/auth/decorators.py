@@ -40,7 +40,7 @@ from spice_next_core.auth.jwt_token_validator import JWTDecodeError, JWTTokenVal
 
 
 def _build_validator():
-	settings = frappe.get_single("UHIS Settings")
+	settings = frappe.get_single("Spice Settings")
 	return JWTTokenValidator(
 		remote_auth_url=settings.remote_auth_url or None,
 		client_tag=settings.remote_auth_client_tag or None,

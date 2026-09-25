@@ -1,2 +1,3 @@
 spice_next_core.spice_next_core.doctype.sync_seq_counter.patches.v0_init_counter
 spice_next_core.spice_next_core.doctype.uhis_settings.patches.v0_backfill_ai_widget_and_vad_defaults
+spice_next_core.spice_next_core.doctype.spice_settings.patches.v0_migrate_from_uhis_settings

@@ -48,7 +48,7 @@ def get_health_summary(patient):
 
 		encounter_count = frappe.db.count("Encounter", {"case": ["in", case_names]})
 
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 
 	return {
 		"dob": str(doc.dob) if doc.dob else None,

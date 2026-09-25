@@ -4,5 +4,5 @@
 from frappe.model.document import Document
 
 
-class UHISSettings(Document):
+class SpiceSettings(Document):
 	pass

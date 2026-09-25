@@ -175,6 +175,6 @@ def get_case_summary(case):
 
 def _ai_enabled():
 	try:
-		return bool(frappe.get_single("UHIS Settings").ai_insights_enabled)
+		return bool(frappe.get_single("Spice Settings").ai_insights_enabled)
 	except Exception:
 		return False
