@@ -11,6 +11,9 @@ Wire contract: ../../docs/api-contract/sync-envelope.md
 import frappe
 from frappe import _
 
+from spice_next_core.auth.decorators import current_remote_user_id
+from spice_next_core.auth.decorators import whitelist as remote_whitelist
+
 CONTRACT_VERSION = 1
 
 _SYNCABLE_DOCTYPES = [
@@ -55,7 +58,7 @@ def _resolve_env(payload=None):
 # ── push ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def push(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -279,7 +282,7 @@ def _log_op(client_op_id, doctype, name, seq):
 # ── pull ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def pull(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -330,7 +333,8 @@ def _changes_since(cursor, catchment, limit):
 				if catchment and has_geography:
 					or_filters.append(["geography_node", "in", list(catchment)])
 				if provider_name is _UNRESOLVED:
-					provider_name = _current_provider_name(frappe.session.user)
+					calling_provider = _resolve_calling_provider(frappe.session.user)
+					provider_name = calling_provider.name if calling_provider else None
 				if provider_name:
 					or_filters.append(["uhis_user", "=", provider_name])
 				if not or_filters:
@@ -359,13 +363,6 @@ def _changes_since(cursor, catchment, limit):
 _UNRESOLVED = object()
 
 
-def _current_provider_name(user):
-	"""Resolves a session user to their Provider record's name -- same
-	`Provider.user` Link lookup `get_user_catchment` performs, reused here for
-	Call Logs' `uhis_user` pull-scoping (see `_changes_since`)."""
-	return frappe.db.get_value("Provider", {"user": user}, "name")
-
-
 def _serialize_change(row):
 	doc = frappe.get_doc(row["doctype"], row["name"])
 	return {
@@ -380,7 +377,7 @@ def _serialize_change(row):
 # ── config ────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def config(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -528,6 +525,43 @@ def _get_subtree(geography_node):
 	return nodes
 
 
+def _resolve_calling_provider(user):
+	"""Resolves the calling identity to a Provider record, trying both auth
+	paths this app's endpoints support:
+
+	1. A real Frappe session (Desk/System Manager, whatever internal caller
+	   already worked before -- Provider.user, a Frappe User Link).
+	2. The mobile X-Auth-Token flow: @require_remote_auth (see
+	   spice_next_core.auth.decorators) validates the token and sets
+	   frappe.local.remote_user_id, but deliberately never touches
+	   frappe.session.user (that flow implies allow_guest=True, so
+	   frappe.session.user stays "Guest" for the whole request) -- so a
+	   mobile caller only ever resolves via current_remote_user_id(),
+	   matched against Provider.username, the exact same lookup
+	   shukhee_integration.api.consultation._current_provider() already uses.
+
+	Returns the Provider dict (name/role_type/geography_node/facility) or
+	None if neither path resolves one."""
+	provider = frappe.db.get_value(
+		"Provider",
+		{"user": user},
+		["name", "role_type", "geography_node", "facility"],
+		as_dict=True,
+	)
+	if provider:
+		return provider
+
+	remote_user_id = current_remote_user_id()
+	if not remote_user_id:
+		return None
+	return frappe.db.get_value(
+		"Provider",
+		{"username": remote_user_id},
+		["name", "role_type", "geography_node", "facility"],
+		as_dict=True,
+	)
+
+
 def get_user_catchment(user):
 	"""
 	Resolve geography scope for a user.
@@ -542,12 +576,7 @@ def get_user_catchment(user):
 	if "System Manager" in frappe.get_roles(user):
 		return None
 
-	provider = frappe.db.get_value(
-		"Provider",
-		{"user": user},
-		["name", "role_type", "geography_node", "facility"],
-		as_dict=True,
-	)
+	provider = _resolve_calling_provider(user)
 	if not provider:
 		return set()
 
