@@ -38,7 +38,7 @@ def enqueue_household_narrative(household_name):
 
 def generate_household_narrative(household_name):
 	"""Background job: build context, call AI, store result."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.ai_insights_enabled:
 		return
 	needs_key = cfg.ai_provider in ("Claude", "OpenAI")

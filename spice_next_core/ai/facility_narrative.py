@@ -36,7 +36,7 @@ def enqueue_facility_narrative(facility_name):
 
 def generate_facility_narrative(facility_name):
 	"""Background job: build context, call AI, store result."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.ai_insights_enabled:
 		return
 	needs_key = cfg.ai_provider in ("Claude", "OpenAI")

@@ -15,16 +15,16 @@ from spice_next_core.api.fhir import _gender_from_fhir
 @frappe.whitelist()
 def trigger_fhir_pull():
 	"""Whitelisted: enqueue a pull job from the Desk."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.fhir_sync_enabled or not cfg.fhir_server_url:
-		frappe.throw("FHIR sync is not enabled or FHIR Server URL is not configured in UHIS Settings.")
+		frappe.throw("FHIR sync is not enabled or FHIR Server URL is not configured in Spice Settings.")
 	frappe.enqueue("spice_next_core.fhir.pull.do_pull", queue="long", now=False)
 	return {"status": "enqueued"}
 
 
 def do_pull():
 	"""Background job: pull FHIR resources and upsert into Frappe."""
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 	if not cfg.fhir_sync_enabled or not cfg.fhir_server_url:
 		return
 
@@ -56,8 +56,8 @@ def do_pull():
 		counts[resource_type] = n
 
 	frappe.db.set_value(
-		"UHIS Settings",
-		"UHIS Settings",
+		"Spice Settings",
+		"Spice Settings",
 		"fhir_last_pull_dt",
 		now_datetime(),
 		update_modified=False,

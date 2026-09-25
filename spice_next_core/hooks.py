@@ -110,7 +110,7 @@ fixtures = [
 # docs never get that file (v16 upgrade deleted all 3 UHIS workspaces this
 # way). Delivered instead as on-disk files under spice_next_core/workspace/.
 
-# Periodic jobs — guarded internally by UHIS Settings.fhir_sync_enabled flag.
+# Periodic jobs — guarded internally by Spice Settings.fhir_sync_enabled flag.
 scheduler_events = {
 	"hourly": [
 		"spice_next_core.fhir.pull.do_pull",

@@ -26,7 +26,7 @@
    "fieldtype": "Data",
    "label": "Min App Version (Override)",
    "default": "",
-   "description": "Per-user override of UHIS Settings > Minimum App Version. Leave blank to use the system default."
+   "description": "Per-user override of Spice Settings > Minimum App Version. Leave blank to use the system default."
   },
   {
    "fieldname": "selected_language",
@@ -34,14 +34,14 @@
    "label": "Selected Language (Override)",
    "options": "en\nbn",
    "default": "",
-   "description": "Per-user override of UHIS Settings > Default Language. Leave blank to use the system default."
+   "description": "Per-user override of Spice Settings > Default Language. Leave blank to use the system default."
   },
   {
    "fieldname": "ai_feature",
    "fieldtype": "Check",
    "label": "AI Feature (Override)",
    "default": "0",
-   "description": "Per-user override of UHIS Settings > AI Feature Enabled. If this row exists, this value (0 or 1) always overrides the system default."
+   "description": "Per-user override of Spice Settings > AI Feature Enabled. If this row exists, this value (0 or 1) always overrides the system default."
   }
  ],
  "issingle": 0,

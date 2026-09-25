@@ -11,6 +11,9 @@ Wire contract: ../../docs/api-contract/sync-envelope.md
 import frappe
 from frappe import _
 
+from spice_next_core.auth.decorators import current_remote_user_id
+from spice_next_core.auth.decorators import whitelist as remote_whitelist
+
 CONTRACT_VERSION = 1
 
 _SYNCABLE_DOCTYPES = [
@@ -55,7 +58,7 @@ def _resolve_env(payload=None):
 # ── push ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def push(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -279,7 +282,7 @@ def _log_op(client_op_id, doctype, name, seq):
 # ── pull ─────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def pull(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -301,6 +304,7 @@ def pull(payload=None, **kwargs):
 
 def _changes_since(cursor, catchment, limit):
 	results = []
+	provider_name = _UNRESOLVED
 	for doctype in _SYNCABLE_DOCTYPES:
 		try:
 			meta = frappe.get_meta(doctype)
@@ -310,13 +314,41 @@ def _changes_since(cursor, catchment, limit):
 		has_care_team = meta.get_field("care_team")
 
 		filters = [["sync_seq", ">", cursor]]
-		if catchment and (has_geography or has_care_team):
+		or_filters = []
+
+		if doctype == "Call Logs":
+			# Call Logs' own geography_node is denormalized from its optional
+			# `patient` Link (see consultation.start_consultation's uhis_patient_id
+			# handling), which the mobile app does not currently populate -- there
+			# is no bridge yet between this app's cross-system Patient identity and
+			# the legacy platform's own patient ids, so `patient`/`geography_node`
+			# are null on every call made through the current mobile build.
+			# `uhis_user` (Provider Link), by contrast, is stamped unconditionally
+			# on every booking. OR it in alongside the (currently mostly-inert)
+			# geography filter, rather than replacing it, so a pulling SK always
+			# sees the calls they personally made -- regardless of geography
+			# catchment -- and the geography path still works once patient
+			# linking is wired up.
+			if catchment is not None:  # None == System Manager, unrestricted
+				if catchment and has_geography:
+					or_filters.append(["geography_node", "in", list(catchment)])
+				if provider_name is _UNRESOLVED:
+					calling_provider = _resolve_calling_provider(frappe.session.user)
+					provider_name = calling_provider.name if calling_provider else None
+				if provider_name:
+					or_filters.append(["uhis_user", "=", provider_name])
+				if not or_filters:
+					# No geography match possible and no Provider record for this
+					# session -- this doctype contributes nothing for this caller.
+					continue
+		elif catchment and (has_geography or has_care_team):
 			scope_field = "geography_node" if has_geography else "care_team"
 			filters.append([scope_field, "in", list(catchment)])
 
 		rows = frappe.get_all(
 			doctype,
 			filters=filters,
+			or_filters=or_filters or None,
 			fields=["name", "sync_seq"],
 			order_by="sync_seq asc",
 			limit=limit,
@@ -326,6 +358,9 @@ def _changes_since(cursor, catchment, limit):
 
 	results.sort(key=lambda x: x["sync_seq"])
 	return results[:limit]
+
+
+_UNRESOLVED = object()
 
 
 def _serialize_change(row):
@@ -342,7 +377,7 @@ def _serialize_change(row):
 # ── config ────────────────────────────────────────────────────────────────────
 
 
-@frappe.whitelist(methods=["POST"])
+@remote_whitelist(methods=["POST"], remote_auth=True)
 def config(payload=None, **kwargs):
 	env = _resolve_env(payload)
 	_assert_contract_version(env)
@@ -490,6 +525,43 @@ def _get_subtree(geography_node):
 	return nodes
 
 
+def _resolve_calling_provider(user):
+	"""Resolves the calling identity to a Provider record, trying both auth
+	paths this app's endpoints support:
+
+	1. A real Frappe session (Desk/System Manager, whatever internal caller
+	   already worked before -- Provider.user, a Frappe User Link).
+	2. The mobile X-Auth-Token flow: @require_remote_auth (see
+	   spice_next_core.auth.decorators) validates the token and sets
+	   frappe.local.remote_user_id, but deliberately never touches
+	   frappe.session.user (that flow implies allow_guest=True, so
+	   frappe.session.user stays "Guest" for the whole request) -- so a
+	   mobile caller only ever resolves via current_remote_user_id(),
+	   matched against Provider.username, the exact same lookup
+	   shukhee_integration.api.consultation._current_provider() already uses.
+
+	Returns the Provider dict (name/role_type/geography_node/facility) or
+	None if neither path resolves one."""
+	provider = frappe.db.get_value(
+		"Provider",
+		{"user": user},
+		["name", "role_type", "geography_node", "facility"],
+		as_dict=True,
+	)
+	if provider:
+		return provider
+
+	remote_user_id = current_remote_user_id()
+	if not remote_user_id:
+		return None
+	return frappe.db.get_value(
+		"Provider",
+		{"username": remote_user_id},
+		["name", "role_type", "geography_node", "facility"],
+		as_dict=True,
+	)
+
+
 def get_user_catchment(user):
 	"""
 	Resolve geography scope for a user.
@@ -504,12 +576,7 @@ def get_user_catchment(user):
 	if "System Manager" in frappe.get_roles(user):
 		return None
 
-	provider = frappe.db.get_value(
-		"Provider",
-		{"user": user},
-		["name", "role_type", "geography_node", "facility"],
-		as_dict=True,
-	)
+	provider = _resolve_calling_provider(user)
 	if not provider:
 		return set()
 

@@ -43,7 +43,7 @@ bench --site <your-site> install-app spice_next_core
 bench --site <your-site> migrate
 ```
 
-> **Note:** An OpenAI-compatible LLM endpoint (local via [Ollama](https://ollama.com) or cloud) is required for AI narrative features. Configure it in **UHIS Settings** after installation.
+> **Note:** An OpenAI-compatible LLM endpoint (local via [Ollama](https://ollama.com) or cloud) is required for AI narrative features. Configure it in **Spice Settings** after installation.
 
 ---
 

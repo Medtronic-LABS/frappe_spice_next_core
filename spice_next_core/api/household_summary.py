@@ -74,7 +74,7 @@ def get_household_summary(household):
 			last_enc_dt = str(last_rows[0].encounter_dt)[:10]
 
 	hh_doc = frappe.get_doc("Household", household)
-	cfg = frappe.get_single("UHIS Settings")
+	cfg = frappe.get_single("Spice Settings")
 
 	return {
 		"members": members,

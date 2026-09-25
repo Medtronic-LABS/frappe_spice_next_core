@@ -7,7 +7,7 @@ Public endpoint (allow_guest=True, implied by remote_auth=True below)
 authenticated via a caller-supplied `X-Auth-Token: Bearer <JWT>` header — NOT
 Frappe session/token auth. Guarded by spice_next_core.auth.decorators.whitelist's
 remote_auth=True, which validates the token against the remote auth-service
-(or falls back to unverified local decode when UHIS Settings.remote_auth_url
+(or falls back to unverified local decode when Spice Settings.remote_auth_url
 is blank — dev/test only). See spice_next_core.auth.jwt_token_validator.JWTTokenValidator
 for both phases.
 
@@ -51,14 +51,14 @@ Response (Frappe wraps in {"message": ...}):
   }
 
 Override rules:
-  - latestAppVersion always comes from UHIS Settings (no per-user override).
+  - latestAppVersion always comes from Spice Settings (no per-user override).
   - minAppVersion / language: per-user value from User App Control wins if
-    non-empty, else the UHIS Settings system-level value.
+    non-empty, else the Spice Settings system-level value.
   - AIFeature: if a User App Control row exists for the caller, its
-    ai_feature value (0 or 1) always wins; otherwise UHIS Settings'
+    ai_feature value (0 or 1) always wins; otherwise Spice Settings'
     ai_feature_enabled is used.
   - aiWidgets / vadTuning: system-level only, always read straight from
-    UHIS Settings — no per-user override exists for these yet (matches the
+    Spice Settings — no per-user override exists for these yet (matches the
     Flutter client's own three-tier doctrine: build-time default -> on-device
     override -> this system-level tier; a future per-user tier can be added
     here without changing the response shape).
@@ -73,7 +73,7 @@ from spice_next_core.auth.decorators import current_remote_user_id, whitelist
 def get_controls():
 	user_id = current_remote_user_id()
 
-	settings = frappe.get_single("UHIS Settings")
+	settings = frappe.get_single("Spice Settings")
 	min_app_version = settings.min_app_version or ""
 	latest_app_version = settings.latest_app_version or ""
 	language = settings.default_language or ""
