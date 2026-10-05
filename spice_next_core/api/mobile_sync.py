@@ -1066,3 +1066,342 @@ def _flat_pregnancy_observations(encounter_name, service_provided, *, visit_numb
 		elif service in ("PNC", "PNC_MOTHER", "PNC_NEONATE", "PNC_CHILD", "PNC_NEONATAL"):
 			observations["pncVisitNumber"] = visit_number
 	return observations
+
+
+# ── Phase 5: remaining programmes (CHILDHOOD_VISIT, ICCM, EYE_CARE,
+# CATARACT, FAMILY_PLANNING) ─────────────────────────────────────────────────
+#
+# Case resolution is per-type, not uniform: CHILDHOOD_VISIT IS pregnancy-
+# episode-linked on the real client (confirmed in uhis_lf_mobile's
+# kPregnancyEpisodeLinkedTypes, which explicitly includes CHILDHOOD_VISIT/
+# CHILD_MENU alongside ANC/PWPROFILE/PNC_MOTHER/PREGNANCY_OUTCOME) -- a
+# child's immunisation visit shares its Case with the mother's pregnancy
+# episode, which looks surprising but matches the real system rather than a
+# "cleaner" model invented here. ICCM/EYE_CARE/CATARACT/FAMILY_PLANNING are
+# NOT episode-linked, so they use get_or_create_case's one-Case-per-Patient
+# model, same as NCD and PNC_NEONATE.
+
+OTHER_ASSESSMENT_TYPES = frozenset(
+	{"CHILDHOOD_VISIT", "CHILD_MENU", "ICCM", "IMCI", "EYE_CARE", "CATARACT", "FAMILY_PLANNING", "FP"}
+)
+
+_EPISODE_LINKED_OTHER_TYPES = frozenset({"CHILDHOOD_VISIT", "CHILD_MENU"})
+
+
+def _unwrap_other_details(assessment_type, assessment_details):
+	"""Undoes _wrapDetailsForType's wrapping for the Phase 5 types."""
+	t = (assessment_type or "").upper()
+	assessment_details = assessment_details or {}
+	if t in ("CHILDHOOD_VISIT", "CHILD_MENU"):
+		return assessment_details.get("pncChild") or {}
+	if t in ("ICCM", "IMCI"):
+		return assessment_details.get("iccm") or {}
+	if t == "EYE_CARE":
+		return assessment_details.get("eye_care") or {}
+	if t == "CATARACT":
+		return assessment_details.get("cataract") or {}
+	if t in ("FAMILY_PLANNING", "FP"):
+		return assessment_details.get("familyPlanning") or {}
+	return {}
+
+
+def process_other_assessment(payload, device_id):
+	"""Translates one `assessments[]` wire item for any of the Phase 5
+	programmes -- same encounter/context shape as process_ncd_assessment /
+	process_pregnancy_assessment, parameterised by assessment_type and its
+	own Case-resolution rule (see the module note above)."""
+	assessment_type = (payload.get("assessmentType") or "").upper()
+	encounter_payload = payload.get("encounter") or {}
+	member_id = encounter_payload.get("memberId")
+	if not member_id or not frappe.db.exists("Patient", member_id):
+		frappe.throw(_("Unknown patient for memberId {0}").format(member_id))
+
+	if assessment_type in _EPISODE_LINKED_OTHER_TYPES:
+		pregnancy_episode_id = encounter_payload.get("pregnancyEpisodeId")
+		case_name = get_or_create_pregnancy_case(member_id, pregnancy_episode_id)
+	else:
+		pregnancy_episode_id = None
+		case_name = get_or_create_case(member_id)
+
+	details = _unwrap_other_details(assessment_type, payload.get("assessmentDetails"))
+	effective = frappe.utils.get_datetime(
+		encounter_payload.get("startTime") or encounter_payload.get("endTime") or frappe.utils.now()
+	)
+
+	encounter = frappe.get_doc(
+		{
+			"doctype": "Encounter",
+			"client_uuid": _client_uuid("lf-enc", device_id, payload.get("referenceId")),
+			"case": case_name,
+			"patient": member_id,
+			"encounter_type": "Routine",
+			"encounter_dt": effective,
+		}
+	)
+	encounter.insert(ignore_permissions=True)
+	if encounter.docstatus == 0:
+		encounter.submit()
+
+	custom_status = encounter_payload.get("customStatus")
+	frappe.get_doc(
+		{
+			"doctype": "Mobile Encounter Context",
+			"encounter": encounter.name,
+			"service_provided": payload.get("assessmentType"),
+			"village": _resolve_village(payload.get("villageId")),
+			"referred": encounter_payload.get("referred"),
+			"latitude": encounter_payload.get("latitude"),
+			"longitude": encounter_payload.get("longitude"),
+			"start_time": encounter_payload.get("startTime"),
+			"end_time": encounter_payload.get("endTime"),
+			"visit_number": encounter_payload.get("visitNumber"),
+			"pregnancy_episode_id": pregnancy_episode_id,
+			"patient_status": payload.get("patientStatus"),
+			"referred_reasons": payload.get("referredReasons"),
+			"custom_status": frappe.as_json(custom_status) if custom_status else None,
+		}
+	).insert(ignore_permissions=True)
+
+	writer = _OTHER_OBSERVATION_WRITERS.get(_normalize_other_type(assessment_type))
+	if writer:
+		writer(case_name, encounter.name, details, effective)
+	return encounter.name
+
+
+def _normalize_other_type(assessment_type):
+	t = (assessment_type or "").upper()
+	if t == "CHILD_MENU":
+		return "CHILDHOOD_VISIT"
+	if t == "IMCI":
+		return "ICCM"
+	if t == "FP":
+		return "FAMILY_PLANNING"
+	return t
+
+
+def _yes_no(value):
+	"""Cataract's nested `ncd` card captures diagnosis/smoker flags as real
+	booleans (unlike NCD's own "Yes"/"No" string convention) -- normalize to
+	the same string convention so Observation.value stays consistent across
+	every writer in this module."""
+	if value is None:
+		return None
+	if isinstance(value, bool):
+		return "Yes" if value else "No"
+	return str(value)
+
+
+def _write_childhood_visit_observations(case_name, encounter_name, details, effective):
+	"""Maps the real _toChildhoodVisit() push shape. anyIllness/
+	childReferral/childReferralFacilityType are administrative/workflow
+	fields already captured via patientStatus/referred/referredReasons on
+	Mobile Encounter Context -- not duplicated as Observations."""
+	if details.get("congenitalDefect"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|276654001", details["congenitalDefect"], None, effective
+		)
+	if details.get("weight") is not None:
+		_write_observation(case_name, encounter_name, "LOINC|29463-7", details["weight"], "kg", effective)
+	if details.get("additionalFood24Hrs"):
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|169745008",
+			details["additionalFood24Hrs"],
+			None,
+			effective,
+		)
+	if details.get("receivedVaccine"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|127785005", details["receivedVaccine"], None, effective
+		)
+	if details.get("dewormingMedicine"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|414580003", details["dewormingMedicine"], None, effective
+		)
+	if details.get("childIllnessType"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|225834001", details["childIllnessType"], None, effective
+		)
+
+
+def _write_iccm_observations(case_name, encounter_name, details, effective):
+	"""Maps the real _toIccm() push shape. Free-text/list fields
+	(chiefComplaint, presentingSymptoms) and the individual IMCI danger
+	signs (convulsions, unconscious, ...) have no seeded Concept -- not
+	written, same no-fabrication rule as every other writer here. muac has
+	no seeded Concept either, despite being a real vital -- a genuine gap,
+	not an oversight."""
+	classification = details.get("iccmClassification")
+	if classification:
+		_write_observation(
+			case_name, encounter_name, "SNOMED|225834001", classification, None, effective
+		)
+	if details.get("temperature") is not None:
+		_write_observation(
+			case_name, encounter_name, "LOINC|8310-5", details["temperature"], "degF", effective
+		)
+	if details.get("respiratoryRate") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"LOINC|9279-1",
+			details["respiratoryRate"],
+			"breaths/min",
+			effective,
+		)
+
+
+def _eye_care_card_observations(case_name, encounter_name, card, effective):
+	"""Shared by EYE_CARE's own `eyeCare` card and CATARACT's identically-
+	shaped `cataract` card -- both forms collect the same glasses/referral
+	fields under different wire keys."""
+	outcomes = card.get("eyeTestOutcomes")
+	if outcomes:
+		value = ", ".join(outcomes) if isinstance(outcomes, list) else outcomes
+		_write_observation(case_name, encounter_name, "SNOMED|371405004", value, None, effective)
+	if card.get("typeOfFrame"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|363983007", card["typeOfFrame"], None, effective
+		)
+	if card.get("referPlace"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|306206005", card["referPlace"], None, effective
+		)
+
+
+def _write_eye_care_observations(case_name, encounter_name, details, effective):
+	_eye_care_card_observations(case_name, encounter_name, details.get("eyeCare") or {}, effective)
+
+
+def _write_cataract_observations(case_name, encounter_name, details, effective):
+	"""Maps the real _toCataract() push shape -- the `cataract` card (shared
+	eye-care fields + cataract-specific ones) and, when NCD vitals were also
+	captured during the same visit, the nested `ncd` card's bpLog/glucoseLog
+	(reusing the SAME Concepts process_ncd_assessment uses, since these are
+	the same clinical facts -- just a bool, not "Yes"/"No" string,
+	convention on this particular form)."""
+	card = details.get("cataract") or {}
+	_eye_care_card_observations(case_name, encounter_name, card, effective)
+	if card.get("historyOfOtherDiseases"):
+		value = card["historyOfOtherDiseases"]
+		value = ", ".join(value) if isinstance(value, list) else value
+		_write_observation(case_name, encounter_name, "SNOMED|417662000", value, None, effective)
+	if card.get("patientReferredForOperation"):
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|306204006",
+			card["patientReferredForOperation"],
+			None,
+			effective,
+		)
+	if card.get("operationName"):
+		value = card["operationName"]
+		value = ", ".join(value) if isinstance(value, list) else value
+		_write_observation(case_name, encounter_name, "SNOMED|387713003", value, None, effective)
+	if card.get("reason"):
+		value = card["reason"]
+		value = ", ".join(value) if isinstance(value, list) else value
+		_write_observation(case_name, encounter_name, "SNOMED|410666004", value, None, effective)
+	if card.get("pseudophakiaPostCataractSurgery"):
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|406859001",
+			card["pseudophakiaPostCataractSurgery"],
+			None,
+			effective,
+		)
+
+	ncd = details.get("ncd") or {}
+	bp_log = ncd.get("bpLog") or {}
+	systolic = bp_log.get("avgSystolic")
+	diastolic = bp_log.get("avgDiastolic")
+	if systolic is not None and diastolic is not None:
+		_write_observation(case_name, encounter_name, "LOINC|8480-6", systolic, "mm[Hg]", effective)
+		_write_observation(case_name, encounter_name, "LOINC|8462-4", diastolic, "mm[Hg]", effective)
+	if bp_log.get("height") is not None:
+		_write_observation(case_name, encounter_name, "LOINC|8302-2", bp_log["height"], "cm", effective)
+	if bp_log.get("weight") is not None:
+		_write_observation(case_name, encounter_name, "LOINC|29463-7", bp_log["weight"], "kg", effective)
+	if bp_log.get("isRegularSmoker") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|77176002",
+			_yes_no(bp_log["isRegularSmoker"]),
+			None,
+			effective,
+		)
+	if bp_log.get("isBeforeHtnDiagnosis") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|38341003",
+			_yes_no(bp_log["isBeforeHtnDiagnosis"]),
+			None,
+			effective,
+		)
+	glucose_log = ncd.get("glucoseLog") or {}
+	if glucose_log.get("glucose") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"LOINC|2339-0",
+			glucose_log["glucose"],
+			glucose_log.get("glucoseUnit") or "mmol/L",
+			effective,
+		)
+	if glucose_log.get("glucoseType"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|87612001", glucose_log["glucoseType"], None, effective
+		)
+	if glucose_log.get("isBeforeDiabetesDiagnosis") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|73211009",
+			_yes_no(glucose_log["isBeforeDiabetesDiagnosis"]),
+			None,
+			effective,
+		)
+
+
+def _write_family_planning_observations(case_name, encounter_name, details, effective):
+	"""Maps the real _toFamilyPlanning() push shape. familyPlanningMethods
+	is deliberately NOT written -- no seeded Concept represents "family
+	planning method" (SNOMED|13197004 "First-time contraceptive user" is a
+	different fact, not the method list), and inventing a code here would
+	be worse than omitting the field."""
+	if details.get("numberOfLivingChildren") is not None:
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|224118004",
+			details["numberOfLivingChildren"],
+			None,
+			effective,
+		)
+	if details.get("ageOfLastChild"):
+		_write_observation(
+			case_name, encounter_name, "SNOMED|424144002", details["ageOfLastChild"], None, effective
+		)
+	if details.get("desireForChildrenInFuture"):
+		_write_observation(
+			case_name,
+			encounter_name,
+			"SNOMED|415510000",
+			details["desireForChildrenInFuture"],
+			None,
+			effective,
+		)
+
+
+_OTHER_OBSERVATION_WRITERS = {
+	"CHILDHOOD_VISIT": _write_childhood_visit_observations,
+	"ICCM": _write_iccm_observations,
+	"EYE_CARE": _write_eye_care_observations,
+	"CATARACT": _write_cataract_observations,
+	"FAMILY_PLANNING": _write_family_planning_observations,
+}

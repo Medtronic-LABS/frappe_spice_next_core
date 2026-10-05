@@ -658,5 +658,280 @@ class TestMobileSyncPregnancy(unittest.TestCase):
 		self.assertEqual(treatment_details, [{"patientId": patient.name}])
 
 
+class TestMobileSyncOtherProgrammes(unittest.TestCase):
+	"""Phase 5 of the migration plan: CHILDHOOD_VISIT, ICCM, EYE_CARE,
+	CATARACT, FAMILY_PLANNING -- the remaining programmes
+	uhis_lf_mobile uses. CHILDHOOD_VISIT is pregnancy-episode-linked on the
+	real client (kPregnancyEpisodeLinkedTypes); the other four are not."""
+
+	def setUp(self):
+		self._docs = []
+
+	def tearDown(self):
+		for doctype, name in reversed(self._docs):
+			if not frappe.db.exists(doctype, name):
+				continue
+			if frappe.get_meta(doctype).is_submittable and frappe.db.get_value(doctype, name, "docstatus") == 1:
+				frappe.get_doc(doctype, name).cancel()
+			frappe.delete_doc(doctype, name, ignore_permissions=True, delete_permanently=True, force=True)
+		frappe.db.commit()
+
+	def _make(self, doctype, fields, *, set_name=None):
+		fields = dict(fields, doctype=doctype)
+		if frappe.get_meta(doctype).has_field("client_uuid") and "client_uuid" not in fields:
+			fields["client_uuid"] = frappe.generate_hash(length=16)
+		doc = frappe.get_doc(fields)
+		if set_name:
+			doc.insert(ignore_permissions=True, set_name=set_name)
+		else:
+			doc.insert(ignore_permissions=True)
+		self._docs.append((doctype, doc.name))
+		return doc
+
+	def _patient(self, **fields):
+		return self._make("Patient", dict({"full_name": "Other Programme Test Patient"}, **fields))
+
+	def _track_side_effects(self, encounter_name):
+		self._docs.append(("Mobile Encounter Context", encounter_name))
+		self._docs.append(("Encounter", encounter_name))
+		for obs_name in frappe.get_all("Observation", filters={"encounter": encounter_name}, pluck="name"):
+			self._docs.append(("Observation", obs_name))
+
+	def _track_case_by_patient(self, patient_name):
+		case_name = frappe.db.get_value("Case", {"patient": patient_name}, "name")
+		if case_name:
+			self._docs.append(("Case", case_name))
+
+	def _track_episode_case(self, pregnancy_episode_id):
+		case_name = f"case-preg-{pregnancy_episode_id}"
+		if frappe.db.exists("Case", case_name):
+			self._docs.append(("Case", case_name))
+
+	def _payload(self, assessment_type, patient_name, details, *, pregnancy_episode_id=None, reference_id=None):
+		encounter = {
+			"memberId": patient_name,
+			"startTime": "2026-10-06 09:00:00",
+			"endTime": "2026-10-06 09:30:00",
+		}
+		if pregnancy_episode_id:
+			encounter["pregnancyEpisodeId"] = pregnancy_episode_id
+		return {
+			"referenceId": reference_id if reference_id is not None else frappe.generate_hash(length=8),
+			"assessmentType": assessment_type,
+			"assessmentDetails": details,
+			"villageId": "0",
+			"patientStatus": "Recovered",
+			"encounter": encounter,
+		}
+
+	# ── CHILDHOOD_VISIT (episode-linked) ─────────────────────────────────────
+
+	def test_childhood_visit_is_episode_linked_and_writes_observations(self):
+		patient = self._patient()
+		episode_id = frappe.generate_hash(length=12)
+		details = {
+			"pncChild": {
+				"congenitalDefect": "No",
+				"weight": 4.5,
+				"receivedVaccine": "BCG",
+				"dewormingMedicine": "Yes",
+				"childIllnessType": "Diarrhoea",
+			},
+			"cbs": {},
+		}
+		payload = self._payload("CHILDHOOD_VISIT", patient.name, details, pregnancy_episode_id=episode_id)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_episode_case(episode_id)
+
+		ctx = frappe.get_doc("Mobile Encounter Context", encounter_name)
+		self.assertEqual(ctx.pregnancy_episode_id, episode_id)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["SNOMED|276654001"], "No")
+		self.assertEqual(by_concept["LOINC|29463-7"], "4.5")
+		self.assertEqual(by_concept["SNOMED|127785005"], "BCG")
+		self.assertEqual(by_concept["SNOMED|414580003"], "Yes")
+		self.assertEqual(by_concept["SNOMED|225834001"], "Diarrhoea")
+
+	# ── ICCM (not episode-linked) ────────────────────────────────────────────
+
+	def test_iccm_writes_classification_and_vitals(self):
+		patient = self._patient()
+		details = {
+			"iccm": {
+				"iccmClassification": "Pneumonia",
+				"temperature": 101.2,
+				"respiratoryRate": 32,
+				"chiefComplaint": "Cough and fever",
+			}
+		}
+		payload = self._payload("ICCM", patient.name, details)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_case_by_patient(patient.name)
+
+		ctx = frappe.get_doc("Mobile Encounter Context", encounter_name)
+		self.assertIsNone(ctx.pregnancy_episode_id)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["SNOMED|225834001"], "Pneumonia")
+		self.assertEqual(by_concept["LOINC|8310-5"], "101.2")
+		self.assertEqual(by_concept["LOINC|9279-1"], "32")
+		# chiefComplaint is free text with no seeded Concept -- must not be
+		# written at all, not even under an unrelated code.
+		self.assertEqual(len(obs), 3)
+
+	# ── EYE_CARE ─────────────────────────────────────────────────────────────
+
+	def test_eye_care_writes_outcomes_and_frame_type(self):
+		patient = self._patient()
+		details = {
+			"eye_care": {
+				"eyeCare": {
+					"eyeTestOutcomes": ["Cataract"],
+					"typeOfFrame": "Metal",
+					"referPlace": "District Hospital",
+				},
+				"generalInformation": {},
+			}
+		}
+		payload = self._payload("EYE_CARE", patient.name, details)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_case_by_patient(patient.name)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["SNOMED|371405004"], "Cataract")
+		self.assertEqual(by_concept["SNOMED|363983007"], "Metal")
+		self.assertEqual(by_concept["SNOMED|306206005"], "District Hospital")
+
+	# ── CATARACT ─────────────────────────────────────────────────────────────
+
+	def test_cataract_writes_shared_eye_care_fields_and_own_fields(self):
+		patient = self._patient()
+		# _wrapDetailsForType wraps the WHOLE _toCataract() output (itself
+		# already {generalInformation, cataract: {...card...}, ncd?}) under
+		# an OUTER "cataract" key -- same name reused for the inner card,
+		# confirmed by _isCataractMenuWrapped's own double-key handling.
+		details = {
+			"cataract": {
+				"generalInformation": {},
+				"cataract": {
+					"eyeTestOutcomes": ["Cataract"],
+					"patientReferredForOperation": "Yes",
+					"operationName": ["Cataract surgery"],
+					"pseudophakiaPostCataractSurgery": "No",
+				},
+			}
+		}
+		payload = self._payload("CATARACT", patient.name, details)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_case_by_patient(patient.name)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["SNOMED|371405004"], "Cataract")
+		self.assertEqual(by_concept["SNOMED|306204006"], "Yes")
+		self.assertEqual(by_concept["SNOMED|387713003"], "Cataract surgery")
+		self.assertEqual(by_concept["SNOMED|406859001"], "No")
+
+	def test_cataract_writes_nested_ncd_card_when_present(self):
+		patient = self._patient()
+		details = {
+			"cataract": {
+				"generalInformation": {},
+				"cataract": {"ncdServiceProvided": "Yes"},
+				"ncd": {
+					"bpLog": {
+						"avgSystolic": 145,
+						"avgDiastolic": 92,
+						"height": 170.0,
+						"weight": 70.0,
+						"isRegularSmoker": True,
+						"isBeforeHtnDiagnosis": False,
+					},
+					"glucoseLog": {"glucose": 6.5, "glucoseType": "rbs"},
+				},
+			}
+		}
+		payload = self._payload("CATARACT", patient.name, details)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_case_by_patient(patient.name)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["LOINC|8480-6"], "145")
+		self.assertEqual(by_concept["LOINC|8462-4"], "92")
+		self.assertEqual(by_concept["LOINC|8302-2"], "170.0")
+		self.assertEqual(by_concept["LOINC|29463-7"], "70.0")
+		self.assertEqual(by_concept["SNOMED|77176002"], "Yes")
+		self.assertEqual(by_concept["SNOMED|38341003"], "No")
+		self.assertEqual(by_concept["LOINC|2339-0"], "6.5")
+		self.assertEqual(by_concept["SNOMED|87612001"], "rbs")
+
+	# ── FAMILY_PLANNING ──────────────────────────────────────────────────────
+
+	def test_family_planning_writes_fields_but_not_methods(self):
+		patient = self._patient()
+		details = {
+			"familyPlanning": {
+				"numberOfLivingChildren": "2",
+				"ageOfLastChild": "2024-01-01T00:00:00+00:00",
+				"desireForChildrenInFuture": "No",
+				"familyPlanningMethods": ["Oral Contraceptive Pill"],
+			}
+		}
+		payload = self._payload("FAMILY_PLANNING", patient.name, details)
+		encounter_name = mobile_sync.process_other_assessment(payload, "device-other")
+		self._track_side_effects(encounter_name)
+		self._track_case_by_patient(patient.name)
+
+		obs = frappe.get_all(
+			"Observation", filters={"encounter": encounter_name}, fields=["concept", "value"]
+		)
+		by_concept = {r.concept: r.value for r in obs}
+		self.assertEqual(by_concept["SNOMED|224118004"], "2")
+		self.assertEqual(by_concept["SNOMED|424144002"], "2024-01-01T00:00:00+00:00")
+		self.assertEqual(by_concept["SNOMED|415510000"], "No")
+		# No seeded Concept represents "family planning method" -- must not
+		# be fabricated onto an unrelated concept.
+		self.assertEqual(len(obs), 3)
+
+	# ── unwrapping ───────────────────────────────────────────────────────────
+
+	def test_unwrap_other_details_handles_every_wrapped_type(self):
+		self.assertEqual(
+			mobile_sync._unwrap_other_details("CHILDHOOD_VISIT", {"pncChild": {"a": 1}, "cbs": {}}),
+			{"a": 1},
+		)
+		self.assertEqual(mobile_sync._unwrap_other_details("ICCM", {"iccm": {"b": 2}}), {"b": 2})
+		self.assertEqual(
+			mobile_sync._unwrap_other_details("EYE_CARE", {"eye_care": {"c": 3}}), {"c": 3}
+		)
+		self.assertEqual(
+			mobile_sync._unwrap_other_details("CATARACT", {"cataract": {"d": 4}}), {"d": 4}
+		)
+		self.assertEqual(
+			mobile_sync._unwrap_other_details("FAMILY_PLANNING", {"familyPlanning": {"e": 5}}),
+			{"e": 5},
+		)
+
+
 if __name__ == "__main__":
 	unittest.main()
