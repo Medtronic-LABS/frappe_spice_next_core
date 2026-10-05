@@ -145,6 +145,88 @@ def read_household(household):
 
 
 @frappe.whitelist(methods=["POST"])
+def observations_by_encounter(encounter):
+	"""All Observations for one Encounter, as a FHIR Bundle -- backs
+	shukhee_integration.api.fhir_proxy's `GET /fhir-server/fhir/Observation?
+	encounter=Encounter/{id}` replacement for uhis_lf_mobile.
+
+	Groups sibling systolic (8480-6) + diastolic (8462-4) Observations
+	sharing the same effectiveDateTime into one parent Observation coded
+	85354-9 (blood pressure panel) with component[] -- uhis_lf_mobile's own
+	FhirObservation parser only recognizes the composite shape and silently
+	drops a flat 8480-6/8462-4 pair (see
+	lib/core/models/fhir_observation.dart's own component handling), so this
+	grouping is mandatory, not cosmetic."""
+	obs_names = frappe.get_all("Observation", filters={"encounter": encounter}, pluck="name")
+	resources = [to_fhir_observation(name) for name in obs_names]
+	resources = _group_bp_composite(resources)
+	return {
+		"resourceType": "Bundle",
+		"type": "searchset",
+		"total": len(resources),
+		"entry": [{"resource": r} for r in resources],
+	}
+
+
+def _group_bp_composite(resources):
+	by_effective = {}
+	passthrough = []
+	for resource in resources:
+		code = _primary_loinc_code(resource)
+		if code in (_LOINC_SYSTOLIC, _LOINC_DIASTOLIC):
+			key = resource.get("effectiveDateTime")
+			by_effective.setdefault(key, {})[code] = resource
+		else:
+			passthrough.append(resource)
+
+	grouped = []
+	for effective, pair in by_effective.items():
+		systolic = pair.get(_LOINC_SYSTOLIC)
+		diastolic = pair.get(_LOINC_DIASTOLIC)
+		if systolic and diastolic:
+			grouped.append(
+				{
+					"resourceType": "Observation",
+					"id": f"{systolic['id']}-{diastolic['id']}-bp",
+					"status": "final",
+					"subject": systolic.get("subject"),
+					"effectiveDateTime": effective,
+					"code": {
+						"coding": [
+							{
+								"system": "http://loinc.org",
+								"code": "85354-9",
+								"display": "Blood pressure panel",
+							}
+						]
+					},
+					"component": [
+						{"code": systolic["code"], "valueQuantity": systolic.get("valueQuantity")},
+						{"code": diastolic["code"], "valueQuantity": diastolic.get("valueQuantity")},
+					],
+				}
+			)
+		else:
+			# Only one half of the pair exists (shouldn't normally happen,
+			# e.g. a partial/corrected reading) -- pass it through as a flat
+			# Observation rather than silently dropping real data.
+			grouped.extend(pair.values())
+
+	return passthrough + grouped
+
+
+def _primary_loinc_code(resource):
+	for coding in (resource.get("code") or {}).get("coding") or []:
+		if coding.get("system") == "http://loinc.org":
+			return coding.get("code")
+	return None
+
+
+_LOINC_SYSTOLIC = "8480-6"
+_LOINC_DIASTOLIC = "8462-4"
+
+
+@frappe.whitelist(methods=["POST"])
 def read_patient_bundle(patient):
 	entries = []
 
