@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "autoname": "field:encounter",
+ "creation": "2026-10-06 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "encounter",
+  "village",
+  "referred",
+  "latitude",
+  "longitude",
+  "column_break_1",
+  "start_time",
+  "end_time",
+  "visit_number",
+  "pregnancy_episode_id",
+  "custom_status",
+  "patient_status",
+  "peer_supervisor",
+  "referred_reasons"
+ ],
+ "fields": [
+  {
+   "fieldname": "encounter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Encounter",
+   "options": "Encounter",
+   "reqd": 1,
+   "unique": 1,
+   "description": "1:1 with Encounter -- holds the uhis_lf_mobile wire-only fields that have no FHIR analog, so Encounter itself stays clean for its other consumer (flutter-uhis-next)."
+  },
+  {
+   "fieldname": "village",
+   "fieldtype": "Link",
+   "label": "Village",
+   "options": "Geography Node",
+   "description": "Resolved server-side from the wire's numeric villageId -- see the Geography Node legacy-village-id mapping."
+  },
+  {
+   "fieldname": "referred",
+   "fieldtype": "Check",
+   "label": "Referred"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Datetime",
+   "label": "Start Time"
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Datetime",
+   "label": "End Time"
+  },
+  {
+   "fieldname": "visit_number",
+   "fieldtype": "Int",
+   "label": "Visit Number",
+   "description": "ANC/PNC visit number (1-based). Null for non-ANC/PNC encounters."
+  },
+  {
+   "fieldname": "pregnancy_episode_id",
+   "fieldtype": "Data",
+   "label": "Pregnancy Episode Id",
+   "description": "Set for ANC/PNC/pregnancy-outcome-family encounters only."
+  },
+  {
+   "fieldname": "custom_status",
+   "fieldtype": "JSON",
+   "label": "Custom Status",
+   "description": "Verbatim copy of the wire's encounter.customStatus string list."
+  },
+  {
+   "fieldname": "patient_status",
+   "fieldtype": "Data",
+   "label": "Patient Status"
+  },
+  {
+   "fieldname": "peer_supervisor",
+   "fieldtype": "Link",
+   "label": "Peer Supervisor",
+   "options": "Provider"
+  },
+  {
+   "fieldname": "referred_reasons",
+   "fieldtype": "Small Text",
+   "label": "Referred Reasons",
+   "description": "Comma-joined string, verbatim from the wire -- not an array, matching the client's own LocalAssessmentEntity.toApiRequest shape."
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-06 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Mobile Encounter Context",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 0,
+   "export": 1,
+   "print": 0,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 0,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "hide_toolbar": 1
+}

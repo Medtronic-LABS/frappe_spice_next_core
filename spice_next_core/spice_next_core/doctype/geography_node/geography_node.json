@@ -10,6 +10,7 @@
   "label",
   "geography_type",
   "parent_node",
+  "legacy_village_id",
   "tab_facilities",
   "sva_facilities",
   "tab_households",
@@ -41,6 +42,12 @@
    "in_list_view": 1,
    "label": "Parent Node",
    "options": "Geography Node"
+  },
+  {
+   "fieldname": "legacy_village_id",
+   "fieldtype": "Int",
+   "label": "Legacy Village Id",
+   "description": "Maps this node to the numeric villageId the legacy platform (and uhis_lf_mobile's offline-sync wire contract) uses -- 0/unset for nodes with no legacy counterpart. Deliberately not DB-unique: every existing row defaults to 0 (Postgres has no value to treat as NULL here), which a hard unique constraint rejects outright. Added for the uhis_lf_sync integration; unrelated to flutter-uhis-next's own usage of this doctype."
   },
   {
    "fieldname": "tab_facilities",
