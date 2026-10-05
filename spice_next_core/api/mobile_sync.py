@@ -381,32 +381,60 @@ def fetch_households_and_members(village_ids):
 		filters={"geography_node": ["in", geography_nodes]},
 		fields=["name", "display_title", "geography_node"],
 	)
-	households_wire = []
+	if not households:
+		return [], []
+	household_names = [hh.name for hh in households]
+
+	# Batched instead of a per-household frappe.get_doc + per-member
+	# frappe.get_doc -- the Engineering Design Standards explicitly forbid
+	# N+1 fan-out, and this is read traffic that scales with village size
+	# (architecture.md's pilot -> state -> national trajectory), not a
+	# fixed-size admin screen.
+	member_rows = frappe.get_all(
+		"Household Member",
+		filters={"parent": ["in", household_names]},
+		fields=["parent", "patient", "is_head"],
+	)
+	patient_names = list({row.patient for row in member_rows})
+	patients_by_name = {
+		p.name: p
+		for p in (
+			frappe.get_all(
+				"Patient",
+				filters={"name": ["in", patient_names]},
+				fields=["name", "full_name", "gender", "dob", "phone"],
+			)
+			if patient_names
+			else []
+		)
+	}
+
+	households_wire = [
+		{
+			"id": hh.name,
+			"referenceId": hh.name,
+			"name": hh.display_title,
+			"villageId": _reverse_village(hh.geography_node),
+		}
+		for hh in households
+	]
 	members_wire = []
-	for hh in households:
-		households_wire.append(
+	for row in member_rows:
+		patient = patients_by_name.get(row.patient)
+		if not patient:
+			continue
+		members_wire.append(
 			{
-				"id": hh.name,
-				"referenceId": hh.name,
-				"name": hh.display_title,
-				"villageId": _reverse_village(hh.geography_node),
+				"id": patient.name,
+				"referenceId": patient.name,
+				"householdId": row.parent,
+				"name": patient.full_name,
+				"gender": patient.gender,
+				"dateOfBirth": str(patient.dob) if patient.dob else None,
+				"phoneNumber": patient.phone,
+				"isHouseholdHead": bool(row.is_head),
 			}
 		)
-		hh_doc = frappe.get_doc("Household", hh.name)
-		for row in hh_doc.members:
-			patient = frappe.get_doc("Patient", row.patient)
-			members_wire.append(
-				{
-					"id": patient.name,
-					"referenceId": patient.name,
-					"householdId": hh.name,
-					"name": patient.full_name,
-					"gender": patient.gender,
-					"dateOfBirth": str(patient.dob) if patient.dob else None,
-					"phoneNumber": patient.phone,
-					"isHouseholdHead": bool(row.is_head),
-				}
-			)
 	return households_wire, members_wire
 
 
@@ -443,39 +471,61 @@ def fetch_pregnancy_infos_and_treatment_details(village_ids):
 	household_names = frappe.get_all(
 		"Household", filters={"geography_node": ["in", geography_nodes]}, pluck="name"
 	)
-	patient_names = set()
-	for hh_name in household_names:
-		hh_doc = frappe.get_doc("Household", hh_name)
-		for row in hh_doc.members:
-			patient_names.add(row.patient)
+	if not household_names:
+		return [], []
+
+	# Batched instead of a per-household/per-patient/per-case fan-out -- see
+	# fetch_households_and_members's own note on the Engineering Design
+	# Standards' no-N+1 rule.
+	patient_names = list(
+		{
+			r.patient
+			for r in frappe.get_all(
+				"Household Member", filters={"parent": ["in", household_names]}, fields=["patient"]
+			)
+		}
+	)
+	if not patient_names:
+		return [], []
+
+	case_rows = frappe.get_all(
+		"Case", filters={"patient": ["in", patient_names]}, fields=["name", "patient"]
+	)
+	case_to_patient = {c.name: c.patient for c in case_rows}
+	if not case_to_patient:
+		return [], []
+
+	encounter_rows = frappe.get_all(
+		"Encounter", filters={"case": ["in", list(case_to_patient)]}, fields=["name", "case"]
+	)
+	encounter_names = [e.name for e in encounter_rows]
+	if not encounter_names:
+		return [], []
+	encounter_to_patient = {e.name: case_to_patient[e.case] for e in encounter_rows}
+
+	context_rows = frappe.get_all(
+		"Mobile Encounter Context",
+		filters={"encounter": ["in", encounter_names]},
+		fields=["encounter", "service_provided", "visit_number"],
+	)
 
 	pregnancy_infos = []
-	treatment_details = []
-	for patient_name in patient_names:
-		case_names = frappe.get_all("Case", filters={"patient": patient_name}, pluck="name")
-		has_any_encounter = False
-		for case_name in case_names:
-			encounter_names = frappe.get_all("Encounter", filters={"case": case_name}, pluck="name")
-			has_any_encounter = has_any_encounter or bool(encounter_names)
-			for encounter_name in encounter_names:
-				ctx = frappe.db.get_value(
-					"Mobile Encounter Context",
-					encounter_name,
-					["service_provided", "visit_number"],
-					as_dict=True,
-				)
-				if not ctx:
-					continue
-				service = (ctx.service_provided or "").upper()
-				if service not in _PREGNANCY_INFO_SERVICE_TYPES:
-					continue
-				row = _flat_pregnancy_observations(
-					encounter_name, service, visit_number=ctx.visit_number, pregnancy_episode_id=None
-				)
-				row["householdMemberId"] = patient_name
-				pregnancy_infos.append(row)
-		if has_any_encounter:
-			treatment_details.append({"patientId": patient_name})
+	patients_with_encounter = set()
+	for ctx in context_rows:
+		patient_name = encounter_to_patient.get(ctx.encounter)
+		if not patient_name:
+			continue
+		patients_with_encounter.add(patient_name)
+		service = (ctx.service_provided or "").upper()
+		if service not in _PREGNANCY_INFO_SERVICE_TYPES:
+			continue
+		row = _flat_pregnancy_observations(
+			ctx.encounter, service, visit_number=ctx.visit_number, pregnancy_episode_id=None
+		)
+		row["householdMemberId"] = patient_name
+		pregnancy_infos.append(row)
+
+	treatment_details = [{"patientId": p} for p in patients_with_encounter]
 	return pregnancy_infos, treatment_details
 
 
@@ -506,20 +556,48 @@ def member_assessment_history(village_ids):
 		],
 	)
 
+	if not contexts:
+		return []
+
+	# Batched instead of a per-context frappe.get_doc("Encounter", ...) +
+	# frappe.get_doc("Case", ...) -- see fetch_households_and_members's own
+	# note on the Engineering Design Standards' no-N+1 rule.
+	encounter_names = [ctx.encounter for ctx in contexts]
+	encounters_by_name = {
+		e.name: e
+		for e in frappe.get_all(
+			"Encounter",
+			filters={"name": ["in", encounter_names]},
+			fields=["name", "case", "encounter_dt", "creation"],
+		)
+	}
+	case_names = list({e.case for e in encounters_by_name.values() if e.case})
+	patient_by_case = {
+		c.name: c.patient
+		for c in (
+			frappe.get_all("Case", filters={"name": ["in", case_names]}, fields=["name", "patient"])
+			if case_names
+			else []
+		)
+	}
+
 	# Oldest-processed-first so the per-member "seen before" set correctly
 	# marks the chronologically LAST visit as isLatestVisit, independent of
 	# whatever order frappe.get_all happened to return rows in.
 	rows = []
 	for ctx in contexts:
-		encounter = frappe.get_doc("Encounter", ctx.encounter)
+		encounter = encounters_by_name.get(ctx.encounter)
+		if not encounter:
+			continue
 		rows.append((encounter.encounter_dt or encounter.creation, ctx, encounter))
 	rows.sort(key=lambda r: r[0])
 
 	latest_seen = set()
 	items = []
 	for visit_dt, ctx, encounter in reversed(rows):
-		case = frappe.get_doc("Case", encounter.case)
-		member_id = case.patient
+		member_id = patient_by_case.get(encounter.case)
+		if not member_id:
+			continue
 		is_latest = member_id not in latest_seen
 		latest_seen.add(member_id)
 		service = (ctx.service_provided or "").upper()
