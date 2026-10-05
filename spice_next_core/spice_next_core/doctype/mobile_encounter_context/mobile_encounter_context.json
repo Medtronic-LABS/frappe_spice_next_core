@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "encounter",
+  "service_provided",
   "village",
   "referred",
   "latitude",
@@ -30,6 +31,13 @@
    "reqd": 1,
    "unique": 1,
    "description": "1:1 with Encounter -- holds the uhis_lf_mobile wire-only fields that have no FHIR analog, so Encounter itself stays clean for its other consumer (flutter-uhis-next)."
+  },
+  {
+   "fieldname": "service_provided",
+   "fieldtype": "Data",
+   "label": "Service Provided",
+   "in_list_view": 1,
+   "description": "Verbatim wire assessmentType (e.g. \"NCD\", \"ANC\") -- Encounter.encounter_type only models Routine/Followup/Emergency/Referral, not programme, and member_assessment_history's serviceProvided is read back from here."
   },
   {
    "fieldname": "village",
