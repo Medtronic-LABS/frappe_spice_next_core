@@ -6,6 +6,9 @@ Nothing is stored as FHIR; these mappers read DocType rows and produce R4 resour
 import json
 
 import frappe
+from frappe import _
+
+from spice_next_core.auth.decorators import whitelist as remote_whitelist
 
 # ── whitelisted read endpoints ────────────────────────────────────────────────
 
@@ -146,9 +149,9 @@ def read_household(household):
 
 @frappe.whitelist(methods=["POST"])
 def observations_by_encounter(encounter):
-	"""All Observations for one Encounter, as a FHIR Bundle -- backs
-	shukhee_integration.api.fhir_proxy's `GET /fhir-server/fhir/Observation?
-	encounter=Encounter/{id}` replacement for uhis_lf_mobile.
+	"""All Observations for one Encounter, as a FHIR Bundle -- the data this
+	app's own `observation()` wire endpoint (below) serves to uhis_lf_mobile,
+	and reusable internally by any other POST-based caller too.
 
 	Groups sibling systolic (8480-6) + diastolic (8462-4) Observations
 	sharing the same effectiveDateTime into one parent Observation coded
@@ -166,6 +169,28 @@ def observations_by_encounter(encounter):
 		"total": len(resources),
 		"entry": [{"resource": r} for r in resources],
 	}
+
+
+@remote_whitelist(methods=["GET"], remote_auth=True)
+def observation(encounter=None):
+	"""FHIR read wire-adapter replacing the legacy fhir-server's Observation
+	search for uhis_lf_mobile:
+
+	  GET /fhir-server/fhir/Observation?encounter=Encounter/{id}
+
+	Auth only -- the actual FHIR resource synthesis is observations_by_
+	encounter, above (invariant: FHIR is egress-only, nothing is stored as
+	FHIR). Separate from it (rather than whitelisting that function
+	directly) because the real wire call is a GET with an `Encounter/{id}`
+	reference literal in a query param, while observations_by_encounter is
+	POST + a bare id, and needs the mobile remote-auth path rather than
+	whatever a plain @frappe.whitelist default session-auth caller gets."""
+	if not encounter:
+		frappe.throw(_("encounter is required."), frappe.ValidationError)
+	# Wire value is "Encounter/{id}" (a FHIR reference literal); we only ever
+	# need the bare id to look up the Observation rows.
+	encounter_id = encounter.split("/", 1)[-1]
+	return observations_by_encounter(encounter_id)
 
 
 def _group_bp_composite(resources):

@@ -6,11 +6,16 @@ pressure composite) only exists at the level of real rows with real concept
 codes, not in isolatable pure logic.
 """
 
+import inspect
 import unittest
+from unittest.mock import patch
 
 import frappe
 
+from spice_next_core.api import fhir as fhir_module
 from spice_next_core.api.fhir import observations_by_encounter
+
+observation = inspect.unwrap(fhir_module.observation)
 
 
 class TestObservationsByEncounter(unittest.TestCase):
@@ -138,6 +143,38 @@ class TestObservationsByEncounter(unittest.TestCase):
 
 		bundle = observations_by_encounter(encounter.name)
 		self.assertEqual(bundle, {"resourceType": "Bundle", "type": "searchset", "total": 0, "entry": []})
+
+
+class TestObservationWireEndpoint(unittest.TestCase):
+	"""Unit tests for api/fhir.observation -- pure wire-adapter concerns only
+	(encounter param validation, "Encounter/{id}" reference literal
+	stripping). The actual FHIR resource synthesis (BP composite grouping
+	etc.) is observations_by_encounter's own concern, tested above --
+	mocked out here. Moved here from shukhee_integration.api.fhir_proxy
+	(now merged directly into this module) as part of consolidating the
+	whole offline-sync + FHIR-read replacement into spice_next_core."""
+
+	def test_missing_encounter_raises(self):
+		with self.assertRaises(frappe.ValidationError):
+			observation(encounter=None)
+
+	@patch("spice_next_core.api.fhir.observations_by_encounter")
+	def test_strips_encounter_reference_prefix(self, mock_observations):
+		mock_observations.return_value = {"resourceType": "Bundle", "entry": []}
+		observation(encounter="Encounter/abc-123")
+		mock_observations.assert_called_once_with("abc-123")
+
+	@patch("spice_next_core.api.fhir.observations_by_encounter")
+	def test_bare_id_without_reference_prefix_also_works(self, mock_observations):
+		mock_observations.return_value = {"resourceType": "Bundle", "entry": []}
+		observation(encounter="abc-123")
+		mock_observations.assert_called_once_with("abc-123")
+
+	@patch("spice_next_core.api.fhir.observations_by_encounter")
+	def test_returns_the_bundle_unchanged(self, mock_observations):
+		bundle = {"resourceType": "Bundle", "type": "searchset", "total": 0, "entry": []}
+		mock_observations.return_value = bundle
+		self.assertEqual(observation(encounter="Encounter/abc-123"), bundle)
 
 
 if __name__ == "__main__":

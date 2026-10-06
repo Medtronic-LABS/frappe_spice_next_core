@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "autoname": "field:request_id",
+ "creation": "2026-10-06 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_id",
+  "device_id",
+  "provider",
+  "sync_mode",
+  "app_version_name",
+  "app_version_code",
+  "sync_items"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Request Id",
+   "description": "The mobile app's own client-generated requestId (uuid) -- becomes this doc's name directly, so a retried create POST with the same requestId resolves to the same batch rather than creating a duplicate.",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "device_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Device Id",
+   "description": "Paired with each Offline Sync Item's (entity_type, reference_id) to form the real idempotency key -- reference_id alone is only unique per device, not globally.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Provider",
+   "options": "Provider",
+   "description": "The authenticated caller (resolved server-side via current_remote_user_id() -> Provider.username, never trusted from client-supplied userId) -- the practitioner of record for every Assessment row in this batch."
+  },
+  {
+   "fieldname": "sync_mode",
+   "fieldtype": "Select",
+   "label": "Sync Mode",
+   "options": "ManualSync\nAutomaticSync\nInitialSync"
+  },
+  {
+   "fieldname": "app_version_name",
+   "fieldtype": "Data",
+   "label": "App Version Name"
+  },
+  {
+   "fieldname": "app_version_code",
+   "fieldtype": "Data",
+   "label": "App Version Code"
+  },
+  {
+   "fieldname": "sync_items",
+   "fieldtype": "Table",
+   "label": "Sync Items",
+   "options": "Offline Sync Item"
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Spice Next Core",
+ "name": "Offline Sync Batch",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 0,
+   "export": 1,
+   "print": 0,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "hide_toolbar": 1
+}

@@ -115,6 +115,9 @@ scheduler_events = {
 	"hourly": [
 		"spice_next_core.fhir.pull.do_pull",
 	],
+	"daily": [
+		"spice_next_core.reconciliation.reconcile_failed_items",
+	],
 }
 
 # doc_events wiring.
