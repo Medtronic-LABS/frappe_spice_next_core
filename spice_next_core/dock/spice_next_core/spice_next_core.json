@@ -1,0 +1,22 @@
+[
+ {
+  "app": "spice_next_core",
+  "docstatus": 0,
+  "doctype": "Dock",
+  "idx": 0,
+  "items": [
+   {
+    "added": 0,
+    "hidden": 0,
+    "icon": "stethoscope",
+    "link_to": "Spice Next Core",
+    "link_type": "Sidebar",
+    "title": "Spice"
+   }
+  ],
+  "mount_on": "uhis",
+  "name": "spice_next_core",
+  "standard": 1,
+  "user": ""
+ }
+]
